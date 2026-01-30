@@ -1,0 +1,245 @@
+name: Android-Linux-32
+
+on:
+    workflow_dispatch:
+    push:
+        branches:
+            - master
+            - "Stable*"
+            - "N-trip"
+        tags:
+            - "v*"
+        paths-ignore:
+            - "docs/**"
+    pull_request:
+        paths:
+            - ".github/workflows/android-32.yml"
+            - "deploy/android/**"
+            - "src/**"
+            - "android/**"
+            - "CMakeLists.txt"
+            - "cmake/**"
+            - "translations/*"
+
+env:
+    ANDROID_KEYSTORE_PASSWORD: vant2026
+    QT_VERSION: 6.10.0
+    ARTIFACT: QGroundControl32.apk
+    BUILD_TYPE: Release
+
+jobs:
+    build:
+        name: Build Apk
+        runs-on: ubuntu-latest
+
+        defaults:
+            run:
+                shell: bash
+
+        env:
+            PACKAGE32: QGroundControl32
+            QT_ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/deploy/android/android_release.keystore
+            QT_ANDROID_KEYSTORE_ALIAS: QGCAndroidKeyStore
+            QT_ANDROID_ABIS: armeabi-v7a
+
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v5
+              with:
+                  submodules: recursive
+                  fetch-depth: 1
+                  fetch-tags: true
+
+            - name: Initial Setup
+              uses: ./.github/actions/common
+
+            - name: Free Disk Space
+              if: runner.os == 'Linux'
+              uses: jlumbroso/free-disk-space@main
+              with:
+                  tool-cache: false
+                  android: false
+                  large-packages: false
+
+            - name: Install Qt for Android
+              uses: ./.github/actions/qt-android
+              with:
+                  host: linux
+                  arch: linux_gcc_64
+                  version: ${{ env.QT_VERSION }}
+                  abis: ${{ env.QT_ANDROID_ABIS }}
+                  cpm-modules: ${{ runner.temp }}/build/cpm_modules
+
+            - name: Install Android NDK
+              uses: nttld/setup-ndk@v1
+              id: setup-ndk
+              with:
+                  ndk-version: r21e
+                  add-to-path: false
+
+            - name: Remove Android SDKs to force usage of android-33 only
+              run: |
+                  echo "Cleaning preinstalled platforms that confuse Qt..."
+                  sudo rm -rf ${ANDROID_SDK_ROOT}/platforms/* || true
+                  echo "Installing only Android 33"
+                  echo "y" | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager "platforms;android-33" "build-tools;33.0.2" "platform-tools"
+
+            - name: Ensure repo keystore
+              working-directory: ${{ github.workspace }}
+              run: |
+                  set -euo pipefail
+                  KS_PATH="${{ github.workspace }}/deploy/android/android_release.keystore"
+                  mkdir -p "$(dirname "$KS_PATH")"
+                  if [ -f "$KS_PATH" ]; then
+                    echo "Keystore found in repository — validating password (silent)"
+                    if keytool -list -keystore "$KS_PATH" -storepass "$ANDROID_KEYSTORE_PASSWORD" -alias QGCAndroidKeyStore > /dev/null 2>&1; then
+                      echo "Keystore is valid and will be used from the repo."
+                    else
+                      echo "Keystore present but password validation failed. Do NOT overwrite your repo keystore automatically." >&2
+                      echo "Options: commit a keystore that matches 'vant2026', update ANDROID_KEYSTORE_PASSWORD, or remove the repo keystore to let CI generate one." >&2
+                      exit 1
+                    fi
+                  else
+                    echo "No keystore in repo — generating temporary CI keystore (alias=QGCAndroidKeyStore)"
+                    keytool -genkeypair \
+                        -v \
+                        -keystore "$KS_PATH" \
+                        -storetype PKCS12 \
+                        -storepass "$ANDROID_KEYSTORE_PASSWORD" \
+                        -keypass "$ANDROID_KEYSTORE_PASSWORD" \
+                        -alias QGCAndroidKeyStore \
+                        -dname "CN=QGroundControl, OU=CI, O=QGroundControl, L=Earth, ST=Earth, C=US" \
+                        -keyalg RSA \
+                        -keysize 2048 \
+                        -validity 10000
+                    echo "Generated CI keystore at $KS_PATH"
+                  fi
+                  ls -l "$KS_PATH"
+
+            - name: Configure
+              working-directory: ${{ runner.temp }}/build
+              env:
+                  ANDROID_KEYSTORE_PASSWORD: ${{ env.ANDROID_KEYSTORE_PASSWORD }}
+              run: |
+                  # Debug and ensure qt-cmake is executable
+                  ls -l "$QT_ROOT_DIR/bin/qt-cmake" || true
+                  chmod +x "$QT_ROOT_DIR/bin/qt-cmake" || true
+                  if [ -n "$ANDROID_KEYSTORE_PASSWORD" ]; then
+                    SIGN=ON
+                  else
+                    SIGN=OFF
+                  fi
+
+                  # Run configure (qt-cmake) with explicit signing props
+                  "$QT_ROOT_DIR/bin/qt-cmake" -S ${{ github.workspace }} -B . -G Ninja \
+                    -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
+                    -DCMAKE_WARN_DEPRECATED=FALSE \
+                    -DQT_ANDROID_ABIS="${{ env.QT_ANDROID_ABIS }}" \
+                    -DQT_ANDROID_BUILD_ALL_ABIS=OFF \
+                    -DQT_HOST_PATH="$QT_ROOT_DIR/../gcc_64" \
+                    -DQT_ANDROID_SIGN_APK=OFF \
+                    -DQT_ANDROID_KEYSTORE_PATH="${{ github.workspace }}/deploy/android/android_release.keystore" \
+                    -DQT_ANDROID_KEYSTORE_ALIAS=QGCAndroidKeyStore \
+                    -DQT_ANDROID_KEYSTORE_STORE_PASS="$ANDROID_KEYSTORE_PASSWORD" \
+                    -DQT_ANDROID_KEYSTORE_KEY_PASS="$ANDROID_KEYSTORE_PASSWORD" \
+                    -DQGC_STABLE_BUILD=${{ github.ref_type == 'tag' || contains(github.ref, 'Stable') && 'ON' || 'OFF' }}
+
+                  echo "NOTE: automatic signing disabled in CMake; signing will be done explicitly after build to avoid apksigner stdin issues."
+
+                  # --- Diagnostics (redacted) ---
+                  echo "-- verify keystore on runner (silent validation) --"
+                  KS="${{ github.workspace }}/deploy/android/android_release.keystore"
+                  ls -l "$KS" || true
+                  if keytool -list -keystore "$KS" -storepass "$ANDROID_KEYSTORE_PASSWORD" -alias QGCAndroidKeyStore > /dev/null 2>&1; then
+                    echo "keystore: OK (password validated)"
+                  else
+                    echo "keystore: validation FAILED" >&2
+                  fi
+
+                  echo "-- check generated deployment-settings JSON (redacted) --"
+                  JSONGLOB="${{ runner.temp }}/build/android-*deployment-settings.json"
+                  for f in $JSONGLOB; do
+                    [ -f "$f" ] || continue
+                    echo "found: $f"
+                    # show signing-related keys but redact values
+                    sed -n '1,240p' "$f" | sed -E 's/("storePassword"[[:space:]]*:[[:space:]]*")[^"]*(")/\1***\2/; s/("keyPassword"[[:space:]]*:[[:space:]]*")[^"]*(")/\1***\2/; s/("keystore"[[:space:]]*:[[:space:]]*")[^"]*(")/\1<PATH>\2/' | sed -n '1,120p'
+                    grep -E 'keystore|storePassword|keyPassword|alias' "$f" || true
+                  done
+
+                  echo "-- env presence checks (no secrets printed) --"
+                  test -n "$ANDROID_KEYSTORE_PASSWORD" && echo "ANDROID_KEYSTORE_PASSWORD is set"
+                  test -n "$QT_ANDROID_KEYSTORE_STORE_PASS" && echo "QT_ANDROID_KEYSTORE_STORE_PASS is set"
+                  test -n "$QT_ROOT_DIR" && echo "QT_ROOT_DIR is set: $QT_ROOT_DIR" || true
+
+            - name: Build
+              working-directory: ${{ runner.temp }}/build
+              env:
+                  ANDROID_NDK_ROOT: ${{ steps.setup-ndk.outputs.ndk-path }}
+                  ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+                  ANDROID_NDK_LATEST_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+                  ANDROID_NDK: ${{ steps.setup-ndk.outputs.ndk-path }}
+                  ANDROID_KEYSTORE_PASSWORD: ${{ env.ANDROID_KEYSTORE_PASSWORD }}
+                  QT_ANDROID_KEYSTORE_STORE_PASS: $ANDROID_KEYSTORE_PASSWORD
+                  QT_ANDROID_KEYSTORE_KEY_PASS: $ANDROID_KEYSTORE_PASSWORD
+              run: cmake --build . --target all --config ${{ env.BUILD_TYPE }} --parallel
+
+            - name: Package & sign APK
+              working-directory: ${{ runner.temp }}/build
+              env:
+                  ANDROID_KEYSTORE_PASSWORD: ${{ env.ANDROID_KEYSTORE_PASSWORD }}
+                  PACKAGE32: ${{ env.PACKAGE32 }}
+                  QT_ROOT_DIR: ${{ env.QT_ROOT_DIR }}
+              run: |
+                  set -euo pipefail
+                  # locate deployment-settings.json
+                  JSON=$(ls ${RUNNER_TEMP}/build/android-*deployment-settings.json 2>/dev/null | head -n1 || true)
+                  if [ -z "$JSON" ]; then
+                    echo "ERROR: deployment-settings.json not found" >&2
+                    ls -la ${RUNNER_TEMP}/build || true
+                    exit 1
+                  fi
+                  echo "Using deployment settings: $JSON"
+
+                  # prefer host androiddeployqt (gcc_64) when available
+                  if [ -x "$QT_ROOT_DIR/../gcc_64/bin/androiddeployqt" ]; then
+                    ANDROIDDEPLOYQT="$QT_ROOT_DIR/../gcc_64/bin/androiddeployqt"
+                  else
+                    ANDROIDDEPLOYQT="$QT_ROOT_DIR/bin/androiddeployqt"
+                  fi
+                  echo "androiddeployqt: $ANDROIDDEPLOYQT"
+
+                  # try signed package first (explicit --storepass/--keypass)
+                  set +e
+                  "$ANDROIDDEPLOYQT" --verbose --input "$JSON" --output ${RUNNER_TEMP}/build/android-build --release \
+                    --sign "${GITHUB_WORKSPACE}/deploy/android/android_release.keystore" QGCAndroidKeyStore \
+                    --storepass "$ANDROID_KEYSTORE_PASSWORD" --keypass "$ANDROID_KEYSTORE_PASSWORD"
+                  rc=$?
+                  set -e
+
+                  if [ $rc -ne 0 ]; then
+                    echo "Signed packaging failed (rc=$rc) — attempting unsigned package for debugging"
+                    "$ANDROIDDEPLOYQT" --verbose --input "$JSON" --output ${RUNNER_TEMP}/build/android-build --release
+                  fi
+
+                  echo "Listing APK outputs"
+                  ls -la ${RUNNER_TEMP}/build/android-build/build/outputs/apk/release || ls -la ${RUNNER_TEMP}/build/android-build || true
+
+                  # copy best-effort artifact to expected location
+                  cp ${RUNNER_TEMP}/build/android-build/build/outputs/apk/release/*signed*.apk ${RUNNER_TEMP}/build/${PACKAGE32}.apk 2>/dev/null || \
+                    cp ${RUNNER_TEMP}/build/android-build/*.apk ${RUNNER_TEMP}/build/${PACKAGE32}.apk 2>/dev/null || \
+                    cp ${RUNNER_TEMP}/build/android-build/build/outputs/apk/release/*.apk ${RUNNER_TEMP}/build/${PACKAGE32}.apk 2>/dev/null || true
+
+            - name: Upload artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: ${{ env.PACKAGE32 }}.apk
+                  path: ${{ runner.temp }}/build/${{ env.PACKAGE32 }}.apk
+
+            # AWS upload removed to match UMVEC_App simplification; artifact is available via Actions artifacts.
+
+            # - name: Deploy to Play Store
+            #   if: ${{ env.BUILD_TYPE == 'Release' }}
+            #   uses: ./.github/actions/playstore
+            #   with:
+            #     artifact_name: ${{ runner.temp }}/build/${{ env.PACKAGE32 }}.apk
+            #     service_account_json: ${{ secrets.SERVICE_ACCOUNT }}
