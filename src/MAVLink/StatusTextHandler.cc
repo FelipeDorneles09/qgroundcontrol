@@ -239,6 +239,11 @@ void StatusTextHandler::handleHTMLEscapedTextMessage(MAV_COMPONENT compId, MAV_S
     StatusText* const message = new StatusText(compId, severity, text);
     message->setFormatedText(formatText);
 
+    qCDebug(StatusTextHandlerLog) << "StatusTextHandler::handleHTMLEscapedTextMessage emitting newFormattedMessage" \
+                                  << "compId:" << static_cast<int>(compId) \
+                                  << "severity:" << static_cast<int>(severity) \
+                                  << "msgLen:" << formatText.length();
+
     emit newFormattedMessage(formatText);
 
     (void) m_messages.append(message);

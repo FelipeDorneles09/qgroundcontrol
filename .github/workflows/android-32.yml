@@ -74,7 +74,7 @@ jobs:
               uses: nttld/setup-ndk@v1
               id: setup-ndk
               with:
-                  ndk-version: r21e
+                  ndk-version: r25c
                   add-to-path: false
 
             - name: Remove Android SDKs to force usage of android-33 only
@@ -138,6 +138,8 @@ jobs:
                     -DQT_ANDROID_BUILD_ALL_ABIS=OFF \
                     -DQT_HOST_PATH="$QT_ROOT_DIR/../gcc_64" \
                     -DQT_ANDROID_SIGN_APK=OFF \
+                    -DCMAKE_CXX_FLAGS="-fPIC" \
+                    -DCMAKE_C_FLAGS="-fPIC" \
                     -DQT_ANDROID_KEYSTORE_PATH="${{ github.workspace }}/deploy/android/android_release.keystore" \
                     -DQT_ANDROID_KEYSTORE_ALIAS=QGCAndroidKeyStore \
                     -DQT_ANDROID_KEYSTORE_STORE_PASS="$ANDROID_KEYSTORE_PASSWORD" \
