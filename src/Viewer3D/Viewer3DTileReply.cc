@@ -20,9 +20,8 @@
 
 QByteArray Viewer3DTileReply::_bingNoTileImage;
 
-Viewer3DTileReply::Viewer3DTileReply(int zoomLevel, int tileX, int tileY, int mapId, QObject *parent)
-    : QObject{parent}
-{
+Viewer3DTileReply::Viewer3DTileReply(int zoomLevel, int tileX, int tileY, int mapId, QObject* parent)
+    : QObject{parent} {
     if (_bingNoTileImage.length() == 0) {
         QFile file(QStringLiteral(":/res/BingNoTileBytes.dat"));
         if (file.open(QFile::ReadOnly)) {
@@ -51,22 +50,19 @@ Viewer3DTileReply::Viewer3DTileReply(int zoomLevel, int tileX, int tileY, int ma
     connect(_timeoutTimer, &QTimer::timeout, this, &Viewer3DTileReply::timeoutTimerEvent);
 }
 
-Viewer3DTileReply::~Viewer3DTileReply()
-{
-    delete _networkManager;
-    delete _timeoutTimer;
+Viewer3DTileReply::~Viewer3DTileReply() {
+    // _networkManager and _timeoutTimer are parented to this object and
+    // will be deleted by QObject's destructor. Avoid manual delete here.
 }
 
-void Viewer3DTileReply::prepareDownload()
-{
+void Viewer3DTileReply::prepareDownload() {
     const QNetworkRequest request = QGeoTileFetcherQGC::getNetworkRequest(_mapId, _tile.x, _tile.y, _tile.zoomLevel);
     _reply = _networkManager->get(request);
     connect(_reply, &QNetworkReply::finished, this, &Viewer3DTileReply::requestFinished);
     connect(_reply, &QNetworkReply::errorOccurred, this, &Viewer3DTileReply::requestError);
 }
 
-void Viewer3DTileReply::requestFinished()
-{
+void Viewer3DTileReply::requestFinished() {
     _tile.data = _reply->readAll();
     const SharedMapProvider mapProvider = UrlFactory::getMapProviderFromQtMapId(_tile.mapId);
     // disconnect(_networkManager, &QNetworkAccessManager::finished, this, &Viewer3DTileReply::requestFinished);
@@ -75,7 +71,7 @@ void Viewer3DTileReply::requestFinished()
     disconnect(_reply, &QNetworkReply::errorOccurred, this, &Viewer3DTileReply::requestError);
     disconnect(_timeoutTimer, &QTimer::timeout, this, &Viewer3DTileReply::timeoutTimerEvent);
 
-    if(mapProvider && mapProvider->isBingProvider() && _tile.data.size() && _tile.data == _bingNoTileImage){
+    if (mapProvider && mapProvider->isBingProvider() && _tile.data.size() && _tile.data == _bingNoTileImage) {
         // Bing doesn't return an error if you request a tile above supported zoom level
         // It instead returns an image of a missing tile graphic. We need to detect that
         // and error out so 3D View will deal with zooming correctly even if it doesn't have the tile.
@@ -88,16 +84,14 @@ void Viewer3DTileReply::requestFinished()
     emit tileDone(_tile);
 }
 
-void Viewer3DTileReply::requestError()
-{
+void Viewer3DTileReply::requestError() {
     emit tileError(_tile);
     disconnect(_reply, &QNetworkReply::finished, this, &Viewer3DTileReply::requestFinished);
     disconnect(_reply, &QNetworkReply::errorOccurred, this, &Viewer3DTileReply::requestError);
 }
 
-void Viewer3DTileReply::timeoutTimerEvent()
-{
-    if(_timeoutCounter > 5){
+void Viewer3DTileReply::timeoutTimerEvent() {
+    if (_timeoutCounter > 5) {
         // _timeoutCounter = 0;
         // _networkManager->setTransferTimeout(14000);
         // _timeoutTimer->stop();
@@ -107,7 +101,7 @@ void Viewer3DTileReply::timeoutTimerEvent()
         disconnect(_timeoutTimer, &QTimer::timeout, this, &Viewer3DTileReply::timeoutTimerEvent);
         emit tileGiveUp(_tile);
         _timeoutTimer->stop();
-    }else if(_tile.data.isEmpty()){
+    } else if (_tile.data.isEmpty()) {
         emit tileError(_tile);
         prepareDownload();
         _timeoutCounter++;

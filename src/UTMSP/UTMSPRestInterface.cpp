@@ -8,36 +8,33 @@
  ****************************************************************************/
 
 #include "UTMSPRestInterface.h"
-#include "UTMSPLogger.h"
 
 #include <QList>
 #include <QNetworkInterface>
+
+#include "UTMSPLogger.h"
 #include "qeventloop.h"
 
-UTMSPRestInterface::UTMSPRestInterface(QObject *parent):
-    QObject(parent)
-{
+UTMSPRestInterface::UTMSPRestInterface(QObject* parent) : QObject(parent) {
     _networkManager = new QNetworkAccessManager(this);
 }
 
-UTMSPRestInterface::~UTMSPRestInterface()
-{
-    delete _networkManager;
+UTMSPRestInterface::~UTMSPRestInterface() {
+    // _networkManager is parented to this QObject and will be deleted
+    // automatically by QObject's destructor. Avoid manual delete.
     _networkManager = nullptr;
 }
 
-
-void UTMSPRestInterface::setHost(const HostTarget &hostTarget)
-{
+void UTMSPRestInterface::setHost(const HostTarget& hostTarget) {
     switch (hostTarget) {
-    case HostTarget::AuthClient:
-        _currentURL = "https://id.openskies.sh";
-        _currentRequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
-        break;
-    case HostTarget::BlenderClient:
-        _currentURL = "https://testflight.flightblender.com";
-        _currentRequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-        break;
+        case HostTarget::AuthClient:
+            _currentURL = "https://id.openskies.sh";
+            _currentRequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+            break;
+        case HostTarget::BlenderClient:
+            _currentURL = "https://testflight.flightblender.com";
+            _currentRequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+            break;
     }
     _currentRequest.setRawHeader("User-Agent", QString("Qt/%1").arg(QT_VERSION_STR).toUtf8());
     _currentRequest.setRawHeader("Accept", "*/*");
@@ -49,46 +46,45 @@ void UTMSPRestInterface::setHost(const HostTarget &hostTarget)
     _currentRequest.setSslConfiguration(sslConfig);
 }
 
-void UTMSPRestInterface::setBasicToken(const QString &basicToken){
+void UTMSPRestInterface::setBasicToken(const QString& basicToken) {
     _basicToken = basicToken;
     _currentRequest.setRawHeader("Authorization", ("Basic " + _basicToken).toUtf8());
 }
 
-void UTMSPRestInterface::modifyRequest(const QString &target, QNetworkAccessManager::Operation method, const QString &body)
-{
-    QUrl url(_currentURL+target);
+void UTMSPRestInterface::modifyRequest(const QString& target, QNetworkAccessManager::Operation method,
+                                       const QString& body) {
+    QUrl url(_currentURL + target);
     _currentRequest.setUrl(url);
     _currentMethod = method;
     _currentBody = body;
 }
 
-QPair<int, std::string> UTMSPRestInterface::executeRequest()
-{
+QPair<int, std::string> UTMSPRestInterface::executeRequest() {
     if (!_networkManager) {
         qDebug() << "Network manager is not initialized!";
         return qMakePair(0, "Network manager is not initialized");
     }
 
-    QNetworkReply *reply = nullptr;
-    switch(_currentMethod) {
-    case QNetworkAccessManager::GetOperation:
-        reply = _networkManager->get(_currentRequest);
-        break;
-    case QNetworkAccessManager::PostOperation:
-        reply = _networkManager->post(_currentRequest, _currentBody.toUtf8());
-        break;
-    case QNetworkAccessManager::PutOperation:
-        reply = _networkManager->put(_currentRequest, _currentBody.toUtf8());
-        break;
-    case QNetworkAccessManager::DeleteOperation:
-        reply = _networkManager->deleteResource(_currentRequest);
-        break;
-    case QNetworkAccessManager::HeadOperation:
-        reply = _networkManager->head(_currentRequest);
-        break;
-    default:
-        qDebug() << "Unsupported HTTP method: " << _currentMethod;
-        return qMakePair(0, "Unsupported HTTP method");
+    QNetworkReply* reply = nullptr;
+    switch (_currentMethod) {
+        case QNetworkAccessManager::GetOperation:
+            reply = _networkManager->get(_currentRequest);
+            break;
+        case QNetworkAccessManager::PostOperation:
+            reply = _networkManager->post(_currentRequest, _currentBody.toUtf8());
+            break;
+        case QNetworkAccessManager::PutOperation:
+            reply = _networkManager->put(_currentRequest, _currentBody.toUtf8());
+            break;
+        case QNetworkAccessManager::DeleteOperation:
+            reply = _networkManager->deleteResource(_currentRequest);
+            break;
+        case QNetworkAccessManager::HeadOperation:
+            reply = _networkManager->head(_currentRequest);
+            break;
+        default:
+            qDebug() << "Unsupported HTTP method: " << _currentMethod;
+            return qMakePair(0, "Unsupported HTTP method");
     }
 
     if (!reply) return qMakePair(0, "Failed to create network reply");
@@ -105,8 +101,7 @@ QPair<int, std::string> UTMSPRestInterface::executeRequest()
     return qMakePair(statusCode, (QString::fromUtf8(response)).toStdString());
 }
 
-void UTMSPRestInterface::setBearerToken(const std::string& token)
-{
+void UTMSPRestInterface::setBearerToken(const std::string& token) {
     QString Token = QString::fromStdString(token);
     _currentRequest.setRawHeader("Authorization", ("Bearer " + Token).toUtf8());
 }

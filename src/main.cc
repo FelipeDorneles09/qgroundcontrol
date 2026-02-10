@@ -10,28 +10,39 @@
 #include <QtQuick/QQuickWindow>
 #include <QtWidgets/QApplication>
 
+#include "NTRIP.h"
+#include "Platform.h"
 #include "QGCApplication.h"
 #include "QGCCommandLineParser.h"
 #include "QGCLogging.h"
-#include "Platform.h"
-#include "NTRIP.h"
+
+#if defined(_MSC_VER)
+#include <crtdbg.h>
+#endif
 
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
-    #include <QtWidgets/QMessageBox>
-    #include "RunGuard.h"
+#include <QtWidgets/QMessageBox>
+
+#include "RunGuard.h"
 #endif
 
 #ifdef Q_OS_LINUX
-    #include <unistd.h>
-    #include <sys/types.h>
+#include <sys/types.h>
+#include <unistd.h>
 #endif
 
 #ifdef QGC_UNITTEST_BUILD
-    #include "UnitTestList.h"
+#include "UnitTestList.h"
 #endif
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char* argv[]) {
+#if defined(_MSC_VER)
+    // Enable CRT debug heap checks and automatic leak dump on exit for MSVC debug builds.
+    int dbgFlag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+    dbgFlag |= _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF;
+    _CrtSetDbgFlag(dbgFlag);
+    // To break on a specific allocation number use: _CrtSetBreakAlloc(<alloc-number>);
+#endif
 #if 0
     // Useful for debugging specific unit tests
     char argument1[] = "--unittest:ParameterManagerTest";
@@ -45,11 +56,13 @@ int main(int argc, char *argv[])
     if (::getuid() == 0) {
         const QApplication errorApp(argc, argv);
         // QErrorMessage
-        (void) QMessageBox::critical(nullptr,
-                                     QCoreApplication::translate("main", "Error"),
-                                     QCoreApplication::translate("main", "You are running %1 as root. "
-                                                                         "You should not do this since it will cause other issues with %1. "
-                                                                         "%1 will now exit.<br/><br/>").arg(QGC_APP_NAME));
+        (void)QMessageBox::critical(
+            nullptr, QCoreApplication::translate("main", "Error"),
+            QCoreApplication::translate("main",
+                                        "You are running %1 as root. "
+                                        "You should not do this since it will cause other issues with %1. "
+                                        "%1 will now exit.<br/><br/>")
+                .arg(QGC_APP_NAME));
         return -1;
     }
 #endif
@@ -74,10 +87,11 @@ int main(int argc, char *argv[])
     if (!args.allowMultiple) {
         if (!guard.tryToRun()) {
             const QApplication errorApp(argc, argv);
-            (void) QMessageBox::critical(nullptr,
-                QCoreApplication::translate("main", "Error"),
-                QCoreApplication::translate("main", "A second instance of %1 is already running. "
-                                                    "Please close the other instance and try again.").arg(QStringLiteral(QGC_APP_NAME)));
+            (void)QMessageBox::critical(nullptr, QCoreApplication::translate("main", "Error"),
+                                        QCoreApplication::translate("main",
+                                                                    "A second instance of %1 is already running. "
+                                                                    "Please close the other instance and try again.")
+                                            .arg(QStringLiteral(QGC_APP_NAME)));
             return -1;
         }
     }
