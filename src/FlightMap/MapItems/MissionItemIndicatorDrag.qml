@@ -13,6 +13,7 @@ import QtLocation
 import QGroundControl
 
 import QGroundControl.Controls
+import QGroundControl.ScreenTools
 
 /// Use to drag a MissionItemIndicator
 Rectangle {

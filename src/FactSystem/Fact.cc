@@ -8,45 +8,55 @@
  ****************************************************************************/
 
 #include "Fact.h"
+
+#include <QtQml/qqml.h>
+
+#include "FactControls/FactPanelController.h"
+#include "FactGroup.h"
+#include "FactMetaData.h"
 #include "FactValueSliderListModel.h"
+#include "HorizontalFactValueGrid.h"
 #include "QGCApplication.h"
 #include "QGCCorePlugin.h"
 #include "QGCLoggingCategory.h"
 #include "SettingsManager.h"
 
+static void _factSystemRegisterQmlTypes() {
+    static const char* kRefOnly = "Reference only";
+
+    qmlRegisterType<Fact>("QGroundControl.FactSystem", 1, 0, "Fact");
+    qmlRegisterUncreatableType<FactMetaData>("QGroundControl.FactSystem", 1, 0, "FactMetaData", kRefOnly);
+    qmlRegisterUncreatableType<FactGroup>("QGroundControl.FactSystem", 1, 0, "FactGroup", kRefOnly);
+    qmlRegisterType<FactPanelController>("QGroundControl.FactSystem", 1, 0, "FactPanelController");
+
+    qmlRegisterUncreatableType<FactValueGrid>("QGroundControl.Templates", 1, 0, "FactValueGrid", kRefOnly);
+    qmlRegisterType<HorizontalFactValueGrid>("QGroundControl.Templates", 1, 0, "HorizontalFactValueGrid");
+}
+Q_COREAPP_STARTUP_FUNCTION(_factSystemRegisterQmlTypes)
+
 QGC_LOGGING_CATEGORY(FactLog, "FactSystem.Fact")
 
-Fact::Fact(QObject *parent)
-    : QObject(parent)
-{
+Fact::Fact(QObject* parent) : QObject(parent) {
     // qCDebug(FactLog) << Q_FUNC_INFO << this;
 
-    FactMetaData *const metaData = new FactMetaData(_type, this);
+    FactMetaData* const metaData = new FactMetaData(_type, this);
     setMetaData(metaData);
 
     _init();
 }
 
-Fact::Fact(int componentId, const QString &name, FactMetaData::ValueType_t type, QObject *parent)
-    : QObject(parent)
-    , _name(name)
-    , _componentId(componentId)
-    , _type(type)
-{
+Fact::Fact(int componentId, const QString& name, FactMetaData::ValueType_t type, QObject* parent)
+    : QObject(parent), _name(name), _componentId(componentId), _type(type) {
     // qCDebug(FactLog) << Q_FUNC_INFO << this;
 
-    FactMetaData *const metaData = new FactMetaData(_type, this);
+    FactMetaData* const metaData = new FactMetaData(_type, this);
     setMetaData(metaData);
 
     _init();
 }
 
-Fact::Fact(const QString& settingsGroup, FactMetaData *metaData, QObject *parent)
-    : QObject(parent)
-    , _name(metaData->name())
-    , _componentId(0)
-    , _type(metaData->type())
-{
+Fact::Fact(const QString& settingsGroup, FactMetaData* metaData, QObject* parent)
+    : QObject(parent), _name(metaData->name()), _componentId(0), _type(metaData->type()) {
     // qCDebug(FactLog) << Q_FUNC_INFO << this;
 
     bool visible = true;
@@ -63,9 +73,7 @@ Fact::Fact(const QString& settingsGroup, FactMetaData *metaData, QObject *parent
     _init();
 }
 
-Fact::Fact(const Fact &other, QObject *parent)
-    : QObject(parent)
-{
+Fact::Fact(const Fact& other, QObject* parent) : QObject(parent) {
     // qCDebug(FactLog) << Q_FUNC_INFO << this;
 
     *this = other;
@@ -73,18 +81,13 @@ Fact::Fact(const Fact &other, QObject *parent)
     _init();
 }
 
-Fact::~Fact()
-{
+Fact::~Fact() {
     // qCDebug(FactLog) << Q_FUNC_INFO << this;
 }
 
-void Fact::_init()
-{
-    (void) connect(this, &Fact::containerRawValueChanged, this, &Fact::_checkForRebootMessaging);
-}
+void Fact::_init() { (void)connect(this, &Fact::containerRawValueChanged, this, &Fact::_checkForRebootMessaging); }
 
-const Fact &Fact::operator=(const Fact& other)
-{
+const Fact& Fact::operator=(const Fact& other) {
     _name = other._name;
     _componentId = other._componentId;
     _rawValue = other._rawValue;
@@ -101,8 +104,7 @@ const Fact &Fact::operator=(const Fact& other)
     return *this;
 }
 
-void Fact::forceSetRawValue(const QVariant &value)
-{
+void Fact::forceSetRawValue(const QVariant& value) {
     if (_metaData) {
         QVariant typedValue;
         QString errorString;
@@ -119,8 +121,7 @@ void Fact::forceSetRawValue(const QVariant &value)
     }
 }
 
-void Fact::setRawValue(const QVariant &value)
-{
+void Fact::setRawValue(const QVariant& value) {
     if (_metaData) {
         QVariant typedValue;
         QString errorString;
@@ -139,8 +140,7 @@ void Fact::setRawValue(const QVariant &value)
     }
 }
 
-void Fact::setCookedValue(const QVariant& value)
-{
+void Fact::setCookedValue(const QVariant& value) {
     if (_metaData) {
         setRawValue(_metaData->cookedTranslator()(value));
     } else {
@@ -148,8 +148,7 @@ void Fact::setCookedValue(const QVariant& value)
     }
 }
 
-int Fact::valueIndex(const QString &value) const
-{
+int Fact::valueIndex(const QString& value) const {
     if (_metaData) {
         return _metaData->enumStrings().indexOf(value);
     }
@@ -157,16 +156,14 @@ int Fact::valueIndex(const QString &value) const
     return -1;
 }
 
-void Fact::setEnumStringValue(const QString &value)
-{
+void Fact::setEnumStringValue(const QString& value) {
     const int index = valueIndex(value);
     if (index != -1) {
         setCookedValue(_metaData->enumValues()[index]);
     }
 }
 
-void Fact::setEnumIndex(int index)
-{
+void Fact::setEnumIndex(int index) {
     if (_metaData) {
         setCookedValue(_metaData->enumValues()[index]);
     } else {
@@ -174,8 +171,7 @@ void Fact::setEnumIndex(int index)
     }
 }
 
-void Fact::containerSetRawValue(const QVariant &value)
-{
+void Fact::containerSetRawValue(const QVariant& value) {
     if (_rawValue != value) {
         _rawValue = value;
         _sendValueChangedSignal(cookedValue());
@@ -186,8 +182,7 @@ void Fact::containerSetRawValue(const QVariant &value)
     emit vehicleUpdated(_rawValue);
 }
 
-QVariant Fact::cookedValue() const
-{
+QVariant Fact::cookedValue() const {
     if (_metaData) {
         return _metaData->rawTranslator()(_rawValue);
     } else {
@@ -196,8 +191,7 @@ QVariant Fact::cookedValue() const
     }
 }
 
-QString Fact::enumStringValue()
-{
+QString Fact::enumStringValue() {
     if (_metaData) {
         const int enumIndex = this->enumIndex();
         if ((enumIndex >= 0) && (enumIndex < _metaData->enumStrings().count())) {
@@ -210,13 +204,12 @@ QString Fact::enumStringValue()
     return QString();
 }
 
-int Fact::enumIndex()
-{
+int Fact::enumIndex() {
     if (_metaData) {
         //-- Only enums have an index
         if (!_metaData->enumValues().isEmpty()) {
             int index = 0;
-            for (const QVariant &enumValue: _metaData->enumValues()) {
+            for (const QVariant& enumValue : _metaData->enumValues()) {
                 if (enumValue == rawValue()) {
                     return index;
                 }
@@ -241,8 +234,7 @@ int Fact::enumIndex()
     return -1;
 }
 
-QStringList Fact::enumStrings() const
-{
+QStringList Fact::enumStrings() const {
     if (_metaData) {
         return _metaData->enumStrings();
     } else {
@@ -251,8 +243,7 @@ QStringList Fact::enumStrings() const
     }
 }
 
-QVariantList Fact::enumValues() const
-{
+QVariantList Fact::enumValues() const {
     if (_metaData) {
         return _metaData->enumValues();
     } else {
@@ -261,8 +252,7 @@ QVariantList Fact::enumValues() const
     }
 }
 
-void Fact::setEnumInfo(const QStringList &strings, const QVariantList &values)
-{
+void Fact::setEnumInfo(const QStringList& strings, const QVariantList& values) {
     if (_metaData) {
         _metaData->setEnumInfo(strings, values);
         emit enumsChanged();
@@ -271,8 +261,7 @@ void Fact::setEnumInfo(const QStringList &strings, const QVariantList &values)
     }
 }
 
-QStringList Fact::bitmaskStrings() const
-{
+QStringList Fact::bitmaskStrings() const {
     if (_metaData) {
         return _metaData->bitmaskStrings();
     } else {
@@ -281,8 +270,7 @@ QStringList Fact::bitmaskStrings() const
     }
 }
 
-QVariantList Fact::bitmaskValues() const
-{
+QVariantList Fact::bitmaskValues() const {
     if (_metaData) {
         return _metaData->bitmaskValues();
     } else {
@@ -291,13 +279,12 @@ QVariantList Fact::bitmaskValues() const
     }
 }
 
-QStringList Fact::selectedBitmaskStrings() const
-{
+QStringList Fact::selectedBitmaskStrings() const {
     if (_metaData) {
         const auto values = _metaData->bitmaskValues();
         const auto strings = _metaData->bitmaskStrings();
         if (values.size() != strings.size()) {
-            qCWarning(FactLog) << "Size of bitmask value and string is different."  << name();
+            qCWarning(FactLog) << "Size of bitmask value and string is different." << name();
             return {};
         }
 
@@ -319,71 +306,56 @@ QStringList Fact::selectedBitmaskStrings() const
     }
 }
 
-QString Fact::_variantToString(const QVariant &variant, int decimalPlaces) const
-{
+QString Fact::_variantToString(const QVariant& variant, int decimalPlaces) const {
     QString valueString;
 
     switch (type()) {
-    case FactMetaData::valueTypeFloat:
-    {
-        const float fValue = variant.toFloat();
-        if (qIsNaN(fValue)) {
-            valueString = QStringLiteral("--.--");
-        } else {
-            valueString = QStringLiteral("%1").arg(fValue, 0, 'f', decimalPlaces);
+        case FactMetaData::valueTypeFloat: {
+            const float fValue = variant.toFloat();
+            if (qIsNaN(fValue)) {
+                valueString = QStringLiteral("--.--");
+            } else {
+                valueString = QStringLiteral("%1").arg(fValue, 0, 'f', decimalPlaces);
+            }
+        } break;
+        case FactMetaData::valueTypeDouble: {
+            const double dValue = variant.toDouble();
+            if (qIsNaN(dValue)) {
+                valueString = QStringLiteral("--.--");
+            } else {
+                valueString = QStringLiteral("%1").arg(dValue, 0, 'f', decimalPlaces);
+            }
+            break;
         }
-    }
-        break;
-    case FactMetaData::valueTypeDouble:
-    {
-        const double dValue = variant.toDouble();
-        if (qIsNaN(dValue)) {
-            valueString = QStringLiteral("--.--");
-        } else {
-            valueString = QStringLiteral("%1").arg(dValue, 0, 'f', decimalPlaces);
+        case FactMetaData::valueTypeBool:
+            valueString = variant.toBool() ? tr("true") : tr("false");
+            break;
+        case FactMetaData::valueTypeElapsedTimeInSeconds: {
+            const double dValue = variant.toDouble();
+            if (qIsNaN(dValue)) {
+                valueString = QStringLiteral("--:--:--");
+            } else {
+                QTime time(0, 0, 0, 0);
+                time = time.addSecs(dValue);
+                valueString = time.toString(QStringLiteral("hh:mm:ss"));
+            }
+            break;
         }
-        break;
-    }
-    case FactMetaData::valueTypeBool:
-        valueString = variant.toBool() ? tr("true") : tr("false");
-        break;
-    case FactMetaData::valueTypeElapsedTimeInSeconds:
-    {
-        const double dValue = variant.toDouble();
-        if (qIsNaN(dValue)) {
-            valueString = QStringLiteral("--:--:--");
-        } else {
-            QTime time(0, 0, 0, 0);
-            time = time.addSecs(dValue);
-            valueString = time.toString(QStringLiteral("hh:mm:ss"));
-        }
-        break;
-    }
-    default:
-        valueString = variant.toString();
-        break;
+        default:
+            valueString = variant.toString();
+            break;
     }
 
     return valueString;
 }
 
-QString Fact::rawValueStringFullPrecision() const
-{
-    return _variantToString(rawValue(), 18);
-}
+QString Fact::rawValueStringFullPrecision() const { return _variantToString(rawValue(), 18); }
 
-QString Fact::rawValueString() const
-{
-    return _variantToString(rawValue(), decimalPlaces());
-}
+QString Fact::rawValueString() const { return _variantToString(rawValue(), decimalPlaces()); }
 
-QString Fact::cookedValueString() const
-{
-    return _variantToString(cookedValue(), decimalPlaces());
-}
+QString Fact::cookedValueString() const { return _variantToString(cookedValue(), decimalPlaces()); }
 
-QVariant Fact::rawDefaultValue() const
-{
+QVariant Fact::rawDefaultValue() const {
     if (_metaData) {
         if (!_metaData->defaultValueAvailable()) {
             qCDebug(FactLog) << "Access to unavailable default value";
@@ -395,8 +367,7 @@ QVariant Fact::rawDefaultValue() const
     }
 }
 
-QVariant Fact::cookedDefaultValue() const
-{
+QVariant Fact::cookedDefaultValue() const {
     if (_metaData) {
         if (!_metaData->defaultValueAvailable()) {
             qCDebug(FactLog) << "Access to unavailable default value";
@@ -408,13 +379,9 @@ QVariant Fact::cookedDefaultValue() const
     }
 }
 
-QString Fact::cookedDefaultValueString() const
-{
-    return _variantToString(cookedDefaultValue(), decimalPlaces());
-}
+QString Fact::cookedDefaultValueString() const { return _variantToString(cookedDefaultValue(), decimalPlaces()); }
 
-QString Fact::shortDescription() const
-{
+QString Fact::shortDescription() const {
     if (_metaData) {
         return _metaData->shortDescription();
     } else {
@@ -423,8 +390,7 @@ QString Fact::shortDescription() const
     }
 }
 
-QString Fact::longDescription() const
-{
+QString Fact::longDescription() const {
     if (_metaData) {
         return _metaData->longDescription();
     } else {
@@ -433,8 +399,7 @@ QString Fact::longDescription() const
     }
 }
 
-QString Fact::rawUnits() const
-{
+QString Fact::rawUnits() const {
     if (_metaData) {
         return _metaData->rawUnits();
     } else {
@@ -443,8 +408,7 @@ QString Fact::rawUnits() const
     }
 }
 
-QString Fact::cookedUnits() const
-{
+QString Fact::cookedUnits() const {
     if (_metaData) {
         return _metaData->cookedUnits();
     } else {
@@ -453,8 +417,7 @@ QString Fact::cookedUnits() const
     }
 }
 
-QVariant Fact::rawMin() const
-{
+QVariant Fact::rawMin() const {
     if (_metaData) {
         return _metaData->rawMin();
     } else {
@@ -463,8 +426,7 @@ QVariant Fact::rawMin() const
     }
 }
 
-QVariant Fact::cookedMin() const
-{
+QVariant Fact::cookedMin() const {
     if (_metaData) {
         return _metaData->cookedMin();
     } else {
@@ -473,13 +435,9 @@ QVariant Fact::cookedMin() const
     }
 }
 
-QString Fact::cookedMinString() const
-{
-    return _variantToString(cookedMin(), decimalPlaces());
-}
+QString Fact::cookedMinString() const { return _variantToString(cookedMin(), decimalPlaces()); }
 
-QVariant Fact::rawMax() const
-{
+QVariant Fact::rawMax() const {
     if (_metaData) {
         return _metaData->rawMax();
     } else {
@@ -488,8 +446,7 @@ QVariant Fact::rawMax() const
     }
 }
 
-QVariant Fact::cookedMax() const
-{
+QVariant Fact::cookedMax() const {
     if (_metaData) {
         return _metaData->cookedMax();
     } else {
@@ -498,13 +455,9 @@ QVariant Fact::cookedMax() const
     }
 }
 
-QString Fact::cookedMaxString() const
-{
-    return _variantToString(cookedMax(), decimalPlaces());
-}
+QString Fact::cookedMaxString() const { return _variantToString(cookedMax(), decimalPlaces()); }
 
-bool Fact::minIsDefaultForType() const
-{
+bool Fact::minIsDefaultForType() const {
     if (_metaData) {
         return _metaData->minIsDefaultForType();
     } else {
@@ -513,8 +466,7 @@ bool Fact::minIsDefaultForType() const
     }
 }
 
-bool Fact::maxIsDefaultForType() const
-{
+bool Fact::maxIsDefaultForType() const {
     if (_metaData) {
         return _metaData->maxIsDefaultForType();
     } else {
@@ -523,8 +475,7 @@ bool Fact::maxIsDefaultForType() const
     }
 }
 
-int Fact::decimalPlaces() const
-{
+int Fact::decimalPlaces() const {
     if (_metaData) {
         return _metaData->decimalPlaces();
     } else {
@@ -533,8 +484,7 @@ int Fact::decimalPlaces() const
     }
 }
 
-QString Fact::category() const
-{
+QString Fact::category() const {
     if (_metaData) {
         return _metaData->category();
     } else {
@@ -543,8 +493,7 @@ QString Fact::category() const
     }
 }
 
-QString Fact::group() const
-{
+QString Fact::group() const {
     if (_metaData) {
         return _metaData->group();
     } else {
@@ -553,8 +502,7 @@ QString Fact::group() const
     }
 }
 
-void Fact::setMetaData(FactMetaData *metaData, bool setDefaultFromMetaData)
-{
+void Fact::setMetaData(FactMetaData* metaData, bool setDefaultFromMetaData) {
     _metaData = metaData;
     if (setDefaultFromMetaData && metaData->defaultValueAvailable()) {
         setRawValue(rawDefaultValue());
@@ -562,8 +510,7 @@ void Fact::setMetaData(FactMetaData *metaData, bool setDefaultFromMetaData)
     emit valueChanged(cookedValue());
 }
 
-bool Fact::valueEqualsDefault() const
-{
+bool Fact::valueEqualsDefault() const {
     if (_metaData) {
         if (_metaData->defaultValueAvailable()) {
             return _metaData->rawDefaultValue() == rawValue();
@@ -576,8 +523,7 @@ bool Fact::valueEqualsDefault() const
     }
 }
 
-bool Fact::defaultValueAvailable() const
-{
+bool Fact::defaultValueAvailable() const {
     if (_metaData) {
         return _metaData->defaultValueAvailable();
     } else {
@@ -586,8 +532,7 @@ bool Fact::defaultValueAvailable() const
     }
 }
 
-QString Fact::validate(const QString &cookedValue, bool convertOnly)
-{
+QString Fact::validate(const QString& cookedValue, bool convertOnly) {
     if (_metaData) {
         QVariant typedValue;
         QString errorString;
@@ -601,8 +546,7 @@ QString Fact::validate(const QString &cookedValue, bool convertOnly)
     }
 }
 
-QVariant Fact::clamp(const QString &cookedValue)
-{
+QVariant Fact::clamp(const QString& cookedValue) {
     if (_metaData) {
         QVariant typedValue;
         if (_metaData->clampValue(cookedValue, typedValue)) {
@@ -617,8 +561,7 @@ QVariant Fact::clamp(const QString &cookedValue)
     return QVariant();
 }
 
-bool Fact::vehicleRebootRequired() const
-{
+bool Fact::vehicleRebootRequired() const {
     if (_metaData) {
         return _metaData->vehicleRebootRequired();
     } else {
@@ -627,8 +570,7 @@ bool Fact::vehicleRebootRequired() const
     }
 }
 
-bool Fact::qgcRebootRequired() const
-{
+bool Fact::qgcRebootRequired() const {
     if (_metaData) {
         return _metaData->qgcRebootRequired();
     } else {
@@ -637,16 +579,14 @@ bool Fact::qgcRebootRequired() const
     }
 }
 
-void Fact::setSendValueChangedSignals(bool sendValueChangedSignals)
-{
+void Fact::setSendValueChangedSignals(bool sendValueChangedSignals) {
     if (sendValueChangedSignals != _sendValueChangedSignals) {
         _sendValueChangedSignals = sendValueChangedSignals;
         emit sendValueChangedSignalsChanged(_sendValueChangedSignals);
     }
 }
 
-void Fact::_sendValueChangedSignal(const QVariant &value)
-{
+void Fact::_sendValueChangedSignal(const QVariant& value) {
     if (_sendValueChangedSignals) {
         emit valueChanged(value);
         _deferredValueChangeSignal = false;
@@ -655,16 +595,14 @@ void Fact::_sendValueChangedSignal(const QVariant &value)
     }
 }
 
-void Fact::sendDeferredValueChangedSignal()
-{
+void Fact::sendDeferredValueChangedSignal() {
     if (_deferredValueChangeSignal) {
         _deferredValueChangeSignal = false;
         emit valueChanged(cookedValue());
     }
 }
 
-QString Fact::enumOrValueString()
-{
+QString Fact::enumOrValueString() {
     if (_metaData) {
         if (_metaData->enumStrings().count()) {
             return enumStringValue();
@@ -677,8 +615,7 @@ QString Fact::enumOrValueString()
     return QString();
 }
 
-double Fact::rawIncrement() const
-{
+double Fact::rawIncrement() const {
     if (_metaData) {
         return _metaData->rawIncrement();
     } else {
@@ -687,8 +624,7 @@ double Fact::rawIncrement() const
     return std::numeric_limits<double>::quiet_NaN();
 }
 
-double Fact::cookedIncrement() const
-{
+double Fact::cookedIncrement() const {
     if (_metaData) {
         return _metaData->cookedIncrement();
     } else {
@@ -697,8 +633,7 @@ double Fact::cookedIncrement() const
     return std::numeric_limits<double>::quiet_NaN();
 }
 
-bool Fact::hasControl() const
-{
+bool Fact::hasControl() const {
     if (_metaData) {
         return _metaData->hasControl();
     } else {
@@ -707,8 +642,7 @@ bool Fact::hasControl() const
     }
 }
 
-bool Fact::readOnly() const
-{
+bool Fact::readOnly() const {
     if (_metaData) {
         return _metaData->readOnly();
     } else {
@@ -717,8 +651,7 @@ bool Fact::readOnly() const
     }
 }
 
-bool Fact::writeOnly() const
-{
+bool Fact::writeOnly() const {
     if (_metaData) {
         return _metaData->writeOnly();
     } else {
@@ -727,8 +660,7 @@ bool Fact::writeOnly() const
     }
 }
 
-bool Fact::volatileValue() const
-{
+bool Fact::volatileValue() const {
     if (_metaData) {
         return _metaData->volatileValue();
     } else {
@@ -737,8 +669,7 @@ bool Fact::volatileValue() const
     }
 }
 
-FactValueSliderListModel *Fact::valueSliderModel()
-{
+FactValueSliderListModel* Fact::valueSliderModel() {
     if (!_valueSliderModel) {
         _valueSliderModel = new FactValueSliderListModel(*this);
     }
@@ -746,8 +677,7 @@ FactValueSliderListModel *Fact::valueSliderModel()
     return _valueSliderModel;
 }
 
-void Fact::_checkForRebootMessaging()
-{
+void Fact::_checkForRebootMessaging() {
     if (qgcApp()) {
         if (!qgcApp()->runningUnitTests()) {
             if (vehicleRebootRequired()) {

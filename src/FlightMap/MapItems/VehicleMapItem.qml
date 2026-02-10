@@ -16,6 +16,7 @@ import QGroundControl
 
 
 import QGroundControl.Controls
+import QGroundControl.ScreenTools
 
 /// Marker for displaying a vehicle location on the map
 MapQuickItem {

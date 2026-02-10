@@ -12,6 +12,7 @@ import QtQuick.Controls
 
 import QGroundControl
 import QGroundControl.Controls
+import QGroundControl.ScreenTools
 
 /// Provides UI for parameter download progress. This is overlayed on top of the FlyViewToolBar.
 

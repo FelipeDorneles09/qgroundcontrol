@@ -7,109 +7,121 @@
  *
  ****************************************************************************/
 
+/// @file
+///     @author Gus Grubba <gus@auterion.com>
+
+/****************************************************************************
+ *
+ * (c) 2009-2024 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
+ *
+ * QGroundControl is licensed according to the terms in the file
+ * COPYING.md in the root of the source code directory.
+ *
+ ****************************************************************************/
 
 /// @file
 ///     @author Gus Grubba <gus@auterion.com>
 
-#pragma once
+#ifndef ScreenToolsController_H
+#define ScreenToolsController_H
 
-#include <QtCore/QLoggingCategory>
-#include <QtCore/QObject>
-#include <QtQmlIntegration/QtQmlIntegration>
+#include <QCursor>
+#include <QQuickItem>
 
-Q_DECLARE_LOGGING_CATEGORY(ScreenToolsControllerLog)
+#include "QGCApplication.h"
+
+/*!
+    @brief Screen helper tools for QML widgets
+*/
 
 /// This Qml control is used to return screen parameters
-class ScreenToolsController : public QObject
-{
+class ScreenToolsController : public QQuickItem {
     Q_OBJECT
-    QML_ELEMENT
-    QML_SINGLETON
-    Q_PROPERTY(bool     isAndroid           READ isAndroid          CONSTANT)
-    Q_PROPERTY(bool     isiOS               READ isiOS              CONSTANT)
-    Q_PROPERTY(bool     isMobile            READ isMobile           CONSTANT)
-    Q_PROPERTY(bool     fakeMobile          READ fakeMobile         CONSTANT)
-    Q_PROPERTY(bool     isDebug             READ isDebug            CONSTANT)
-    Q_PROPERTY(bool     isMacOS             READ isMacOS            CONSTANT)
-    Q_PROPERTY(bool     isLinux             READ isLinux            CONSTANT)
-    Q_PROPERTY(bool     isWindows           READ isWindows          CONSTANT)
-    Q_PROPERTY(bool     isSerialAvailable   READ isSerialAvailable  CONSTANT)
-    Q_PROPERTY(bool     hasTouch            READ hasTouch           CONSTANT)
-    Q_PROPERTY(QString  iOSDevice           READ iOSDevice          CONSTANT)
-    Q_PROPERTY(QString  fixedFontFamily     READ fixedFontFamily    CONSTANT)
-    Q_PROPERTY(QString  normalFontFamily    READ normalFontFamily   CONSTANT)
+   public:
+    ScreenToolsController();
 
-public:
-    explicit ScreenToolsController(QObject *parent = nullptr);
-    ~ScreenToolsController();
+    Q_PROPERTY(bool isAndroid READ isAndroid CONSTANT)
+    Q_PROPERTY(bool isiOS READ isiOS CONSTANT)
+    Q_PROPERTY(bool isMobile READ isMobile CONSTANT)
+    Q_PROPERTY(bool isDebug READ isDebug CONSTANT)
+    Q_PROPERTY(bool isMacOS READ isMacOS CONSTANT)
+    Q_PROPERTY(bool isLinux READ isLinux CONSTANT)
+    Q_PROPERTY(bool isWindows READ isWindows CONSTANT)
+    Q_PROPERTY(bool isSerialAvailable READ isSerialAvailable CONSTANT)
+    Q_PROPERTY(bool hasTouch READ hasTouch CONSTANT)
+    Q_PROPERTY(QString iOSDevice READ iOSDevice CONSTANT)
+    Q_PROPERTY(QString fixedFontFamily READ fixedFontFamily CONSTANT)
+    Q_PROPERTY(QString normalFontFamily READ normalFontFamily CONSTANT)
+    Q_PROPERTY(QString boldFontFamily READ boldFontFamily CONSTANT)
 
-    /// Returns current mouse position
-    Q_INVOKABLE static int mouseX();
-    Q_INVOKABLE static int mouseY();
+    // Returns current mouse position
+    Q_INVOKABLE int mouseX(void) { return QCursor::pos().x(); }
+    Q_INVOKABLE int mouseY(void) { return QCursor::pos().y(); }
 
     // QFontMetrics::descent for default font
-    Q_INVOKABLE static double defaultFontDescent(int pointSize);
+    Q_INVOKABLE double defaultFontDescent(int pointSize) const;
 
-#if defined(Q_OS_ANDROID) || defined(Q_OS_IOS)
-    static bool isMobile() { return true;  }
-    static bool fakeMobile() { return false; }
+#if defined(__mobile__)
+    bool isMobile() const { return true; }
 #else
-    static bool isMobile() { return fakeMobile(); }
-    static bool fakeMobile();
+    bool isMobile() const { return qgcApp()->fakeMobile(); }
 #endif
 
-#if defined (Q_OS_ANDROID)
-    static bool isAndroid() { return true;  }
-    static bool isiOS() { return false; }
-    static bool isLinux() { return false; }
-    static bool isMacOS() { return false; }
-    static bool isWindows() { return false; }
+#if defined(Q_OS_ANDROID)
+    bool isAndroid() { return true; }
+    bool isiOS() { return false; }
+    bool isLinux() { return false; }
+    bool isMacOS() { return false; }
+    bool isWindows() { return false; }
 #elif defined(Q_OS_IOS)
-    static bool isAndroid() { return false; }
-    static bool isiOS() { return true; }
-    static bool isLinux() { return false; }
-    static bool isMacOS() { return false; }
-    static bool isWindows() { return false; }
-#elif defined(Q_OS_MACOS)
-    static bool isAndroid() { return false; }
-    static bool isiOS() { return false; }
-    static bool isLinux() { return false; }
-    static bool isMacOS() { return true; }
-    static bool isWindows() { return false; }
+    bool isAndroid() { return false; }
+    bool isiOS() { return true; }
+    bool isLinux() { return false; }
+    bool isMacOS() { return false; }
+    bool isWindows() { return false; }
+#elif defined(Q_OS_MAC)
+    bool isAndroid() { return false; }
+    bool isiOS() { return false; }
+    bool isLinux() { return false; }
+    bool isMacOS() { return true; }
+    bool isWindows() { return false; }
 #elif defined(Q_OS_LINUX)
-    static bool isAndroid() { return false; }
-    static bool isiOS() { return false; }
-    static bool isLinux() { return true; }
-    static bool isMacOS() { return false; }
-    static bool isWindows() { return false; }
+    bool isAndroid() { return false; }
+    bool isiOS() { return false; }
+    bool isLinux() { return true; }
+    bool isMacOS() { return false; }
+    bool isWindows() { return false; }
 #elif defined(Q_OS_WIN)
-    static bool isAndroid() { return false; }
-    static bool isiOS() { return false; }
-    static bool isLinux() { return false; }
-    static bool isMacOS() { return false; }
-    static bool isWindows() { return true; }
+    bool isAndroid() { return false; }
+    bool isiOS() { return false; }
+    bool isLinux() { return false; }
+    bool isMacOS() { return false; }
+    bool isWindows() { return true; }
 #else
-    static bool isAndroid() { return false; }
-    static bool isiOS() { return false; }
-    static bool isLinux() { return false; }
-    static bool isMacOS() { return false; }
-    static bool isWindows() { return false; }
+    bool isAndroid() { return false; }
+    bool isiOS() { return false; }
+    bool isLinux() { return false; }
+    bool isMacOS() { return false; }
+    bool isWindows() { return false; }
 #endif
 
-#if defined(QGC_NO_SERIAL_LINK)
-    static bool isSerialAvailable() { return false; }
+#if defined(NO_SERIAL_LINK)
+    bool isSerialAvailable() { return false; }
 #else
-    static bool isSerialAvailable() { return true; }
+    bool isSerialAvailable() { return true; }
 #endif
 
 #ifdef QT_DEBUG
-    static bool isDebug() { return true; }
+    bool isDebug() { return true; }
 #else
-    static bool isDebug() { return false; }
+    bool isDebug() { return false; }
 #endif
 
-    static bool hasTouch();
-    static QString iOSDevice();
-    static QString fixedFontFamily();
-    static QString normalFontFamily();
+    bool hasTouch() const;
+    QString iOSDevice() const;
+    QString fixedFontFamily() const;
+    QString normalFontFamily() const;
+    QString boldFontFamily() const;
 };
+
+#endif

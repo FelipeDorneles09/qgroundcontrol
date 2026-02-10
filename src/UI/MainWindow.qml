@@ -20,6 +20,7 @@ import QGroundControl.FactControls
 
 import QGroundControl.FlightDisplay
 import QGroundControl.FlightMap
+import QGroundControl.ScreenTools
 
 /// @brief Native QML top level window
 /// All properties defined here are visible to all QML pages.

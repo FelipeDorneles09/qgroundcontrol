@@ -12,6 +12,7 @@ import QtQuick
 import QGroundControl
 import QGroundControl.Controls
 import QGroundControl.Toolbar
+import QGroundControl.ScreenTools
 
 Item {
     anchors.top:    parent.top

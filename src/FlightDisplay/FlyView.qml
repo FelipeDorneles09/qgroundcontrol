@@ -18,11 +18,18 @@ import QtQuick.Window
 import QtQml.Models
 
 import QGroundControl
+import QGroundControl.Airspace      
+import QGroundControl.Airmap        
+import QGroundControl.Controllers   
+import QGroundControl.Controls      
+import QGroundControl.FactSystem    
+import QGroundControl.FlightDisplay 
+import QGroundControl.FlightMap     
+import QGroundControl.Palette       
+import QGroundControl.ScreenTools   
+import QGroundControl.Vehicle       
+import QGroundControl.ScreenTools
 
-import QGroundControl.Controls
-
-import QGroundControl.FlightDisplay
-import QGroundControl.FlightMap
 
 
 import QGroundControl.UTMSP
@@ -54,6 +61,8 @@ Item {
     property real   _margins:               ScreenTools.defaultFontPixelWidth / 2
     property var    _guidedController:      guidedActionsController
     property var    _guidedValueSlider:     guidedValueSlider
+    property var    _guidedActionList:      guidedActionList
+    property var    _guidedAltSlider:       guidedAltSlider
     property var    _widgetLayer:           widgetLayer
     property real   _toolsMargin:           ScreenTools.defaultFontPixelWidth * 0.75
     property rect   _centerViewport:        Qt.rect(0, 0, width, height)
@@ -67,6 +76,9 @@ Item {
     function _calcCenterViewPort() {
         var newToolInset = Qt.rect(0, 0, width, height)
         toolstrip.adjustToolInset(newToolInset)
+        if (QGroundControl.corePlugin.options.instrumentWidget) {
+            flightDisplayViewWidgets.adjustToolInset(newToolInset)
+        }
     }
 
     function dropMainStatusIndicatorTool() {
@@ -75,121 +87,100 @@ Item {
 
     QGCToolInsets {
         id:                     _toolInsets
-        topEdgeLeftInset:       toolbar.height
-        topEdgeCenterInset:     topEdgeLeftInset
-        topEdgeRightInset:      topEdgeLeftInset
-        leftEdgeBottomInset:    _pipView.leftEdgeBottomInset
-        bottomEdgeLeftInset:    _pipView.bottomEdgeLeftInset
+        leftEdgeBottomInset:    _pipOverlay.visible ? _pipOverlay.x + _pipOverlay.width : 0
+        bottomEdgeLeftInset:    _pipOverlay.visible ? parent.height - _pipOverlay.y : 0
     }
 
-    Item {
-        id:                 mapHolder
-        anchors.fill:       parent
-
-        FlyViewMap {
-            id:                     mapControl
-            planMasterController:   _planController
-            rightPanelWidth:        ScreenTools.defaultFontPixelHeight * 9
-            pipView:                _pipView
-            pipMode:                !_mainWindowIsMap
-            toolInsets:             customOverlay.totalToolInsets
-            mapName:                "FlightDisplayView"
-            enabled:                !viewer3DWindow.isOpen
-        }
-
-        FlyViewVideo {
-            id:         videoControl
-            pipView:    _pipView
-        }
-
-        PipView {
-            id:                     _pipView
-            anchors.left:           parent.left
-            anchors.bottom:         parent.bottom
-            anchors.margins:        _toolsMargin
-            item1IsFullSettingsKey: "MainFlyWindowIsMap"
-            item1:                  mapControl
-            item2:                  QGroundControl.videoManager.hasVideo ? videoControl : null
-            show:                   QGroundControl.videoManager.hasVideo && !QGroundControl.videoManager.fullScreen &&
-                                        (videoControl.pipState.state === videoControl.pipState.pipState || mapControl.pipState.state === mapControl.pipState.pipState)
-            z:                      QGroundControl.zOrderWidgets
-
-            property real leftEdgeBottomInset: visible ? width + anchors.margins : 0
-            property real bottomEdgeLeftInset: visible ? height + anchors.margins : 0
-        }
-
-        FlyViewWidgetLayer {
-            id:                     widgetLayer
-            anchors.top:            parent.top
-            anchors.bottom:         parent.bottom
-            anchors.left:           parent.left
-            anchors.right:          guidedValueSlider.visible ? guidedValueSlider.left : parent.right
-            anchors.margins:        _widgetMargin
-            anchors.topMargin:      toolbar.height + _widgetMargin
-            z:                      _fullItemZorder + 2 // we need to add one extra layer for map 3d viewer (normally was 1)
-            parentToolInsets:       _toolInsets
-            mapControl:             _mapControl
-            visible:                !QGroundControl.videoManager.fullScreen
-            utmspActTrigger:        utmspSendActTrigger
-            isViewer3DOpen:         viewer3DWindow.isOpen
-        }
-
-        FlyViewCustomLayer {
-            id:                 customOverlay
-            anchors.fill:       widgetLayer
-            z:                  _fullItemZorder + 2
-            parentToolInsets:   widgetLayer.totalToolInsets
-            mapControl:         _mapControl
-            visible:            !QGroundControl.videoManager.fullScreen
-        }
-
-        // Development tool for visualizing the insets for a paticular layer, show if needed
-        FlyViewInsetViewer {
-            id:                     widgetLayerInsetViewer
-            anchors.top:            parent.top
-            anchors.bottom:         parent.bottom
-            anchors.left:           parent.left
-            anchors.right:          guidedValueSlider.visible ? guidedValueSlider.left : parent.right
-            z:                      widgetLayer.z + 1
-            insetsToView:           widgetLayer.totalToolInsets
-            visible:                false
-        }
-
-        GuidedActionsController {
-            id:                 guidedActionsController
-            missionController:  _missionController
-            guidedValueSlider:     _guidedValueSlider
-        }
-
-        //-- Guided value slider (e.g. altitude)
-        GuidedValueSlider {
-            id:                 guidedValueSlider
-            anchors.right:      parent.right
-            anchors.top:        parent.top
-            anchors.bottom:     parent.bottom
-            z:                  QGroundControl.zOrderTopMost
-            visible:            false
-        }
-
-        Viewer3D {
-            id: viewer3DWindow
-            anchors.fill: parent
-        }
+    FlyViewWidgetLayer {
+        id:                     widgetLayer
+        anchors.top:            parent.top
+        anchors.bottom:         parent.bottom
+        anchors.left:           parent.left
+        anchors.right:          guidedAltSlider.visible ? guidedAltSlider.left : parent.right
+        z:                      _fullItemZorder + 1
+        parentToolInsets:       _toolInsets
+        mapControl:             _mapControl
+        visible:                !QGroundControl.videoManager.fullScreen
     }
 
-    UTMSPActivationStatusBar {
-        activationStartTimestamp:   UTMSPStateStorage.startTimeStamp
-        activationApproval:         UTMSPStateStorage.showActivationTab && QGroundControl.utmspManager.utmspVehicle.vehicleActivation
-        flightID:                   UTMSPStateStorage.flightID
-        anchors.fill:               parent
-
-        function onActivationTriggered(value) {
-            _root.utmspSendActTrigger = value
-        }
+    FlyViewCustomLayer {
+        id:                 customOverlay
+        anchors.fill:       widgetLayer
+        z:                  _fullItemZorder + 2
+        parentToolInsets:   widgetLayer.totalToolInsets
+        mapControl:         _mapControl
+        visible:            !QGroundControl.videoManager.fullScreen
     }
 
-    FlyViewToolBar {
-        id:         toolbar
-        visible:    !QGroundControl.videoManager.fullScreen
+    GuidedActionsController {
+        id:                 guidedActionsController
+        missionController:  _missionController
+        actionList:         _guidedActionList
+        altitudeSlider:     _guidedAltSlider
+    }
+    
+    /*
+    GuidedActionConfirm {
+        id:                         guidedActionConfirm
+        anchors.margins:            _margins
+        anchors.bottom:             parent.bottom
+        anchors.horizontalCenter:   parent.horizontalCenter
+        z:                          QGroundControl.zOrderTopMost
+        guidedController:           _guided_controller
+        guidedValueSlider:          _guidedValueSlider
+        altitudeSlider:             _guidedAltSlider
+    }
+    */
+
+    GuidedActionList {
+        id:                         guidedActionList
+        anchors.margins:            _margins
+        anchors.bottom:             parent.bottom
+        anchors.horizontalCenter:   parent.horizontalCenter
+        z:                          QGroundControl.zOrderTopMost
+        guidedController:           _guidedController
+    }
+
+    //-- Altitude slider
+    GuidedAltitudeSlider {
+        id:                 guidedAltSlider
+        anchors.margins:    _toolsMargin
+        anchors.right:      parent.right
+        anchors.top:        parent.top
+        anchors.bottom:     parent.bottom
+        z:                  QGroundControl.zOrderTopMost
+        radius:             ScreenTools.defaultFontPixelWidth / 2
+        width:              ScreenTools.defaultFontPixelWidth * 10
+        color:              qgcPal.window
+        visible:            false
+    }
+
+    FlyViewMap {
+        id:                     mapControl
+        planMasterController:   _planController
+        rightPanelWidth:        ScreenTools.defaultFontPixelHeight * 9
+        pipMode:                !_mainWindowIsMap
+        toolInsets:             customOverlay.totalToolInsets
+        mapName:                "FlightDisplayView"
+    }
+
+    FlyViewVideo {
+        id: videoControl
+    }
+
+    QGCPipOverlay {
+        id:                     _pipOverlay
+        anchors.right:           parent.right
+        anchors.rightMargin:    30
+        anchors.topMargin:      10
+        anchors.top:            parent.top
+        anchors.margins:        _toolsMargin
+        item1IsFullSettingsKey: "MainFlyWindowIsMap"
+        item1:                  mapControl
+        item2:                  QGroundControl.videoManager.hasVideo ? videoControl : null
+        fullZOrder:             _fullItemZorder
+        pipZOrder:              _pipItemZorder
+        show:                   !QGroundControl.videoManager.fullScreen &&
+                                    (videoControl.pipState.state === videoControl.pipState.pipState || mapControl.pipState.state === mapControl.pipState.pipState)
     }
 }

@@ -6,7 +6,7 @@ import QGroundControl
 
 import QGroundControl.Controls
 import QGroundControl.FactControls
-
+import QGroundControl.ScreenTools
 
 // Camera section for mission item editors
 Column {

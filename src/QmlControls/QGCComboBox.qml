@@ -16,6 +16,8 @@ import QGroundControl
 
 
 import QGroundControl.Controls
+import QGroundControl.ScreenTools
+import QGroundControl.ScreenTools
 
 T.ComboBox {
     id:             control

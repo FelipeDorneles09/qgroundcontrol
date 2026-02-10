@@ -7,61 +7,56 @@
  *
  ****************************************************************************/
 
+/// @file
+/// @author Gus Grubba <gus@auterion.com>
+
+/****************************************************************************
+ *
+ * (c) 2009-2024 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
+ *
+ * QGroundControl is licensed according to the terms in the file
+ * COPYING.md in the root of the source code directory.
+ *
+ ****************************************************************************/
 
 /// @file
 /// @author Gus Grubba <gus@auterion.com>
 
 #include "ScreenToolsController.h"
-#include "QGCApplication.h"
-#include "QGCLoggingCategory.h"
-#include "SettingsManager.h"
-#include "AppSettings.h"
 
-#include <QtGui/QCursor>
-#include <QtGui/QFontDatabase>
-#include <QtGui/QFontMetrics>
+#include <QFontDatabase>
+#include <QFontMetrics>
+#include <QScreen>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QtGui/QInputDevice>
+#else
+#include <QTouchDevice>
+#endif
 
-#if defined(Q_OS_IOS)
+#include "AppSettings.h"
+#include "SettingsManager.h"
+
+#if defined(__ios__)
 #include <sys/utsname.h>
 #endif
 
-QGC_LOGGING_CATEGORY(ScreenToolsControllerLog, "QMLControls.ScreenToolsController")
+ScreenToolsController::ScreenToolsController() {}
 
-ScreenToolsController::ScreenToolsController(QObject *parent)
-    : QObject(parent)
-{
-    // qCDebug(ScreenToolsControllerLog) << Q_FUNC_INFO << this;
-}
-
-ScreenToolsController::~ScreenToolsController()
-{
-    // qCDebug(ScreenToolsControllerLog) << Q_FUNC_INFO << this;
-}
-
-int ScreenToolsController::mouseX()
-{
-    return QCursor::pos().x();
-}
-
-int ScreenToolsController::mouseY()
-{
-    return QCursor::pos().y();
-}
-
-bool ScreenToolsController::hasTouch()
-{
-    for (const auto &inputDevice: QInputDevice::devices()) {
+bool ScreenToolsController::hasTouch() const {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    for (const auto& inputDevice : QInputDevice::devices()) {
         if (inputDevice->type() == QInputDevice::DeviceType::TouchScreen) {
             return true;
         }
     }
-    return false;
+    return isMobile();
+#else
+    return QTouchDevice::devices().count() > 0 || isMobile();
+#endif
 }
 
-QString ScreenToolsController::iOSDevice()
-{
-#if defined(Q_OS_IOS)
+QString ScreenToolsController::iOSDevice() const {
+#if defined(__ios__)
     struct utsname systemInfo;
     uname(&systemInfo);
     return QString(systemInfo.machine);
@@ -70,30 +65,30 @@ QString ScreenToolsController::iOSDevice()
 #endif
 }
 
-QString ScreenToolsController::fixedFontFamily()
-{
+QString ScreenToolsController::fixedFontFamily() const {
     return QFontDatabase::systemFont(QFontDatabase::FixedFont).family();
 }
 
-QString ScreenToolsController::normalFontFamily()
-{
+QString ScreenToolsController::normalFontFamily() const {
     //-- See App.SettinsGroup.json for index
-    const int langID = SettingsManager::instance()->appSettings()->qLocaleLanguage()->rawValue().toInt();
+    int langID = SettingsManager::instance()->appSettings()->qLocaleLanguage()->rawValue().toInt();
     if (langID == QLocale::Korean) {
-        return QStringLiteral("NanumGothic");
+        return QString("NanumGothic");
+    } else {
+        return QString("Open Sans");
     }
-
-    return QStringLiteral("Open Sans");
 }
 
-double ScreenToolsController::defaultFontDescent(int pointSize)
-{
+QString ScreenToolsController::boldFontFamily() const {
+    //-- See App.SettinsGroup.json for index
+    int langID = SettingsManager::instance()->appSettings()->qLocaleLanguage()->rawValue().toInt();
+    if (langID == QLocale::Korean) {
+        return QString("NanumGothic");
+    } else {
+        return QString("Open Sans Semibold");
+    }
+}
+
+double ScreenToolsController::defaultFontDescent(int pointSize) const {
     return QFontMetrics(QFont(normalFontFamily(), pointSize)).descent();
 }
-
-#if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
-bool ScreenToolsController::fakeMobile()
-{
-    return qgcApp()->fakeMobile();
-}
-#endif

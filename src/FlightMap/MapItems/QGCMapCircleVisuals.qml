@@ -18,6 +18,7 @@ import QGroundControl
 
 import QGroundControl.Controls
 import QGroundControl.FlightMap
+import QGroundControl.ScreenTools
 
 /// QGCMapCircle map visuals
 Item {

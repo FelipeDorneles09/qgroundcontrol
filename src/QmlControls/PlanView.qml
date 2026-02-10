@@ -25,7 +25,7 @@ import QGroundControl.FactControls
 
 import QGroundControl.FlightDisplay
 import QGroundControl.UTMSP
-
+import QGroundControl.ScreenTools
 
 Item {
     id: _root

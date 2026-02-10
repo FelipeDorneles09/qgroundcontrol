@@ -3,7 +3,7 @@ import QtQuick.Controls
 
 import QGroundControl
 import QGroundControl.Controls
-
+import QGroundControl.ScreenTools
 
 Canvas {
     id:     root
@@ -20,8 +20,8 @@ Canvas {
     property bool   child:                  false
     property bool   highlightSelected:      false
     property var    color:                  checked ? "green" : (child ? qgcPal.mapIndicatorChild : qgcPal.mapIndicator)
-    property real   anchorPointX:           _height / 2
-    property real   anchorPointY:           _height / 2
+    property real   anchorPointX:           _indicatorRadius
+    property real   anchorPointY:           _indicatorRadius
     property bool   specifiesCoordinate:    true
     property real   gimbalYaw
     property real   vehicleYaw

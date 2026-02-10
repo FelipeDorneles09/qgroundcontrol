@@ -19,9 +19,18 @@ import QtQml.Models
 
 import QGroundControl
 import QGroundControl.Controls
-
+import QGroundControl.Airspace      
+import QGroundControl.Airmap       
+import QGroundControl.Controllers   
 import QGroundControl.FlightDisplay
 import QGroundControl.FlightMap
+import QGroundControl.FactSystem     
+import QGroundControl.Palette      
+import QGroundControl.ScreenTools
+import QGroundControl.Vehicle      
+import QGroundControl.SkyClean     
+import SiYi.Object
+import "qrc:/qml/QGroundControl/Controls"       
 
 // This is the ui overlay layer for the widgets/tools for Fly View
 Item {
@@ -48,23 +57,26 @@ Item {
 
     property bool utmspActTrigger
 
+    property var siyi: SiYi
+    property SiYiCamera camera: siyi.camera
+
     QGCToolInsets {
         id:                     _totalToolInsets
-        leftEdgeTopInset:       toolStrip.leftEdgeTopInset
-        leftEdgeCenterInset:    toolStrip.leftEdgeCenterInset
-        leftEdgeBottomInset:    virtualJoystickMultiTouch.visible ? virtualJoystickMultiTouch.leftEdgeBottomInset : parentToolInsets.leftEdgeBottomInset
-        rightEdgeTopInset:      topRightPanel.rightEdgeTopInset
-        rightEdgeCenterInset:   topRightPanel.rightEdgeCenterInset
-        rightEdgeBottomInset:   bottomRightRowLayout.rightEdgeBottomInset
-        topEdgeLeftInset:       toolStrip.topEdgeLeftInset
-        topEdgeCenterInset:     mapScale.topEdgeCenterInset
-        topEdgeRightInset:      topRightPanel.topEdgeRightInset
-        bottomEdgeLeftInset:    virtualJoystickMultiTouch.visible ? virtualJoystickMultiTouch.bottomEdgeLeftInset : parentToolInsets.bottomEdgeLeftInset
-        bottomEdgeCenterInset:  bottomRightRowLayout.bottomEdgeCenterInset
-        bottomEdgeRightInset:   virtualJoystickMultiTouch.visible ? virtualJoystickMultiTouch.bottomEdgeRightInset : bottomRightRowLayout.bottomEdgeRightInset
+        leftEdgeTopInset:       toolStrip.leftInset
+        leftEdgeCenterInset:    toolStrip.leftInset
+        leftEdgeBottomInset:    parentToolInsets.leftEdgeBottomInset
+        rightEdgeTopInset:      parentToolInsets.rightEdgeTopInset
+        rightEdgeCenterInset:   parentToolInsets.rightEdgeCenterInset
+        rightEdgeBottomInset:   parentToolInsets.rightEdgeBottomInset
+        topEdgeLeftInset:       parentToolInsets.topEdgeLeftInset
+        topEdgeCenterInset:     parentToolInsets.topEdgeCenterInset
+        topEdgeRightInset:      parentToolInsets.topEdgeRightInset
+        bottomEdgeLeftInset:    parentToolInsets.bottomEdgeLeftInset
+        bottomEdgeCenterInset:  mapScale.centerInset
+        bottomEdgeRightInset:   0
     }
 
-    FlyViewTopRightPanel {
+    /* FlyViewTopRightPanel {
         id:                     topRightPanel
         anchors.top:            parent.top
         anchors.right:          parent.right
@@ -74,18 +86,12 @@ Item {
         property real rightEdgeTopInset:    width + _layoutMargin
         property real rightEdgeCenterInset: rightEdgeTopInset
     }
+    */
 
-    FlyViewTopRightColumnLayout {
-        id:                 topRightColumnLayout
-        anchors.top:        parent.top
-        anchors.bottom:     bottomRightRowLayout.top
-        anchors.right:      parent.right
-        spacing:            _layoutSpacing
-        visible:           !topRightPanel.visible
-
-        property real topEdgeRightInset:    childrenRect.height + _layoutMargin
-        property real rightEdgeTopInset:    width + _layoutMargin
-        property real rightEdgeCenterInset: rightEdgeTopInset
+    FlyViewMissionCompleteDialog {
+        missionController:      _missionController
+        geoFenceController:     _geoFenceController
+        rallyPointController:   _rallyPointController
     }
 
     FlyViewBottomRightRowLayout {
@@ -105,108 +111,328 @@ Item {
         rallyPointController:   _rallyPointController
     }
 
-    GuidedActionConfirm {
-        anchors.top:                parent.top
-        anchors.horizontalCenter:   parent.horizontalCenter
-        z:                          QGroundControl.zOrderTopMost
-        guidedController:           _guidedController
-        guidedValueSlider:          _guidedValueSlider
-        utmspSliderTrigger:         utmspActTrigger
+    Row {
+        id:                 multiVehiclePanelSelector
+        anchors.margins:    _toolsMargin
+        anchors.top:        parent.top
+        anchors.right:      parent.right
+        width:              _rightPanelWidth
+        spacing:            ScreenTools.defaultFontPixelWidth
+        visible:            QGroundControl.multiVehicleManager.vehicles.count > 1 && QGroundControl.corePlugin.options.flyView.showMultiVehicleList
+
+        property bool showSingleVehiclePanel:  !visible || singleVehicleRadio.checked
+
+        QGCMapPalette { id: mapPal; lightColors: true }
+
+        QGCRadioButton {
+            id:             singleVehicleRadio
+            text:           qsTr("Single")
+            checked:        true
+            textColor:      mapPal.text
+        }
+
+        QGCRadioButton {
+            text:           qsTr("Multi-Vehicle")
+            textColor:      mapPal.text
+        }
     }
+
+    MultiVehicleList {
+        anchors.margins:    _toolsMargin
+        anchors.top:        multiVehiclePanelSelector.bottom
+        anchors.right:      parent.right
+        width:              _rightPanelWidth
+        height:             parent.height - y - _toolsMargin
+        visible:            !multiVehiclePanelSelector.showSingleVehiclePanel
+    }
+
+    /* FlyViewInstrumentPanel {
+        id:                         instrumentPanel
+        anchors.margins:            _toolsMargin
+        anchors.top:                multiVehiclePanelSelector.visible ? multiVehiclePanelSelector.bottom : parent.top
+        anchors.right:              parent.right
+        width:                      _rightPanelWidth
+        spacing:                    _toolsMargin
+        visible:                    QGroundControl.corePlugin.options.flyView.showInstrumentPanel && multiVehiclePanelSelector.showSingleVehiclePanel
+        availableHeight:            parent.height - y - _toolsMargin
+
+        property real rightInset: visible ? parent.width - x : 0
+    } */
+
+    /* PhotoVideoControl {
+        id:                     photoVideoControl
+        anchors.margins:        _toolsMargin
+        anchors.right:          parent.right
+        width:                  _rightPanelWidth
+        state:                  _verticalCenter ? "verticalCenter" : "topAnchor"
+        states: [
+            State {
+                name: "verticalCenter"
+                AnchorChanges {
+                    target:                 photoVideoControl
+                    anchors.top:            undefined
+                    anchors.verticalCenter: _root.verticalCenter
+                }
+            },
+            State {
+                name: "topAnchor"
+                AnchorChanges {
+                    target:                 photoVideoControl
+                    anchors.verticalCenter: undefined
+                    anchors.top:            instrumentPanel.bottom
+                }
+            }
+        ]
+
+        property bool _verticalCenter: !QGroundControl.settingsManager.flyViewSettings.alternateInstrumentPanel.rawValue
+    } */
+
+    Rectangle {
+        id: zoomMultipleRectangle
+        anchors.bottom: telemetryPanel.top
+        width: zoomMultipleLabel.width + zoomMultipleLabel.width*0.4
+        height: zoomMultipleLabel.height + zoomMultipleLabel.height*0.4
+        color: "white"
+    anchors.bottomMargin: ScreenTools.defaultFontPixelHeight * 0.294        
+        visible: false
+        anchors.horizontalCenter: telemetryPanel.horizontalCenter
+    radius: ScreenTools.defaultFontPixelWidth * 0.35
+        QGCLabel {
+            id: zoomMultipleLabel
+            text: (zoomMultipleLabel.zoomMultiple/10).toFixed(1)
+            anchors.centerIn: parent
+            color: "black"
+            font.pixelSize: ScreenTools.defaultFontPixelWidth * 1.4
+
+            Timer {
+                id: visibleTimer
+                interval: 5000
+                running: false
+                repeat: false
+                onTriggered: zoomMultipleRectangle.visible = false
+            }
+
+            property real zoomMultiple: siYiCamera.zoomMultiple
+            onZoomMultipleChanged: {
+                resultRectangle.visible = false
+                zoomMultipleRectangle.visible = true
+                visibleTimer.restart()
+            }
+        }
+    }
+
+    /* Rectangle {
+        id: resultRectangle
+        anchors.bottom: telemetryPanel.top
+        width: resultLabel.width + resultLabel.width*0.4
+        height: resultLabel.height + resultLabel.height*0.4
+    anchors.bottomMargin: ScreenTools.defaultFontPixelHeight * 0.294        
+        anchors.horizontalCenter: telemetryPanel.horizontalCenter
+        color: "white"
+        visible: false
+    radius: ScreenTools.defaultFontPixelWidth * 0.35
+        QGCLabel {
+            id: resultLabel
+            anchors.centerIn: parent
+            color: "black"
+            font.pixelSize: ScreenTools.defaultFontPixelHeight * 1.4
+
+            Timer {
+                id: resultTimer
+                interval: 5000
+                running: false
+                repeat: false
+                onTriggered: resultRectangle.visible = false
+            }
+
+            Connections {
+                target: siYiCamera
+                onOperationResultChanged: {
+                    if (result === 0) {
+                        resultLabel.text = qsTr("拍照成功")
+                    } else if (result === 1) {
+                        resultLabel.text = qsTr("拍照失败")
+                    } else if (result === 4) {
+                        resultLabel.text = qsTr("录像失败")
+                    } else if (result === -1) {
+                        resultLabel.text = qsTr("4K视频不支持变倍")
+                    }
+
+                    resultTimer.restart()
+                    zoomMultipleRectangle.visible = false
+                    resultRectangle.visible = true
+                }
+            }
+        }
+    } */    /* Ajustar na versão Final */
+
+    /* TelemetryValuesBar {
+        id:                 telemetryPanel
+        x:                  recalcXPosition()
+        anchors.margins:    _toolsMargin
+
+        // States for custom layout support
+        states: [
+            State {
+                name: "bottom"
+                when: telemetryPanel.bottomMode
+
+                AnchorChanges {
+                    target: telemetryPanel
+                    anchors.top: undefined
+                    anchors.bottom: parent.bottom
+                    anchors.right: undefined
+                    anchors.verticalCenter: undefined
+                }
+
+                PropertyChanges {
+                    target: telemetryPanel
+                    x: recalcXPosition()
+                }
+            },
+
+            State {
+                name: "right-video"
+                when: !telemetryPanel.bottomMode && photoVideoControl.visible
+
+                AnchorChanges {
+                    target: telemetryPanel
+                    anchors.top: photoVideoControl.bottom
+                    anchors.bottom: undefined
+                    anchors.right: parent.right
+                    anchors.verticalCenter: undefined
+                }
+            },
+
+            State {
+                name: "right-novideo"
+                when: !telemetryPanel.bottomMode && !photoVideoControl.visible
+
+                AnchorChanges {
+                    target: telemetryPanel
+                    anchors.top: undefined
+                    anchors.bottom: undefined
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+        ]
+
+        function recalcXPosition() {
+            // First try centered
+            var halfRootWidth   = _root.width / 2
+            var halfPanelWidth  = telemetryPanel.width / 2
+            var leftX           = (halfRootWidth - halfPanelWidth) - _toolsMargin
+            var rightX          = (halfRootWidth + halfPanelWidth) + _toolsMargin
+            if (leftX >= parentToolInsets.leftEdgeBottomInset || rightX <= parentToolInsets.rightEdgeBottomInset ) {
+                // It will fit in the horizontalCenter
+                return halfRootWidth - halfPanelWidth
+            } else {
+                // Anchor to left edge
+                return parentToolInsets.leftEdgeBottomInset + _toolsMargin
+            }
+        }
+    } */
 
     //-- Virtual Joystick
     Loader {
         id:                         virtualJoystickMultiTouch
         z:                          QGroundControl.zOrderTopMost + 1
-        anchors.right:              parent.right
-        anchors.rightMargin:        anchors.leftMargin
+        width:                      parent.width - (parentToolInsets.leftEdgeBottomInset / 2)
         height:                     Math.min(parent.height * 0.25, ScreenTools.defaultFontPixelWidth * 16)
         visible:                    _virtualJoystickEnabled && !QGroundControl.videoManager.fullScreen && !(_activeVehicle ? _activeVehicle.usingHighLatencyLink : false)
         anchors.bottom:             parent.bottom
-        anchors.bottomMargin:       bottomLoaderMargin
-        anchors.left:               parent.left   
-        anchors.leftMargin:         ( y > toolStrip.y + toolStrip.height ? toolStrip.width / 2 : toolStrip.width * 1.05 + toolStrip.x) 
-        source:                     "qrc:/qml/QGroundControl/FlightDisplay/VirtualJoystick.qml"
+        anchors.bottomMargin:       parentToolInsets.leftEdgeBottomInset + ScreenTools.defaultFontPixelHeight * 2
+        anchors.horizontalCenter:   parent.horizontalCenter
+        source:                     "qrc:/qml/VirtualJoystick.qml"
         active:                     _virtualJoystickEnabled && !(_activeVehicle ? _activeVehicle.usingHighLatencyLink : false)
 
-        property real bottomEdgeLeftInset:     parent.height-y
-        property bool autoCenterThrottle:      QGroundControl.settingsManager.appSettings.virtualJoystickAutoCenterThrottle.rawValue
-        property bool leftHandedMode:          QGroundControl.settingsManager.appSettings.virtualJoystickLeftHandedMode.rawValue
+        property bool autoCenterThrottle: QGroundControl.settingsManager.appSettings.virtualJoystickAutoCenterThrottle.rawValue
+
         property bool _virtualJoystickEnabled: QGroundControl.settingsManager.appSettings.virtualJoystick.rawValue
-        property real bottomEdgeRightInset:    parent.height-y
-        property var  _pipViewMargin:          _pipView.visible ? parentToolInsets.bottomEdgeLeftInset + ScreenTools.defaultFontPixelHeight * 2 : 
-                                               bottomRightRowLayout.height + ScreenTools.defaultFontPixelHeight * 1.5
-
-        property var  bottomLoaderMargin:      _pipViewMargin >= parent.height / 2 ? parent.height / 2 : _pipViewMargin
-
-        // Width is difficult to access directly hence this hack which may not work in all circumstances
-        property real leftEdgeBottomInset:  visible ? bottomEdgeLeftInset + width/18 - ScreenTools.defaultFontPixelHeight*2 : 0
-        property real rightEdgeBottomInset: visible ? bottomEdgeRightInset + width/18 - ScreenTools.defaultFontPixelHeight*2 : 0
-        property real rootWidth:            _root.width
-        property var  itemX:                virtualJoystickMultiTouch.x   // real X on screen
-
-        onRootWidthChanged: virtualJoystickMultiTouch.status == Loader.Ready && visible ? virtualJoystickMultiTouch.item.uiTotalWidth = rootWidth : undefined
-        onItemXChanged:     virtualJoystickMultiTouch.status == Loader.Ready && visible ? virtualJoystickMultiTouch.item.uiRealX = itemX : undefined
-
-        //Loader status logic
-        onLoaded: {
-            if (virtualJoystickMultiTouch.visible) {
-                virtualJoystickMultiTouch.item.calibration = true 
-                virtualJoystickMultiTouch.item.uiTotalWidth = rootWidth
-                virtualJoystickMultiTouch.item.uiRealX = itemX
-            } else {
-                virtualJoystickMultiTouch.item.calibration = false
-            }
-        }
     }
 
-    FlyViewToolStrip {
+    /* FlyViewToolStrip {
         id:                     toolStrip
+        anchors.leftMargin:     _toolsMargin + parentToolInsets.leftEdgeCenterInset
+        anchors.topMargin:      _toolsMargin + parentToolInsets.topEdgeLeftInset
         anchors.left:           parent.left
         anchors.top:            parent.top
         z:                      QGroundControl.zOrderWidgets
         maxHeight:              parent.height - y - parentToolInsets.bottomEdgeLeftInset - _toolsMargin
         visible:                !QGroundControl.videoManager.fullScreen
 
-        onDisplayPreFlightChecklist: {
-            if (!preFlightChecklistLoader.active) {
-                preFlightChecklistLoader.active = true
-            }
-            preFlightChecklistLoader.item.open()
-        }
+        onDisplayPreFlightChecklist: mainWindow.showPopupDialogFromComponent(preFlightChecklistPopup)
 
-        property real topEdgeLeftInset:     visible ? y + height : 0
-        property real leftEdgeTopInset:     visible ? x + width : 0
-        property real leftEdgeCenterInset:  leftEdgeTopInset
+        property real leftInset: x + width
+    } */
+
+    FlyViewAirspaceIndicator {
+        anchors.top:                parent.top
+        anchors.topMargin:          ScreenTools.defaultFontPixelHeight * 0.25
+        anchors.horizontalCenter:   parent.horizontalCenter
+        z:                          QGroundControl.zOrderWidgets
+        show:                       mapControl.pipState.state !== mapControl.pipState.pipState
     }
 
-    VehicleWarnings {
+    /* VehicleWarnings {
         anchors.centerIn:   parent
         z:                  QGroundControl.zOrderTopMost
-    }
+    } */
 
-    MapScale {
+    /* MapScale {
         id:                 mapScale
+        anchors.margins:    _toolsMargin
         anchors.left:       toolStrip.right
         anchors.top:        parent.top
         mapControl:         _mapControl
-        buttonsOnLeft:      true
-        zoomButtonsVisible: false
-        autoHide:           true
-        visible:            !ScreenTools.isTinyScreen && QGroundControl.corePlugin.options.flyView.showMapScale && !isViewer3DOpen && mapControl.pipState.state === mapControl.pipState.fullState
+        buttonsOnLeft:      false
+        visible:            !ScreenTools.isTinyScreen && QGroundControl.corePlugin.options.flyView.showMapScale && mapControl.pipState.state === mapControl.pipState.fullState
 
-        property real topEdgeCenterInset: visible ? y + height : 0
-    }
-
-    Loader {
-        id: preFlightChecklistLoader
-        sourceComponent: preFlightChecklistPopup
-        active: false
-    }
+        property real centerInset: visible ? parent.height - y : 0
+    } */
+    
 
     Component {
         id: preFlightChecklistPopup
         FlyViewPreFlightChecklistPopup {
         }
     }
+
+    Item{
+        width:              parent.width 
+        height:             parent.height 
+        Image{
+            source:         "/skyclean/LinesPage"
+            visible:        true
+            opacity:        0.5
+        }
+    }
+
+    ConsoleLog{}            // Sitema de Alerta
+    
+    FlightView{}            // Modo de voo    
+
+    //ChangeMap{}             //  Alterar modelo de mapa  
+
+    StatusLaser{}           // Status do laser Lig/Des
+
+    AltIndicator{}          // Indicador de altura primaria 
+
+    CriticalFailSafe{}      //  Alertta de failSafe
+
+    AlertFailSafe{}         //  Alerta de failsafe 
+
+    FailGps{}               // Alerta de falha no GPS 
+
+    MaxLoad{}               // Carga Máxima
+
+    WrongParameters{}        //  Parâmetros errados
+
+    UpdateView{}            //  Sitema de notificação de atualização   
+
+    ObstacleAlert{}         //  Alerta de obstáculo
+
+    //TakeOff {}              //  Botão de decolar 
+    
 }

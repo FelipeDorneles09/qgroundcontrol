@@ -4,6 +4,7 @@ import QtQuick.Controls
 import QGroundControl
 
 import QGroundControl.Controls
+import QGroundControl.ScreenTools
 
 QGCFlickable {
     height:         outerEditorRect.height

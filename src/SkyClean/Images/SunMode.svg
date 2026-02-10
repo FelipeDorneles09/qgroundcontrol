@@ -1,0 +1,21 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo circular -->
+  <circle cx="50" cy="50" r="48" fill="#3949AB"/>
+  
+  <!-- Parte do sol -->
+  <circle cx="50" cy="50" r="30" fill="#FFEB3B"/>
+
+  <!-- Raios do sol -->
+  <path d="M50 2 L53 18 L47 18 Z" fill="#FFEB3B" />
+  <path d="M50 98 L53 82 L47 82 Z" fill="#FFEB3B" />
+  <path d="M2 50 L18 53 L18 47 Z" fill="#FFEB3B" />
+  <path d="M98 50 L82 53 L82 47 Z" fill="#FFEB3B" />
+
+  <path d="M15 15 L25 25 L19 31 Z" fill="#FFEB3B" />
+  <path d="M85 15 L75 25 L81 31 Z" fill="#FFEB3B" />
+  <path d="M15 85 L25 75 L19 69 Z" fill="#FFEB3B" />
+  <path d="M85 85 L75 75 L81 69 Z" fill="#FFEB3B" />
+  
+  <!-- Sombra no lado direito -->
+  <path d="M50 20 A30 30 0 0 1 50 80 Z" fill="#FBC02D"/>
+</svg>

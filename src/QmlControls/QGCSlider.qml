@@ -12,7 +12,7 @@ import QtQuick.Controls
 
 import QGroundControl
 import QGroundControl.Controls
-
+import QGroundControl.ScreenTools
 
 Slider {
     id:             control
@@ -29,6 +29,10 @@ Slider {
     property bool zeroCentered:         false   // Value indicator starts display from zero instead of min value
     property bool displayValue:         false
     property bool indicatorBarVisible:  true
+
+    // Compatibility aliases for older QML (SkyCleanApp) which used minimumValue/maximumValue
+    property alias minimumValue: control.from
+    property alias maximumValue: control.to
 
     property real _implicitBarLength:   Math.round(ScreenTools.defaultFontPixelWidth * 20)
     property real _barHeight:           Math.round(ScreenTools.defaultFontPixelHeight / 3)

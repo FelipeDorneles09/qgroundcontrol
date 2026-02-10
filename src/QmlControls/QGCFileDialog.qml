@@ -6,6 +6,7 @@ import Qt.labs.platform as Labs
 
 import QGroundControl
 import QGroundControl.Controls
+import QGroundControl.ScreenTools
 
 
 

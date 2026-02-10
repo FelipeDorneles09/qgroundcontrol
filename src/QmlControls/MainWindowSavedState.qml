@@ -14,6 +14,7 @@ import QtCore
 
 import QGroundControl
 import QGroundControl.Controls
+import QGroundControl.ScreenTools
 
 Item {
     property Window window

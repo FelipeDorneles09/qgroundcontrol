@@ -3,7 +3,7 @@ import QtQuick.Controls
 
 import QGroundControl
 import QGroundControl.Controls
-
+import QGroundControl.ScreenTools
 
 /// QGC version of Flickable control that shows horizontal/vertial scroll indicators
 Flickable {
