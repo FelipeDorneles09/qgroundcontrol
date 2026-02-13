@@ -14,12 +14,13 @@ import QtQuick.Dialogs
 
 import QGroundControl
 import QGroundControl.Controls
+import QGroundControl.SkyClean
 
 Rectangle {
     id:     control
     width:  parent.width
     height: ScreenTools.toolbarHeight
-    color:  "transparent"
+    color:  qgcPal.windowTransparent
 
     property var    _activeVehicle:     QGroundControl.multiVehicleManager.activeVehicle
     property bool   _communicationLost: _activeVehicle ? _activeVehicle.vehicleLinkManager.communicationLost : false
@@ -28,6 +29,28 @@ Rectangle {
 
     function dropMainStatusIndicatorTool() {
         mainStatusIndicator.dropMainStatusIndicator();
+    }
+
+    function colorToolBar(){
+        var redcolor = "red"
+        var oricolor = "#6acce0"
+
+        if(_activeVehicle){
+            if(_communicationLost){
+                return redcolor;
+            }
+           if (_activeVehicle.readyToFlyAvailable) {
+                if (_activeVehicle.readyToFly) {
+                    
+                    return oricolor
+                } else {
+                    
+                    return redcolor
+                }
+            }
+        } else {
+            return oricolor; 
+        }
     }
 
     QGCPalette { id: qgcPal }
@@ -48,12 +71,12 @@ Rectangle {
         anchors.left:   parent.left
         width:          mainStatusLayout.width
         opacity:        qgcPal.windowTransparent.a
-        
+
         gradient: Gradient {
             orientation: Gradient.Horizontal
-            GradientStop { position: 0; color: _mainStatusBGColor }
-            //GradientStop { position: qgcButton.x + qgcButton.width; color: _mainStatusBGColor }
-            GradientStop { position: 1; color: qgcPal.window }
+            GradientStop { position: 0;                                     color: colorToolBar()}
+            GradientStop { position: currentButton.x + currentButton.width; color: colorToolBar()}
+            GradientStop { position: 1;                                     color: control.color }
         }
     }
 
@@ -89,9 +112,9 @@ Rectangle {
                 QGCToolBarButton {
                     id:                 qgcButton
                     Layout.fillHeight:  true
-                    icon.source:        "/res/QGCLogoFull.svg"
+                    icon.source:        "/skyclean/SkyClean"
                     logo:               true
-                    onClicked:          mainWindow.showToolSelectDialog()
+                    onClicked:          mainWindow.showDrawerMenu()
                 }
 
                 MainStatusIndicator {
@@ -100,17 +123,14 @@ Rectangle {
                 }
             }
 
-            QGCButton {
+            ButtonAction {
                 id:         disconnectButton
                 text:       qsTr("Disconnect")
                 onClicked:  _activeVehicle.closeVehicle()
                 visible:    _activeVehicle && _communicationLost
             }
 
-            FlightModeIndicator {
-                Layout.fillHeight:  true
-                visible:            _activeVehicle
-            }
+            
         }
 
         QGCFlickable {

@@ -66,6 +66,7 @@ QGCLabel {
         function onFlightModesChanged() { _root.updateFlightModesMenu() }
     }
 
+    /*
     MouseArea {
         id:                 mouseArea
         visible:            currentVehicle && currentVehicle.flightModeSetAvailable
@@ -73,4 +74,5 @@ QGCLabel {
         anchors.fill:       parent
         onClicked:          flightModesMenu.popup((_root.width - flightModesMenu.width) / 2, _root.height)
     }
+    */
 }

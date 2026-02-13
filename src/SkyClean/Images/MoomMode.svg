@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo circular -->
+  <circle cx="50" cy="50" r="50" fill="#2C387E"/>
+
+  <!-- Lua -->
+  <path d="M60,50 A20,20 0 1,1 40,30 A15,15 0 1,0 60,50" fill="#FFEB3B"/>
+
+  <!-- Estrelas -->
+  <polygon points="65,35 67,40 72,40 68,43 70,48 65,45 60,48 62,43 58,40 63,40" fill="#FFEB3B"/>
+  <polygon points="80,55 82,60 87,60 83,63 85,68 80,65 75,68 77,63 73,60 78,60" fill="#FFEB3B"/>
+</svg>

@@ -20,6 +20,7 @@ import QGroundControl.FactControls
 
 import QGroundControl.FlightDisplay
 import QGroundControl.FlightMap
+import QGroundControl.SkyClean
 
 /// @brief Native QML top level window
 /// All properties defined here are visible to all QML pages.
@@ -158,6 +159,22 @@ ApplicationWindow {
         }
     }
 
+    function showDrawerMenu() {
+        draweMenu.visible = !draweMenu.visible;
+    }
+
+    function showSettingsView(){
+        settingsView.visible = !settingsView.visible;
+    }
+
+    function showSupportView(){
+        supportView.visible =   !supportView.visible;
+    }
+
+    function showLogView(){
+        logView.visible =   !logView.visible;
+    }
+
     //-------------------------------------------------------------------------
     //-- Global simple message dialog
 
@@ -268,6 +285,34 @@ ApplicationWindow {
     PlanView {
         id:             planView
         anchors.fill:   parent
+        visible:        false
+    }
+
+    SettingsView{
+        id:             settingsView
+        anchors.fill:   parent 
+        visible:        false
+        z:              10
+    }
+
+    DrawerMenu{
+        id:             draweMenu
+        anchors.fill:   parent 
+        visible:        false
+        z:              20
+    }
+
+    DrawerTakeOff { id: winTakeOff; visible: false; anchors.fill: parent; }
+
+    SupportView{
+        id:             supportView
+        anchors.fill:   parent 
+        visible:        false
+    }
+
+    LogDownloadView{
+        id:             logView
+        anchors.fill:   parent 
         visible:        false
     }
 
@@ -507,6 +552,7 @@ ApplicationWindow {
                     id:             toolbarDrawerText
                     text:           qsTr("Exit") + " " + toolDrawer.toolTitle
                     font.pointSize: ScreenTools.largeFontPointSize
+                    visible: false
                 }
             }
 
@@ -551,7 +597,7 @@ ApplicationWindow {
         }
     }
 
-    Popup {
+    /* Popup {
         id:                 criticalVehicleMessagePopup
         y:                  ScreenTools.toolbarHeight + ScreenTools.defaultFontPixelHeight
         x:                  Math.round((mainWindow.width - width) * 0.5)
@@ -639,6 +685,8 @@ ApplicationWindow {
             }
         }
     }
+
+    */
 
     //-------------------------------------------------------------------------
     //-- Indicator Drawer
@@ -784,6 +832,49 @@ ApplicationWindow {
                 visible = false
                 source = ""
             }
+        }
+    }
+    function showIndicatorPopup(item, dropItem) {
+        indicatorPopup.currentIndicator = dropItem
+        indicatorPopup.currentItem = item
+        indicatorPopup.open()
+    }
+
+    function hideIndicatorPopup() {
+        indicatorPopup.close()
+        indicatorPopup.currentItem = null
+        indicatorPopup.currentIndicator = null
+    }
+
+    Popup {
+        id:             indicatorPopup
+        padding:        ScreenTools.defaultFontPixelWidth * 0.75
+        modal:          true
+        focus:          true
+        closePolicy:    Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        property var    currentItem:        null
+        property var    currentIndicator:   null
+        background: Rectangle {
+            width:  loader.width
+            height: loader.height
+            color:  Qt.rgba(0,0,0,0)
+        }
+        Loader {
+            id:             loader
+            onLoaded: {
+                var centerX = mainWindow.contentItem.mapFromItem(indicatorPopup.currentItem, 0, 0).x - (loader.width * 0.5)
+                if((centerX + indicatorPopup.width) > (mainWindow.width - ScreenTools.defaultFontPixelWidth)) {
+                    centerX = mainWindow.width - indicatorPopup.width - ScreenTools.defaultFontPixelWidth
+                }
+                indicatorPopup.x = centerX
+            }
+        }
+        onOpened: {
+            loader.sourceComponent = indicatorPopup.currentIndicator
+        }
+        onClosed: {
+            loader.sourceComponent = null
+            indicatorPopup.currentIndicator = null
         }
     }
 }

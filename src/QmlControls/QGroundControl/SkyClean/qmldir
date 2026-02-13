@@ -1,0 +1,44 @@
+Module QGroundControl.SkyClean
+
+#Components
+ButtonIcon                      1.0 ButtonIcon.qml
+ButtonAction                    1.0 ButtonAction.qml
+DropView                        1.0 DropView.qml
+ToolStripView                   1.0 ToolStripView.qml
+BoxWindow                       1.0 BoxWindow.qml
+SwitchAction                    1.0 SwitchAction.qml
+SignalRadar                     1.0 SignalRadar.qml
+ChangeMap                       1.0 ChangeMap.qml
+ConsoleLog                      1.0 ConsoleLog.qml
+ComnLinksView                   1.0 ComnLinksView.qml
+TakeOff                         1.0 TakeOff.qml
+DrawerTakeOff                   1.0 DrawerTakeOff.qml
+ButtonOp                        1.0 ButtonOp.qml
+SwitchSquad                     1.0 SwitchSquad.qml
+
+#Pages
+DrawerMenu                      1.0 DrawerMenu.qml
+SettingsView                    1.0 SettingsView.qml
+SupportView                     1.0 SupportView.qml
+LogDownloadView                 1.0 LogDownloadView.qml
+MapDownloadPage                 1.0 MapDownloadPage.qml
+FlightView                      1.0 FlightView.qml
+TunningView                     1.0 TunningView.qml
+#Notification
+AlertFailSafe                   1.0 AlertFailSafe.qml
+CriticalFailSafe                1.0 CriticalFailSafe.qml
+WindowTakeOff                   1.0 WindowTakeOff.qml
+Laser                           1.0 LaserSafety.qml
+LaserAjusted                    1.0 LaserAjusted.qml
+BoxAlert                        1.0 BoxWindowAlert.qml
+StatusLaser                     1.0 StatusLaser.qml
+AltIndicator                    1.0 AltIndicator.qml
+FailGps                         1.0 FailGPS.qml
+MaxLoad                         1.0 MaxLoad.qml
+WrongParameters                 1.0 WrongParameters.qml
+ObstacleAlert                   1.0 ObstacleAlert.qml
+
+#Services
+UpdateView                      1.0 UpdateView.qml
+
+ConmLinks                       1.0 ConmLinks.qml

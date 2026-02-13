@@ -104,7 +104,7 @@ Item {
 
         PipView {
             id:                     _pipView
-            anchors.left:           parent.left
+            anchors.right:          parent.right
             anchors.bottom:         parent.bottom
             anchors.margins:        _toolsMargin
             item1IsFullSettingsKey: "MainFlyWindowIsMap"

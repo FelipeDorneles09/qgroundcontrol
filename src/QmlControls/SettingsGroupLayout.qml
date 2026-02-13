@@ -70,6 +70,8 @@ ColumnLayout {
                 color:              QGroundControl.globalPalette.groupBorder
 
                 property var _contentItem: _contentLayout.visibleChildren[index]
+
+                visible: false
             }
         }
  

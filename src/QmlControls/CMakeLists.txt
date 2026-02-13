@@ -136,6 +136,8 @@ qt_add_qml_module(QGroundControlControlsModule
         QGCGroupBox.qml
         QGCLabel.qml
         QGCListView.qml
+        QGCViewMessage.qml
+        QGCViewDialog.qml
         QGCMapLabel.qml
         QGCMarqueeLabel.qml
         QGCMenu.qml

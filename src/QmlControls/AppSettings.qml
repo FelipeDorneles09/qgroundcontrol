@@ -53,13 +53,12 @@ Rectangle {
     Component.onCompleted: {
         //-- Default Settings
         if (globals.commingFromRIDIndicator) {
-            rightPanel.source = "qrc:/qml/QGroundControl/AppSettings/RemoteIDSettings.qml"
+            rightPanel.source = "qrc:/qml/QGroundControl/ApSettings/RemoteIDSettings.qml"
             globals.commingFromRIDIndicator = false
         } else {
             rightPanel.source =  "qrc:/qml/QGroundControl/AppSettings/GeneralSettings.qml"
         }
     }
-
 
     SettingsPagesModel { id: settingsPagesModel }
 
@@ -78,6 +77,7 @@ Rectangle {
         ColumnLayout {
             id:         buttonColumn
             spacing:    ScreenTools.defaultFontPixelHeight / 4
+            visible:    false
 
             property real _maxButtonWidth: 0
 

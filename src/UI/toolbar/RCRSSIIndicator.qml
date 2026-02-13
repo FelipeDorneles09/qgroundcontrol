@@ -7,40 +7,60 @@
  *
  ****************************************************************************/
 
-import QtQuick
-import QtQuick.Layouts
+import QtQuick          
+import QtQuick.Layouts  
 
-import QGroundControl
-import QGroundControl.Controls
-
-
-
+import QGroundControl                       
+import QGroundControl.Controls              
+           
 
 //-------------------------------------------------------------------------
 //-- RC RSSI Indicator
 Item {
-    id:             control
+    id:             _root
     width:          rssiRow.width * 1.1
     anchors.top:    parent.top
     anchors.bottom: parent.bottom
 
-    property bool showIndicator: _activeVehicle.supportsRadio && _rcRSSIAvailable
+    property bool showIndicator: _activeVehicle.supportsRadio
 
     property var    _activeVehicle:     QGroundControl.multiVehicleManager.activeVehicle
-    property bool   _rcRSSIAvailable:   _activeVehicle.rcRSSI > 0 && _activeVehicle.rcRSSI <= 100
+    property bool   _rcRSSIAvailable:   _activeVehicle ? _activeVehicle.rcRSSI > 0 && _activeVehicle.rcRSSI <= 100 : false
 
     Component {
-        id: rcRSSIInfoPage
+        id: rcRSSIInfo
 
-        ToolIndicatorPage {
-            showExpand: false
+        Rectangle {
+            width:  rcrssiCol.width   + ScreenTools.defaultFontPixelWidth  * 3
+            height: rcrssiCol.height  + ScreenTools.defaultFontPixelHeight * 2
+            radius: ScreenTools.defaultFontPixelHeight * 0.5
+            color:  qgcPal.window
+            border.color:   qgcPal.text
 
-            contentComponent: SettingsGroupLayout {
-                heading: qsTr("RC RSSI Status")
+            Column {
+                id:                 rcrssiCol
+                spacing:            ScreenTools.defaultFontPixelHeight * 0.5
+                width:              Math.max(rcrssiGrid.width, rssiLabel.width)
+                anchors.margins:    ScreenTools.defaultFontPixelHeight
+                anchors.centerIn:   parent
 
-                LabelledLabel {
-                    label:      qsTr("RSSI")
-                    labelText:  _activeVehicle.rcRSSI + "%"
+                QGCLabel {
+                    id:             rssiLabel
+                    text:           _activeVehicle ? (_activeVehicle.rcRSSI !== 255 ? qsTr("RC RSSI Status") : qsTr("RC RSSI Data Unavailable")) : qsTr("N/A", "No data available")
+                    font.family:    ScreenTools.demiboldFontFamily
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                GridLayout {
+                    id:                 rcrssiGrid
+                    visible:            _rcRSSIAvailable
+                    anchors.margins:    ScreenTools.defaultFontPixelHeight
+                    columnSpacing:      ScreenTools.defaultFontPixelWidth
+                    columns:            2
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    QGCLabel { text: qsTr("RSSI:") }
+                    QGCLabel { text: _activeVehicle ? (_activeVehicle.rcRSSI + "%") : 0 }
                 }
             }
         }
@@ -56,8 +76,8 @@ Item {
             width:              height
             anchors.top:        parent.top
             anchors.bottom:     parent.bottom
-            sourceSize.height:  height
-            source:             "/qmlimages/RC.svg"
+            sourceSize.height:  height * 2
+            source:             "/skyclean/RadioMK15"
             fillMode:           Image.PreserveAspectFit
             opacity:            _rcRSSIAvailable ? 1 : 0.5
             color:              qgcPal.buttonText
@@ -65,13 +85,15 @@ Item {
 
         SignalStrength {
             anchors.verticalCenter: parent.verticalCenter
-            size:                   parent.height * 0.5
+            size:                   parent.height * 0.7
             percent:                _rcRSSIAvailable ? _activeVehicle.rcRSSI : 0
         }
     }
 
     MouseArea {
         anchors.fill:   parent
-        onClicked:      mainWindow.showIndicatorDrawer(rcRSSIInfoPage, control)
+        onClicked: {
+            mainWindow.showIndicatorPopup(_root, rcRSSIInfo)
+        }
     }
 }

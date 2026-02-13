@@ -105,6 +105,8 @@ Rectangle {
         }
     }
 
+    
+
     // Large mission download progress bar
     Rectangle {
         id:             largeProgressBar

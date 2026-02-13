@@ -47,6 +47,7 @@ add_subdirectory(MissionManager)
 add_subdirectory(PositionManager)
 add_subdirectory(QmlControls)
 add_subdirectory(Settings)
+add_subdirectory(SkyClean)
 add_subdirectory(Terrain)
 add_subdirectory(UI)
 add_subdirectory(Utilities)
@@ -138,6 +139,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         FlightMapModule
         QGroundControlControlsModule
         QGroundControlModule
+        SkyCleanModule
         ToolbarModule
         UTMSPModule
         VehicleSetupModule

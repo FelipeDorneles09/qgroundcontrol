@@ -122,4 +122,45 @@
     <qresource prefix="/json">
         <file alias="NTRIP.SettingsGroup.json">src/Settings/NTRIP.SettingsGroup.json</file>
     </qresource>
+    <qresource prefix="/skyclean">
+        <file alias="Tuning">src/SkyClean/Images/Tuning.svg</file>
+        <file alias="LogDownload">src/SkyClean/Images/LogDownload.svg</file>
+        <file alias="MapDownload">src/SkyClean/Images/MapDownload.svg</file>
+        <file alias="Support">src/SkyClean/Images/Support.svg</file>
+        <file alias="SunMode">src/SkyClean/Images/SunMode.svg</file>
+        <file alias="MoomMode">src/SkyClean/Images/MoomMode.svg</file>
+        <file alias="BrazilIcon">src/SkyClean/Images/BrazilIcon.svg</file>
+        <file alias="EUAIcon">src/SkyClean/Images/EUAIcon.svg</file>
+        <file alias="SkyClean">src/SkyClean/Images/SkyClean.svg</file>
+        <file alias="Battery100">src/SkyClean/Images/Battery100.svg</file>
+        <file alias="Battery75">src/SkyClean/Images/Battery75.svg</file>
+        <file alias="Battery50">src/SkyClean/Images/Battery50.svg</file>
+        <file alias="Battery25">src/SkyClean/Images/Battery25.svg</file>
+        <file alias="Battery0">src/SkyClean/Images/Battery0.svg</file>
+        <file alias="RadioMK15">src/SkyClean/Images/RadioMK15.svg</file>
+        <file alias="FlightStatus">src/SkyClean/Images/FlightStatus.svg</file>
+        <file alias="Distance">src/SkyClean/Images/Distance.svg</file>
+        <file alias="Altitude">src/SkyClean/Images/Altitude.svg</file>
+        <file alias="Time">src/SkyClean/Images/Time.svg</file>
+        <file alias="HorizontalSpeed">src/SkyClean/Images/HorizontalSpeed.svg</file>
+        <file alias="VerticalSpeed">src/SkyClean/Images/VerticalSpeed.svg</file>
+        <file alias="Radar">src/SkyClean/Images/Radar.svg</file>
+        <file alias="MapIcon">src/SkyClean/Images/MapIcon.svg</file>
+        <file alias="StartFly">src/SkyClean/Images/StartFly.svg</file>
+        <file alias="Links">src/SkyClean/Images/Links.svg</file>
+        <file alias="CriticalFailSafe">src/SkyClean/Images/CriticalFailSafe.svg</file>
+        <file alias="AlertFailSafe">src/SkyClean/Images/AlertFailSafe.svg</file>
+        <file alias="TakeOff">src/SkyClean/Images/TakeOff.svg</file>
+        <file alias="LaserOn">src/SkyClean/Images/LaserOn.svg</file>
+        <file alias="LaserOff">src/SkyClean/Images/LaserOff.svg</file>
+        <file alias="Edit">src/SkyClean/Images/Edit.svg</file>
+        <file alias="SkyDrones">src/SkyClean/Images/SkyDrones.svg</file>
+        <file alias="SkyDronesWhite">src/SkyClean/Images/SkyDronesWhite.svg</file>
+        <file alias="LinesPage">src/SkyClean/Images/LinesPage.svg</file>
+        <file alias="IconLaserOn">src/SkyClean/Images/IconLaserOn.svg</file>
+        <file alias="IconLaserOff">src/SkyClean/Images/IconLaserOff.svg</file>
+        <file alias="Alert">src/SkyClean/Images/Alert.svg</file>
+        <file alias="BaroIcon">src/SkyClean/Images/BaroIcon.svg</file>
+        <file alias="ObstacleAlert">src/SkyClean/Images/ObstacleAlert.svg</file>
+    </qresource>
 </RCC>

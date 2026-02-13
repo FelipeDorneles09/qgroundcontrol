@@ -19,9 +19,10 @@ import QtQml.Models
 
 import QGroundControl
 import QGroundControl.Controls
-
+import QGroundControl.SkyClean
 import QGroundControl.FlightDisplay
 import QGroundControl.FlightMap
+import Qt5Compat.GraphicalEffects
 
 // This is the ui overlay layer for the widgets/tools for Fly View
 Item {
@@ -75,6 +76,7 @@ Item {
         property real rightEdgeCenterInset: rightEdgeTopInset
     }
 
+    /*
     FlyViewTopRightColumnLayout {
         id:                 topRightColumnLayout
         anchors.top:        parent.top
@@ -87,7 +89,9 @@ Item {
         property real rightEdgeTopInset:    width + _layoutMargin
         property real rightEdgeCenterInset: rightEdgeTopInset
     }
+    */
 
+    /*
     FlyViewBottomRightRowLayout {
         id:                 bottomRightRowLayout
         anchors.bottom:     parent.bottom
@@ -98,6 +102,7 @@ Item {
         property real bottomEdgeCenterInset:    bottomEdgeRightInset
         property real rightEdgeBottomInset:     width + _layoutMargin
     }
+    */
 
     FlyViewMissionCompleteDialog {
         missionController:      _missionController
@@ -160,6 +165,7 @@ Item {
         }
     }
 
+    /*
     FlyViewToolStrip {
         id:                     toolStrip
         anchors.left:           parent.left
@@ -179,12 +185,16 @@ Item {
         property real leftEdgeTopInset:     visible ? x + width : 0
         property real leftEdgeCenterInset:  leftEdgeTopInset
     }
+    */
 
+    /*
     VehicleWarnings {
         anchors.centerIn:   parent
         z:                  QGroundControl.zOrderTopMost
     }
+    */
 
+    /*
     MapScale {
         id:                 mapScale
         anchors.left:       toolStrip.right
@@ -197,6 +207,7 @@ Item {
 
         property real topEdgeCenterInset: visible ? y + height : 0
     }
+    */
 
     Loader {
         id: preFlightChecklistLoader
@@ -209,4 +220,42 @@ Item {
         FlyViewPreFlightChecklistPopup {
         }
     }
+
+    Item{
+        width:              parent.width 
+        height:             parent.height 
+        Image{
+            source:         "/skyclean/LinesPage"
+            visible:        true
+            opacity:        0.5
+        }
+    }
+
+    ConsoleLog{}            // Sitema de Alerta
+    
+    FlightView{}            // Modo de voo    
+
+    //ChangeMap{}           // Alterar modelo de mapa
+
+    StatusLaser{}           // Status do laser Lig/Des
+
+    AltIndicator{}          // Indicador de altura primaria 
+
+    CriticalFailSafe{}      // Alertta de failSafe
+
+    AlertFailSafe{}         // Alerta de failsafe
+
+    FailGPS{}               // Alerta de falha no GPS 
+
+    MaxLoad{}               // Carga Máxima
+
+    WrongParameters{}       // Parâmetros errados
+
+    UpdateView{}            // Sitema de notificação de atualização
+
+    ObstacleAlert{}         // Alerta de obstáculo
+
+    //TakeOff {}            // Botão de decolar
+    
 }
+

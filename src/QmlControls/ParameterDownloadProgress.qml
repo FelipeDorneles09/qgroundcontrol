@@ -29,6 +29,8 @@ Item {
         visible:        !largeProgressBar.visible
     }
 
+    
+
     // Large parameter download progress bar
     Rectangle {
         id:             largeProgressBar
