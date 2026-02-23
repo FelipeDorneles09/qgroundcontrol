@@ -8,11 +8,10 @@
  ****************************************************************************/
 
 import QtQuick          
-import QtQuick.Layouts  
+import QtQuick.Layouts 
 
 import QGroundControl                       
-import QGroundControl.Controls              
-           
+import QGroundControl.Controls                
 
 //-------------------------------------------------------------------------
 //-- RC RSSI Indicator

@@ -124,6 +124,11 @@ ApplicationWindow {
     }
 
     function showTool(toolTitle, toolSource, toolIcon) {
+        // ensure the side drawer with options is closed when a tool is shown
+        if (draweMenu.visible) {
+            draweMenu.visible = false
+        }
+
         toolDrawer.backIcon     = flyView.visible ? "/qmlimages/PaperPlane.svg" : "/qmlimages/Plan.svg"
         toolDrawer.toolTitle    = toolTitle
         toolDrawer.toolSource   = toolSource
@@ -133,6 +138,10 @@ ApplicationWindow {
 
     function showAnalyzeTool() {
         showTool(qsTr("Analyze Tools"), "qrc:/qml/QGroundControl/AnalyzeView/AnalyzeView.qml", "/qmlimages/Analyze.svg")
+    }
+
+    function showSetupTool() {
+        showTool(qsTr("Vehicle Setup"), "qrc:/qml/QGroundControl/VehicleSetup/SetupView.qml", "/qmlimages/Gears.svg")
     }
 
     function showVehicleConfig() {
@@ -175,6 +184,18 @@ ApplicationWindow {
         logView.visible =   !logView.visible;
     }
 
+    function showTakeOff(){
+        winTakeOff.visible = !winTakeOff.visible;
+    }
+
+    function showLaserSafety(){
+        laserSafety.visible = !laserSafety.visible; 
+    }
+
+    function showLaserAdjusted(){
+        laserAdjusted.visible = !laserAdjusted.visible;
+    }
+
     //-------------------------------------------------------------------------
     //-- Global simple message dialog
 
@@ -192,6 +213,58 @@ ApplicationWindow {
 
         QGCSimpleMessageDialog {
         }
+    }
+
+    // Popup dialog helper (same API as MainRootWindow.qml)
+    function showPopupDialogFromComponent(component, properties) {
+        // Try to instantiate the component directly.  This covers the common
+        // case where the component *is* a QGCPopupDialog (or another Popup
+        // subclass).  The dialog can then handle its own content reparenting
+        // logic which was being broken when wrapped in
+        // QGCPopupDialogContainer.  If the object either fails to create or
+        // doesn't expose an open() method we fall back to the original
+        // container approach so existing callers which pass non‑popup
+        // components are not broken.
+        var props = properties || {}
+        var dlg = component.createObject(mainWindow, props)
+        if (dlg) {
+            if (typeof dlg.open === "function") {
+                dlg.open()
+                return dlg
+            }
+            // not a popup? destroy and fall through to container logic
+            dlg.destroy()
+        }
+        var container = popupDialogContainerComponent.createObject(mainWindow, { dialogComponent: component, dialogProperties: properties })
+        container.open()
+        return container
+    }
+
+    function showPopupDialogFromSource(source, properties) {
+        // Same strategy as showPopupDialogFromComponent; try to create the
+        // object directly and use it if it behaves like a popup.  This allows
+        // callers which simply pass a qml file containing a QGCPopupDialog to
+        // work without the extra container wrapper.
+        var props = properties || {}
+        var comp = Qt.createComponent(source)
+        if (comp.status === Component.Ready) {
+            var dlg = comp.createObject(mainWindow, props)
+            if (dlg) {
+                if (typeof dlg.open === "function") {
+                    dlg.open()
+                    return dlg
+                }
+                dlg.destroy()
+            }
+        }
+        var container = popupDialogContainerComponent.createObject(mainWindow, { dialogSource: source, dialogProperties: properties })
+        container.open()
+        return container
+    }
+
+    Component {
+        id: popupDialogContainerComponent
+        QGCPopupDialogContainer { }
     }
 
     property bool _forceClose: false
@@ -303,6 +376,10 @@ ApplicationWindow {
     }
 
     DrawerTakeOff { id: winTakeOff; visible: false; anchors.fill: parent; }
+
+    LaserSafety { id: laserSafety; visible: false; anchors.fill: parent;}
+
+    LaserAjusted { id:laserAdjusted; visible:false;}
 
     SupportView{
         id:             supportView
@@ -552,7 +629,6 @@ ApplicationWindow {
                     id:             toolbarDrawerText
                     text:           qsTr("Exit") + " " + toolDrawer.toolTitle
                     font.pointSize: ScreenTools.largeFontPointSize
-                    visible: false
                 }
             }
 
@@ -585,7 +661,6 @@ ApplicationWindow {
     //-- Critical Vehicle Message Popup
 
     function showCriticalVehicleMessage(message) {
-        closeIndicatorDrawer()
         if (criticalVehicleMessagePopup.visible || QGroundControl.videoManager.fullScreen) {
             // We received additional warning message while an older warning message was still displayed.
             // When the user close the older one drop the message indicator tool so they can see the rest of them.

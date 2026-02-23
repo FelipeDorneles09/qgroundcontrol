@@ -19,7 +19,7 @@ import QGroundControl.Controls
 
 Rectangle {
     id:     setupView
-    color:  qgcPal.window
+    color:  qgcPal.iconColor
     z:      QGroundControl.zOrderTopMost
 
     // This need to block click event leakage to underlying map.
@@ -51,9 +51,7 @@ Rectangle {
         if (_fullParameterVehicleAvailable) {
             if (QGroundControl.multiVehicleManager.activeVehicle.autopilotPlugin.vehicleComponents.length === 0) {
                 panelLoader.setSourceComponent(noComponentsVehicleSummaryComponent)
-            } else {
-                panelLoader.setSource("qrc:/qml/QGroundControl/VehicleSetup/VehicleSummary.qml")
-            }
+            } 
         } else if (QGroundControl.multiVehicleManager.parameterReadyVehicleAvailable) {
             panelLoader.setSourceComponent(missingParametersVehicleSummaryComponent)
         } else {
@@ -143,7 +141,7 @@ Rectangle {
     Component {
         id: disconnectedVehicleSummaryComponent
         Rectangle {
-            color: qgcPal.windowShade
+            color: qgcPal.iconColor
             QGCLabel {
                 anchors.margins:        _defaultTextWidth * 2
                 anchors.fill:           parent
@@ -153,7 +151,7 @@ Rectangle {
                 font.pointSize:         ScreenTools.largeFontPointSize
                 text:                   qsTr("Vehicle settings and info will display after connecting your vehicle.") +
                                         (ScreenTools.isMobile || !_corePlugin.options.showFirmwareUpgrade ? "" : " Click Firmware on the left to upgrade your vehicle.")
-
+                font.bold: true
                 onLinkActivated: (link) => Qt.openUrlExternally(link)
             }
         }
@@ -163,7 +161,7 @@ Rectangle {
         id: missingParametersVehicleSummaryComponent
 
         Rectangle {
-            color: qgcPal.windowShade
+            color: qgcPal.iconColor
 
             QGCLabel {
                 anchors.margins:        _defaultTextWidth * 2

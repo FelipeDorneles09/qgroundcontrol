@@ -3868,7 +3868,9 @@ void Vehicle::_textMessageReceived(MAV_COMPONENT componentid, MAV_SEVERITY sever
     }
 
     if (readAloud && !skipSpoken) {
-        _say(text);
+        if (!text.startsWith("<")) {
+            _say(text);
+        }
     }
 
     emit textMessageReceived(id(), componentid, severity, text, description);

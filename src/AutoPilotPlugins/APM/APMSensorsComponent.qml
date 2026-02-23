@@ -420,7 +420,9 @@ SetupPage {
 
                     onAccepted: {
                         if (_orientationDialogCalType == _calTypeAccel) {
+                            orientationsDialog.hideDialog()
                             controller.calibrateAccel(_doSimpleAccelCal)
+                            return
                         } else if (_orientationDialogCalType == _calTypeCompass) {
                             if (!northCalibrationCheckBox.checked) {
                                 controller.calibrateCompass()
@@ -453,6 +455,7 @@ SetupPage {
                             text:       _orientationDialogHelp
                         }
 
+                        /*
                         Column {
                             QGCLabel { text: qsTr("Autopilot Rotation:") }
 
@@ -462,6 +465,7 @@ SetupPage {
                                 fact:       boardRot
                             }
                         }
+                        */
 
                         Column {
 

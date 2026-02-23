@@ -127,7 +127,7 @@ RowLayout {
             anchors.horizontalCenter: parent.horizontalCenter
             verticalAlignment:      Text.AlignVCenter
             font.pointSize:         ScreenTools.defaultFontPointSize
-            visible:                _activeVehicle
+            visible:                false
             elide: Text.ElideRight
             // Make the menu text respect the available center area
             Layout.preferredWidth:  parent.width * 0.9

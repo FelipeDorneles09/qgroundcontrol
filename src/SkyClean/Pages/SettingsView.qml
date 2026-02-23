@@ -349,7 +349,7 @@ Rectangle{
                             id: laserDistanceHelpComponent
                             QGCPopupDialog {
                                 title: qsTr("Distância da parede")
-                                buttons: StandardButton.Ok
+                                buttons: Dialog.Ok
 
                                 ColumnLayout {
                                     QGCLabel {
@@ -484,7 +484,7 @@ Rectangle{
                             id: alertBattHelpComponent
                             QGCPopupDialog {
                                 title: qsTr("Alerta de aviso de bateria")
-                                buttons: StandardButton.Ok
+                                buttons: Dialog.Ok
 
                                 ColumnLayout {
                                     QGCLabel {
@@ -598,7 +598,7 @@ Rectangle{
                                 id: critBattHelpComponent
                                 QGCPopupDialog {
                                     title: qsTr("Alerta crítico de bateria:")
-                                    buttons: StandardButton.Ok
+                                    buttons: Dialog.Ok
 
                                     ColumnLayout {
                                         QGCLabel {
@@ -696,7 +696,6 @@ Rectangle{
                             fact:                   _videoSettings.rtspUrl
                             visible:                rtspUrlLabel.visible
                             text:                   "rtsp://192.168.144.25:8554/main.264"
-                            onTextChanged: SiYi.camera.analyzeIp(text)
                         }
                         ButtonAction{
                             visible:                                rtspUrlLabel.visible
@@ -705,7 +704,7 @@ Rectangle{
                             setText:                                qsTr("Ok")
                             onClicked:{
                                 // Aplica/valida a URL sem esconder o campo
-                                SiYi.camera.analyzeIp(_videoSettings.rtspUrl.value)
+                                _videoSettings.rtspUrl.value = rtspUrlField.text
                                 if (typeof mainWindow !== 'undefined' && mainWindow.showMessageDialog) {
                                     mainWindow.showMessageDialog(qsTr("RTSP"), qsTr("RTSP URL aplicada"))
                                 }
@@ -724,8 +723,6 @@ Rectangle{
                                 _videoSettings.rtspUrl.value = ""
                                 _videoSettings.rtspUrl.value = cur
                                 console.log("Reenviando RTSP URL:", cur)
-                                // Tentar reutilizar a rotina de análise/validação
-                                SiYi.camera.analyzeIp(cur)
                                 // Feedback ao usuário
                                 if (typeof mainWindow !== 'undefined' && mainWindow.showMessageDialog) {
                                     mainWindow.showMessageDialog(qsTr("RTSP"), qsTr("Reenviando RTSP URL"))

@@ -99,7 +99,7 @@ FirstRunPrompt {
                     Layout.fillWidth:   true
                     sizeToContents:     true
                     model:              [ qsTr("Metric System"), qsTr("Imperial System") ]
-                    currentIndex:       _unitsSettings.horizontalDistanceUnits.value === UnitsSettings.HorizontalDistanceUnitsMeters ? 0 : 1
+                    currentIndex:       _unitsSettings.horizontalDistanceUnits.value === UnitsSettings.HorizontalDistanceUnitsMeters ? 1 : 0
                     onActivated: (index) => { changeSystemOfUnits(currentIndex === 0 /* metric */) }
                 }
 

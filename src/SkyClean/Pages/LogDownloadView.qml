@@ -247,7 +247,7 @@ Rectangle{
                         eraseAllMessage,
                         qsTr("Apagar Todos Os Arquivos"),
                         mainWindow.showDialogDefaultWidth,
-                        StandardButton.Yes | StandardButton.No)
+                        Dialog.Yes | Dialog.No)
                     Component {
                         id: eraseAllMessage
                         QGCViewMessage {

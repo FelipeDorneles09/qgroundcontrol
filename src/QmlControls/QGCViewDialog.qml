@@ -15,7 +15,7 @@ import QGroundControl.Controls      1.0
 import QGroundControl.FactControls  1.0
 
 Item {
-    property var buttons: StandardButton.NoButton
+    property var buttons: Dialog.NoButton
 
     signal hideDialog
 

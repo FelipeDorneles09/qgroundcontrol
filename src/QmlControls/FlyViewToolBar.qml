@@ -119,7 +119,7 @@ Rectangle {
 
                 MainStatusIndicator {
                     id:                 mainStatusIndicator
-                    Layout.fillHeight:  true
+                    Layout.preferredHeight: viewButtonRow.height
                 }
             }
 
@@ -130,6 +130,9 @@ Rectangle {
                 visible:    _activeVehicle && _communicationLost
             }
 
+        property real indicatorsLeftLocalX: indicatorLoader.x - (mainStatusIndicator ? mainStatusIndicator.x : 0)
+        onIndicatorsLeftLocalXChanged: if (mainStatusIndicator) mainStatusIndicator.rightIndicatorsX = indicatorsLeftLocalX
+        Component.onCompleted: if (mainStatusIndicator) mainStatusIndicator.rightIndicatorsX = indicatorsLeftLocalX
             
         }
 

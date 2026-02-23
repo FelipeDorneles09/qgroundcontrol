@@ -7,5 +7,6 @@ qt_add_qml_module(FirstRunPromptDialogsModule
     QML_FILES
         OfflineVehicleFirstRunPrompt.qml
         UnitsFirstRunPrompt.qml
+        UpdateNotesFirstRunPrompt.qml
     NO_PLUGIN
 )

@@ -88,7 +88,7 @@ Item {
             audioOutput:                    AudioOutput {
             volume:                     1.0
         }    
-            loops:                          Audio.Infinite        
+            loops:                          MediaPlayer.Infinite        
         }
 
         Rectangle{

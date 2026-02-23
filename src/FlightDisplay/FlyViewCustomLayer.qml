@@ -35,6 +35,7 @@ Item {
     property var parentToolInsets               // These insets tell you what screen real estate is available for positioning the controls in your overlay
     property var totalToolInsets:   _toolInsets // These are the insets for your custom overlay additions
     property var mapControl
+    property bool _hasFLFMessage9: false
 
     // since this file is a placeholder for the custom layer in a standard build, we will just pass through the parent insets
     QGCToolInsets {
@@ -51,5 +52,57 @@ Item {
         bottomEdgeLeftInset:    parentToolInsets.bottomEdgeLeftInset
         bottomEdgeCenterInset:  parentToolInsets.bottomEdgeCenterInset
         bottomEdgeRightInset:   parentToolInsets.bottomEdgeRightInset
+    }
+
+    QGCPalette { id: qgcPal }
+
+    Connections {
+        target: QGroundControl.multiVehicleManager.activeVehicle
+        onNewFormattedMessage: {
+            let flfCode = null;
+
+            if (formattedMessage.includes("<FLF:9>")) {
+                flfCode = "FLF:9";
+            } else if (formattedMessage.includes("<FLF:0>")) {
+                flfCode = "FLF:0";
+            }
+
+            switch (flfCode) {
+                case "FLF:9":
+                    _hasFLFMessage9 = true;
+                    console.log("FLF:9 activated, showing overlay.");
+                    break;
+                case "FLF:0":
+                    _hasFLFMessage9 = false;
+                    console.log("FLF:0 activated, hiding overlay.");
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    Rectangle {
+        id: guidedModeRect
+        width: ScreenTools.defaultFontPixelHeight * 5
+        height: width
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: ScreenTools.defaultFontPixelWidth * 2
+        anchors.rightMargin: ScreenTools.defaultFontPixelWidth * 2
+        color: qgcPal.iconColor
+        radius: width / 2
+        z: QGroundControl.zOrderTopMost
+        visible: _hasFLFMessage9
+        border.color: qgcPal.cleanColor
+        border.width: 2
+
+        Image {
+            anchors.centerIn: parent
+            source: "/qmlimages/wall.png"
+            fillMode: Image.PreserveAspectFit
+            width: parent.width * 0.8
+            height: parent.height
+        }
     }
 }

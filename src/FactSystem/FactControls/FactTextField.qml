@@ -15,6 +15,7 @@ QGCTextField {
     showUnits:          true
     showHelp:           false
     numericValuesOnly:  fact && !fact.typeIsString
+    width:              580
 
     signal updated()
 

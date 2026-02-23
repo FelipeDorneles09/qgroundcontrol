@@ -103,9 +103,9 @@ void QGCCorePlugin::adjustSettingMetaData(const QString& settingsGroup, FactMeta
         if (metaData.name() == AppSettings::indoorPaletteName) {
             QVariant outdoorPalette;
 #if defined(Q_OS_ANDROID) || defined(Q_OS_IOS)
-            outdoorPalette = 0;
-#else
             outdoorPalette = 1;
+#else
+            outdoorPalette = 0;
 #endif
             metaData.setRawDefaultValue(outdoorPalette);
             return;
@@ -327,6 +327,8 @@ QString QGCCorePlugin::firstRunPromptResource(int id) const {
             return QStringLiteral("/qml/QGroundControl/FirstRunPromptDialogs/UnitsFirstRunPrompt.qml");
         case kOfflineVehicleFirstRunPromptId:
             return QStringLiteral("/qml/QGroundControl/FirstRunPromptDialogs/OfflineVehicleFirstRunPrompt.qml");
+        case updateNotesRunPromptId:
+            return QStringLiteral("/qml/QGroundControl/FirstRunPromptDialogs/UpdateNotesFirstRunPrompt.qml");
         default:
             return QString();
     }

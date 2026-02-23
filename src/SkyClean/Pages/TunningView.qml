@@ -6,7 +6,7 @@
 
 import QtQuick                      				2.12
 import QtQuick.Controls             				2.4
-import QtQuick.Dialogs              				
+import QtQuick.Dialogs           
 import QtQuick.Layouts              				1.12
 import QtLocation                   				5.3
 import QtPositioning                				5.3
@@ -189,7 +189,7 @@ Rectangle{
                         QGCPopupDialog {
                             id: calibratePasswordDialog
                             title: qsTr("Senha requerida")
-                            buttons: StandardButton.None
+                            buttons: Dialog.None
 
                             // generatedPassword follows same rule as in APMSensorsComponent.qml
                             property string generatedPassword: {
@@ -237,7 +237,8 @@ Rectangle{
 
                                             if (pwdInput.text === calibratePasswordDialog.generatedPassword) {
                                                 root.performCalibrationAccess(pwdInput.text)
-                                                hideDialog()
+                                                // close the popup instead of calling nonexistent hideDialog
+                                                calibratePasswordDialog.close()
                                             } else {
                                                 errorLabel.text = qsTr("Senha incorreta")
                                                 errorLabel.visible = true
@@ -248,7 +249,7 @@ Rectangle{
                                     QGCButton {
                                         text: qsTr("Cancelar")
                                         onClicked: {
-                                            hideDialog()
+                                            calibratePasswordDialog.close()
                                         }
                                     }
                                 }

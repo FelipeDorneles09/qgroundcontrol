@@ -77,7 +77,6 @@ Rectangle {
         ColumnLayout {
             id:         buttonColumn
             spacing:    ScreenTools.defaultFontPixelHeight / 4
-            visible:    false
 
             property real _maxButtonWidth: 0
 
@@ -131,6 +130,7 @@ Rectangle {
         anchors.bottom:         parent.bottom
         width:                  1
         color:                  qgcPal.windowShade
+        visible:                false
     }
 
     //-- Panel Contents

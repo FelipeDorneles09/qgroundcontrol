@@ -504,7 +504,7 @@ SetupPage {
                     MissionItemIndexLabel {
                         id:                 launchIconHeight
                         Layout.alignment:   Qt.AlignHCenter
-                        label:              qsTr("L")
+                        label:              qsTr("")
 
                         transform: [
                             Scale {

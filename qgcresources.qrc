@@ -49,6 +49,7 @@
         <file alias="terrain.svg">resources/terrain.svg</file>
         <file alias="TrashDelete.svg">resources/TrashDelete.svg</file>
         <file alias="VehicleMessages.png">resources/VehicleMessages.png</file>
+        <file alias="wall.png">resources/wall.png</file>
         <file alias="waves.svg">resources/waves.svg</file>
         <file alias="wind-guru.svg">resources/wind-guru.svg</file>
         <file alias="wind-rose.svg">resources/wind-rose.svg</file>

@@ -7,15 +7,14 @@
  *
  ****************************************************************************/
 
-import QtQuick
-import QtLocation
-import QtPositioning
+import QtQuick                  
+import QtLocation               
+import QtPositioning            
+import Qt5Compat.GraphicalEffects       
 
-import QGroundControl
-
-
-import QGroundControl.Controls
-import QGroundControl.FlightDisplay
+import QGroundControl                   
+import QGroundControl.Controls      
+import QGroundControl.FlightDisplay 
 
 Item {
     id:             _root
@@ -47,14 +46,14 @@ Item {
             ctx.lineWidth = width/100;
             ctx.scale(_root.width  / _minlength, _root.height / _minlength);
             ctx.rotate(-Math.PI/2 - Math.PI/8);
-            for (var i=0; i<proximityValues.rgRotationValues.length; i++) {
-                var rotationValue = proximityValues.rgRotationValues[i]
-                if (!isNaN(rotationValue)) {
-                    var a=Math.PI/4 * i;
-                    ctx.beginPath();
-                    ctx.arc(0, 0, rotationValue * _ratio, 0 + a + Math.PI/50, Math.PI/4 + a - Math.PI/50, false);
-                    ctx.stroke();
-                }
+            // Only draw the radar value with orientation == 0 (rotationNone)
+            var rotationValue = proximityValues.rgRotationValues.length > 0 ? proximityValues.rgRotationValues[0] : NaN;
+            if (!isNaN(rotationValue)) {
+                // Draw only the first sector (index 0)
+                var a = Math.PI/4 * 0;
+                ctx.beginPath();
+                ctx.arc(0, 0, rotationValue * _ratio, 0 + a + Math.PI/50, Math.PI/4 + a - Math.PI/50, false);
+                ctx.stroke();
             }
         }
     }
@@ -63,18 +62,19 @@ Item {
         anchors.fill: parent
 
         Repeater{
-            model: proximityValues.rgRotationValues.length
+            // Only show the label for orientation == 0 (rotationNone)
+            model: 1
 
             QGCLabel{
                 x:                      (_sectorViewEllipsoid.width / 2) - (width / 2)
                 y:                      (_sectorViewEllipsoid.height / 2) - (height / 2)
-                text:                   proximityValues.rgRotationValueStrings[index]
-                font.bold:              true
-                visible:                !isNaN(proximityValues.rgRotationValues[index])
+                text:                   proximityValues.rgRotationValueStrings[0]
+                font.family:            ScreenTools.demiboldFontFamily
+                visible:                !isNaN(proximityValues.rgRotationValues[0])
 
                 transform: Translate {
-                    x: Math.cos(-Math.PI/2 + Math.PI/4 * index) * (proximityValues.rgRotationValues[index] * _ratio)
-                    y: Math.sin(-Math.PI/2 + Math.PI/4 * index) * (proximityValues.rgRotationValues[index] * _ratio)
+                    x: Math.cos(-Math.PI/2 + Math.PI/4 * 0) * (proximityValues.rgRotationValues[0] * _ratio)
+                    y: Math.sin(-Math.PI/2 + Math.PI/4 * 0) * (proximityValues.rgRotationValues[0] * _ratio)
                 }
             }
         }

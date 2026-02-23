@@ -157,6 +157,11 @@ DECLARE_SETTINGSFACT_NO_FUNC(VideoSettings, rtspUrl) {
     if (!_rtspUrlFact) {
         _rtspUrlFact = _createSettingsFact(rtspUrlName);
         connect(_rtspUrlFact, &Fact::valueChanged, this, &VideoSettings::_configChanged);
+        if (_rtspUrlFact->rawValue().toString().isEmpty()) {
+            const QString defaultRtsp = QStringLiteral("rtsp://192.168.144.25:8554/main.264");
+            qCDebug(VideoManagerLog) << "Setting default RTSP URL:" << defaultRtsp;
+            _rtspUrlFact->setRawValue(defaultRtsp);
+        }
     }
     return _rtspUrlFact;
 }
