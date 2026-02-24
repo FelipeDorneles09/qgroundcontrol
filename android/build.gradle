@@ -111,6 +111,17 @@ android {
     println "qtAndroidDir: ${qtAndroidDir}"
     println "Java Version: " + JavaVersion.current()
 
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+
     packagingOptions {
         // exclude 'lib/*/*_qmltooling_*'
         exclude 'lib/*/*_Controls_FluentWinUI3_*'
