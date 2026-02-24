@@ -82,14 +82,9 @@ Item{
                 left:               parent.left 
                 leftMargin:         ScreenTools.defaultFontPixelWidth * 3.5
             }   
-            Rectangle {
-        anchors.fill: parent
-        color: "transparent"
-        border.color: "red"
-    }
             Text{
                 text:                   qsTr("Entre em contato conosco para suporte técnico, dúvidas ou sugestões.")
-                color:                  "red"
+                color:                  qgcPal.textColor
                 font.pointSize:         16
             }
             /* E-mail */

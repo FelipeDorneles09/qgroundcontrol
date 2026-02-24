@@ -27,6 +27,9 @@ import QGroundControl.SkyClean
 ApplicationWindow {
     id:             mainWindow
     visible:        true
+    visibility: Qt.platform.os === "android"
+                ? Window.FullScreen
+                : Window.Maximized
 
     property bool   _utmspSendActTrigger
 

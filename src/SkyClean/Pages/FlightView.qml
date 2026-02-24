@@ -77,10 +77,10 @@ Item {
 
     Rectangle{
         width:                          parent.width 
-        height:                         70
+        height:                         ScreenTools.defaultFontPixelWidth * 9
         color:                          "#6acce0"
         opacity:                        60
-        radius:                         20
+        radius:                         ScreenTools.defaultFontPixelWidth * 2.5
         anchors{
             bottom:                     parent.bottom 
             bottomMargin:               5
@@ -94,21 +94,21 @@ Item {
             Layout.fillHeight:      true
             Layout.fillWidth:       true
             anchors.left:           parent.left 
-            anchors.leftMargin:     40
+            anchors.leftMargin:     ScreenTools.defaultFontPixelWidth * 5
             anchors.bottom:         parent.bottom
-            anchors.bottomMargin:   5
+            anchors.bottomMargin:   ScreenTools.defaultFontPixelHeight * 0.65
 
             Row {
-                spacing: 30
+                spacing: ScreenTools.defaultFontPixelWidth * 3.9
 
                 //Altitude
                 Row {
-                    spacing:    8
+                    spacing:    ScreenTools.defaultFontPixelWidth
                     
                     Image{
                         source:             "/skyclean/Altitude"
-                        //width:              20
-                        //height:             20
+                        width:              ScreenTools.defaultFontPixelWidth * 5
+                        height:             ScreenTools.defaultFontPixelWidth * 5
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -130,12 +130,12 @@ Item {
 
                 // Flight Time
                 Row {
-                    spacing:    8
+                    spacing:    ScreenTools.defaultFontPixelWidth
                     
                     Image{
                         source:             "/skyclean/Time"
-                        //width:              20
-                        //height:             20
+                        width:              ScreenTools.defaultFontPixelWidth * 5
+                        height:             ScreenTools.defaultFontPixelWidth * 5
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -157,12 +157,12 @@ Item {
                 
                 // HorizontalSpeed
                 Row {
-                    spacing:    8
+                    spacing:    ScreenTools.defaultFontPixelWidth
                     
                     Image{
                         source:             "/skyclean/HorizontalSpeed"
-                        //width:              20
-                        //height:             20
+                        width:              ScreenTools.defaultFontPixelWidth * 5
+                        height:             ScreenTools.defaultFontPixelWidth * 5
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -184,12 +184,12 @@ Item {
 
                 // VerticalSpeed
                 Row {
-                    spacing:    8
+                    spacing:    ScreenTools.defaultFontPixelWidth
                     
                     Image{
                         source:             "/skyclean/VerticalSpeed"
-                        //width:              20
-                        //height:             20
+                        width:              ScreenTools.defaultFontPixelWidth * 5
+                        height:             ScreenTools.defaultFontPixelWidth * 5
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -211,12 +211,12 @@ Item {
 
                 //Distance
                 Row {
-                    spacing:    8
+                    spacing:    ScreenTools.defaultFontPixelWidth
                     
                     Image{
                         source:             "/skyclean/Distance"
-                        //width:              20
-                        //height:             20
+                        width:              ScreenTools.defaultFontPixelWidth * 5
+                        height:             ScreenTools.defaultFontPixelWidth * 5
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -242,6 +242,8 @@ Item {
                     Image{
                         source: "/skyclean/Radar"
                         anchors.verticalCenter: parent.verticalCenter 
+                        width:              ScreenTools.defaultFontPixelWidth * 5
+                        height:             ScreenTools.defaultFontPixelWidth * 5
                         layer.enabled: true 
                         layer.effect: ColorOverlay {
                             opacity: 0.7
