@@ -222,8 +222,8 @@ Item {
     }
 
     Item{
-        width:              parent.width 
-        height:             parent.height 
+        width:              Screen.width 
+        height:             Screen.height 
         Image{
             source:         "/skyclean/LinesPage"
             visible:        true

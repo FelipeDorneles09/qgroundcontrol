@@ -120,6 +120,7 @@ Rectangle {
                 MainStatusIndicator {
                     id:                 mainStatusIndicator
                     Layout.preferredHeight: viewButtonRow.height
+                    Layout.fillWidth: true
                 }
             }
 

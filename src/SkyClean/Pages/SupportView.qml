@@ -45,7 +45,7 @@ Item{
         /* BackGround */
         Rectangle{
             width:                      ScreenTools.defaultFontPixelWidth * 70
-            height:                     ScreenTools.defaultFontPixelHeight * 2.919
+            height:                     ScreenTools.defaultFontPixelHeight * 3.1
             radius:                     0
             color:                      qgcPal.cleanColor
 
@@ -82,13 +82,7 @@ Item{
                 left:               parent.left 
                 leftMargin:         ScreenTools.defaultFontPixelWidth * 3.5
             }   
-            Text{
-                text:                   qsTr("Entre em contato conosco para suporte técnico, dúvidas ou sugestões.")
-                color:                  qgcPal.textColor
-                font.pointSize:         16
-            }
             /* E-mail */
-            Item {
                 Column{
                     spacing:        ScreenTools.defaultFontPixelHeight * 1.456
                     /* E-mail */
@@ -201,7 +195,7 @@ Item{
                         }
                     }
                 }
-            }
+            
             
         }
     }

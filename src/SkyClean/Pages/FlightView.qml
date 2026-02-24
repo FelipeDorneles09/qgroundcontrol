@@ -77,10 +77,10 @@ Item {
 
     Rectangle{
         width:                          parent.width 
-        height:                         ScreenTools.defaultFontPixelWidth * 9
+        height:                         ScreenTools.defaultFontPixelWidth * 7
         color:                          "#6acce0"
         opacity:                        60
-        radius:                         ScreenTools.defaultFontPixelWidth * 2.5
+        radius:                         ScreenTools.defaultFontPixelWidth * 2
         anchors{
             bottom:                     parent.bottom 
             bottomMargin:               5
@@ -94,12 +94,12 @@ Item {
             Layout.fillHeight:      true
             Layout.fillWidth:       true
             anchors.left:           parent.left 
-            anchors.leftMargin:     ScreenTools.defaultFontPixelWidth * 5
+            anchors.leftMargin:     ScreenTools.defaultFontPixelWidth * 4
             anchors.bottom:         parent.bottom
             anchors.bottomMargin:   ScreenTools.defaultFontPixelHeight * 0.65
 
             Row {
-                spacing: ScreenTools.defaultFontPixelWidth * 3.9
+                spacing: ScreenTools.defaultFontPixelWidth * 2.5
 
                 //Altitude
                 Row {
@@ -107,8 +107,8 @@ Item {
                     
                     Image{
                         source:             "/skyclean/Altitude"
-                        width:              ScreenTools.defaultFontPixelWidth * 5
-                        height:             ScreenTools.defaultFontPixelWidth * 5
+                        width:              ScreenTools.defaultFontPixelWidth * 4
+                        height:             ScreenTools.defaultFontPixelWidth * 4
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -134,8 +134,8 @@ Item {
                     
                     Image{
                         source:             "/skyclean/Time"
-                        width:              ScreenTools.defaultFontPixelWidth * 5
-                        height:             ScreenTools.defaultFontPixelWidth * 5
+                        width:              ScreenTools.defaultFontPixelWidth * 4
+                        height:             ScreenTools.defaultFontPixelWidth * 4
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -161,8 +161,8 @@ Item {
                     
                     Image{
                         source:             "/skyclean/HorizontalSpeed"
-                        width:              ScreenTools.defaultFontPixelWidth * 5
-                        height:             ScreenTools.defaultFontPixelWidth * 5
+                        width:              ScreenTools.defaultFontPixelWidth * 4
+                        height:             ScreenTools.defaultFontPixelWidth * 4
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -188,8 +188,8 @@ Item {
                     
                     Image{
                         source:             "/skyclean/VerticalSpeed"
-                        width:              ScreenTools.defaultFontPixelWidth * 5
-                        height:             ScreenTools.defaultFontPixelWidth * 5
+                        width:              ScreenTools.defaultFontPixelWidth * 4
+                        height:             ScreenTools.defaultFontPixelWidth * 4
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -215,8 +215,8 @@ Item {
                     
                     Image{
                         source:             "/skyclean/Distance"
-                        width:              ScreenTools.defaultFontPixelWidth * 5
-                        height:             ScreenTools.defaultFontPixelWidth * 5
+                        width:              ScreenTools.defaultFontPixelWidth * 4
+                        height:             ScreenTools.defaultFontPixelWidth * 4
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -242,8 +242,8 @@ Item {
                     Image{
                         source: "/skyclean/Radar"
                         anchors.verticalCenter: parent.verticalCenter 
-                        width:              ScreenTools.defaultFontPixelWidth * 5
-                        height:             ScreenTools.defaultFontPixelWidth * 5
+                        width:              ScreenTools.defaultFontPixelWidth * 4
+                        height:             ScreenTools.defaultFontPixelWidth * 4
                         layer.enabled: true 
                         layer.effect: ColorOverlay {
                             opacity: 0.7
