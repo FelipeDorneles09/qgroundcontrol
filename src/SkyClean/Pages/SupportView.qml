@@ -4,19 +4,19 @@
  * All rights reserved.
  */
 
-import QtQuick                      2.12
-import QtQuick.Controls             2.4
+import QtQuick                      
+import QtQuick.Controls             
 import QtQuick.Dialogs              
-import QtQuick.Layouts              1.12
-import QtLocation                   5.3
-import QtPositioning                5.3
-import QtQuick.Window               2.2
-import QtQml.Models                 2.1
-import QGroundControl               1.0
-import QGroundControl.Controls      1.0
-import QGroundControl.FactControls    1.0
-import QGroundControl.FlightDisplay 1.0
-import QGroundControl.FlightMap     1.0
+import QtQuick.Layouts              
+import QtLocation                   
+import QtPositioning                
+import QtQuick.Window               
+import QtQml.Models                 
+import QGroundControl               
+import QGroundControl.Controls      
+import QGroundControl.FactControls    
+import QGroundControl.FlightDisplay 
+import QGroundControl.FlightMap     
 import Qt5Compat.GraphicalEffects   
 
 Item{
@@ -81,6 +81,16 @@ Item{
                 topMargin:          ScreenTools.defaultFontPixelHeight * 4.375
                 left:               parent.left 
                 leftMargin:         ScreenTools.defaultFontPixelWidth * 3.5
+            }   
+            Rectangle {
+        anchors.fill: parent
+        color: "transparent"
+        border.color: "red"
+    }
+            Text{
+                text:                   qsTr("Entre em contato conosco para suporte técnico, dúvidas ou sugestões.")
+                color:                  "red"
+                font.pointSize:         16
             }
             /* E-mail */
             Item {
