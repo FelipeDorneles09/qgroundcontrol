@@ -15,6 +15,7 @@ import android.os.PowerManager;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.app.Activity;
 import android.os.storage.StorageManager;
@@ -77,6 +78,15 @@ public class QGCActivity extends QtActivity {
      */
     private void keepScreenOn() {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        // Garante que a aplicação ocupe toda a tela no Android
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        getWindow().getDecorView().setSystemUiVisibility(
+            android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+            android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
+            android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+            android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
+        );
     }
 
     /**

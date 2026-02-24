@@ -27,10 +27,10 @@ import QGroundControl.SkyClean
 ApplicationWindow {
     id:             mainWindow
     visible:        true
-    visibility: Qt.platform.os === "android"
-                ? Window.FullScreen
-                : Window.Maximized
-
+    visibility:     Window.FullScreen   // Força o modo tela cheia
+    
+    // No Qt 6, isso ajuda a ignorar as margens do sistema
+    flags:          Qt.Window | Qt.MaximizeUsingFullscreenGeometryHint
     property bool   _utmspSendActTrigger
 
     Component.onCompleted: {
