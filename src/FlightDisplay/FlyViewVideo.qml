@@ -64,7 +64,7 @@ Item {
     Loader {
         id:             cameraLoader
         anchors.fill:   parent
-        visible:        QGroundControl.videoManager.isUvc
+        visible:        !QGroundControl.videoManager.isStreamSource
         source:         QGroundControl.videoManager.uvcEnabled ? "qrc:/qml/QGroundControl/FlightDisplay/FlightDisplayViewUVC.qml" : "qrc:/qml/QGroundControl/FlightDisplay//FlightDisplayViewDummy.qml"
     }
 
@@ -95,6 +95,11 @@ Item {
         screenX:                 flyViewVideoMouseArea.mouseX
         screenY:                 flyViewVideoMouseArea.mouseY
         cameraTrackingEnabled:   videoStreaming._camera && videoStreaming._camera.trackingEnabled
+    }
+
+    //-- SiYi Flight Display Controller (gimbal + camera controls)
+    FlyViewVideoSiYiController {
+        anchors.fill: parent
     }
 
     MouseArea {

@@ -43,6 +43,7 @@
 #include "QGCLogging.h"
 #include "QGCLoggingCategory.h"
 #include "SettingsManager.h"
+#include "SiYi/SiYi.h"
 #include "UDPLink.h"
 #include "Vehicle.h"
 #include "VehicleComponent.h"
@@ -250,6 +251,13 @@ void QGCApplication::_initForNormalAppBoot() {
     QGCCorePlugin::instance()->init();
     MAVLinkProtocol::instance()->init();
     MultiVehicleManager::instance()->init();
+    // Ensure SiYi QML types are registered before the QML engine is created so
+    // "import SiYi.Object 1.0" is available when QML files are loaded.
+    qmlRegisterSingletonType<SiYi>("SiYi.Object", 1, 0, "SiYi",
+                                   [](QQmlEngine*, QJSEngine*) -> QObject* { return SiYi::instance(); });
+    qmlRegisterUncreatableType<SiYiCamera>("SiYi.Object", 1, 0, "SiYiCamera", "Reference only");
+    qmlRegisterUncreatableType<SiYiTransmitter>("SiYi.Object", 1, 0, "SiYiTransmitter", "Reference only");
+
     _qmlAppEngine = QGCCorePlugin::instance()->createQmlApplicationEngine(this);
     QObject::connect(_qmlAppEngine, &QQmlApplicationEngine::objectCreationFailed, this, QCoreApplication::quit,
                      Qt::QueuedConnection);

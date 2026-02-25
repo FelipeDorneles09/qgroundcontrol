@@ -15,6 +15,7 @@ import QtQuick.Dialogs
 import QGroundControl
 import QGroundControl.Controls
 import QGroundControl.SkyClean
+import SiYi.Object 1.0
 
 Rectangle {
     id:     control

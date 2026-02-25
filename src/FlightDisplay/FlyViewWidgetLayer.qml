@@ -110,6 +110,40 @@ Item {
         rallyPointController:   _rallyPointController
     }
 
+    Rectangle {
+        id: zoomMultipleRectangle
+        anchors.bottom: telemetryPanel.top
+        width: zoomMultipleLabel.width + zoomMultipleLabel.width*0.4
+        height: zoomMultipleLabel.height + zoomMultipleLabel.height*0.4
+        color: "white"
+    anchors.bottomMargin: ScreenTools.defaultFontPixelHeight * 0.294        
+        visible: false
+        anchors.horizontalCenter: telemetryPanel.horizontalCenter
+    radius: ScreenTools.defaultFontPixelWidth * 0.35
+        QGCLabel {
+            id: zoomMultipleLabel
+            text: (zoomMultipleLabel.zoomMultiple/10).toFixed(1)
+            anchors.centerIn: parent
+            color: "black"
+            font.pixelSize: ScreenTools.defaultFontPixelWidth * 1.4
+
+            Timer {
+                id: visibleTimer
+                interval: 5000
+                running: false
+                repeat: false
+                onTriggered: zoomMultipleRectangle.visible = false
+            }
+
+            property real zoomMultiple: siYiCamera.zoomMultiple
+            onZoomMultipleChanged: {
+                resultRectangle.visible = false
+                zoomMultipleRectangle.visible = true
+                visibleTimer.restart()
+            }
+        }
+    }
+
     GuidedActionConfirm {
         anchors.top:                parent.top
         anchors.horizontalCenter:   parent.horizontalCenter

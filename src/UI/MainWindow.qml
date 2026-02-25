@@ -21,6 +21,7 @@ import QGroundControl.FactControls
 import QGroundControl.FlightDisplay
 import QGroundControl.FlightMap
 import QGroundControl.SkyClean
+import SiYi.Object 1.0
 
 /// @brief Native QML top level window
 /// All properties defined here are visible to all QML pages.
@@ -28,9 +29,12 @@ ApplicationWindow {
     id:             mainWindow
     visible:        true
     visibility:     Window.FullScreen   // Força o modo tela cheia
+
+    
     
     // No Qt 6, isso ajuda a ignorar as margens do sistema
     flags:          Qt.Window | Qt.MaximizeUsingFullscreenGeometryHint
+    property SiYiCamera siYiCamera: SiYi.camera
     property bool   _utmspSendActTrigger
 
     Component.onCompleted: {
