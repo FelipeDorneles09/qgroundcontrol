@@ -188,7 +188,7 @@ Rectangle{
 
                             Rectangle {
                                 id: helpBtnLaserTitle
-                                width: ScreenTools.defaultFontPixelWidth * 2.38
+                                width: ScreenTools.defaultFontPixelWidth * 2.5
                                 height: width
                                 radius: width / 2
                                 color: qgcPal.buttonHighlight
@@ -199,7 +199,7 @@ Rectangle{
                                 Text {
                                     anchors.centerIn: parent
                                     text: "?"
-                                    font.pixelSize: ScreenTools.defaultFontPixelHeight * 0.469
+                                    font.pixelSize: ScreenTools.defaultFontPixelHeight * 0.5
                                     font.bold: true
                                     color: qgcPal.buttonHighlightText
                                 }
@@ -303,7 +303,7 @@ Rectangle{
                                                      
                             Item {
                                 width: ScreenTools.defaultFontPixelWidth * 25.2
-                                height: ScreenTools.defaultFontPixelHeight * 1.456
+                                height: ScreenTools.defaultFontPixelHeight * 2
 
                                 TextField{ 
                                     id:                                         valueTxt         
@@ -317,7 +317,7 @@ Rectangle{
                             }
                             ButtonAction{
                                 setWidth:                                   ScreenTools.defaultFontPixelWidth * 12.6
-                                setHeight:                                  ScreenTools.defaultFontPixelHeight * 1.456
+                                setHeight:                                  ScreenTools.defaultFontPixelHeight * 2
                                 setText:                                    qsTr("Ok")
                                 onClicked: {
                                     var txt = valueTxt.text ? valueTxt.text.trim() : "";
@@ -387,7 +387,7 @@ Rectangle{
 
                             Rectangle {
                                 id: helpBtnAlertTitle
-                                width: ScreenTools.defaultFontPixelWidth * 2.38
+                                width: ScreenTools.defaultFontPixelWidth * 2.5
                                 height: width
                                 radius: width / 2
                                 color: qgcPal.buttonHighlight
@@ -398,7 +398,7 @@ Rectangle{
                                 Text {
                                     anchors.centerIn: parent
                                     text: "?"
-                                    font.pixelSize: ScreenTools.defaultFontPixelHeight * 0.469
+                                    font.pixelSize: ScreenTools.defaultFontPixelHeight * 0.5
                                     font.bold: true
                                     color: qgcPal.buttonHighlightText
                                 }
@@ -426,7 +426,7 @@ Rectangle{
                                                       
                                 Item {
                                     width: ScreenTools.defaultFontPixelWidth * 25.2
-                                    height: ScreenTools.defaultFontPixelHeight * 1.456
+                                    height: ScreenTools.defaultFontPixelHeight * 2
 
                                     TextField{ 
                                         id:                                         valueTxtBatt         
@@ -440,7 +440,7 @@ Rectangle{
                                 }
                                 ButtonAction{    
                                     setWidth:                                   ScreenTools.defaultFontPixelWidth * 12.6
-                                    setHeight:                                  ScreenTools.defaultFontPixelHeight * 1.456
+                                    setHeight:                                  ScreenTools.defaultFontPixelHeight * 2
                                     setText:                                    qsTr("Ok")
                                     onClicked: {                                        
                                             if (!isNaN(valueTxtBatt.text) && valueTxtBatt.text >= 20 && valueTxtBatt.text <= 30) {
@@ -524,7 +524,7 @@ Rectangle{
 
                             Rectangle {
                                 id: helpBtnCritTitle
-                                width: ScreenTools.defaultFontPixelWidth * 2.38
+                                width: ScreenTools.defaultFontPixelWidth * 2.5
                                 height: width
                                 radius: width / 2
                                 color: qgcPal.buttonHighlight
@@ -535,7 +535,7 @@ Rectangle{
                                 Text {
                                     anchors.centerIn: parent
                                     text: "?"
-                                    font.pixelSize: ScreenTools.defaultFontPixelHeight * 0.469
+                                    font.pixelSize: ScreenTools.defaultFontPixelHeight * 0.5
                                     font.bold: true
                                     color: qgcPal.buttonHighlightText
                                 }
@@ -564,7 +564,7 @@ Rectangle{
                                                       
                                 Item {
                                     width: ScreenTools.defaultFontPixelWidth * 25.2
-                                    height: ScreenTools.defaultFontPixelHeight * 1.456
+                                    height: ScreenTools.defaultFontPixelHeight * 2
 
                                     TextField{ 
                                         id:                                         valueBatt        
@@ -578,7 +578,7 @@ Rectangle{
                                 }
                                     ButtonAction{
                                         setWidth:                                   ScreenTools.defaultFontPixelWidth * 12.6
-                                        setHeight:                                  ScreenTools.defaultFontPixelHeight * 1.456
+                                        setHeight:                                  ScreenTools.defaultFontPixelHeight * 2
                                         setText:                                    qsTr("Ok")
                                         onClicked: {
                                         

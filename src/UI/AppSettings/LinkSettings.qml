@@ -24,7 +24,7 @@ SettingsPage {
 
     SettingsGroupLayout {
         heading:        qsTr("AutoConnect")
-        visible:        _autoConnectSettings.visible
+        visible:        false
 
         Repeater {
             id: autoConnectRepeater
@@ -45,13 +45,29 @@ SettingsPage {
                 text:               autoConnectRepeater.names[index]
                 fact:               modelData
                 visible:            modelData.visible
+                enabled:            false
+
+                Component.onCompleted: {
+                    // Ensure the setting is false and cannot be set to true from UI
+                    try { modelData.value = false } catch(e) {}
+                }
+
+                Connections {
+                    target: modelData
+                    // If some code tries to set it true, immediately set back to false
+                    onValueChanged: {
+                        if (modelData.value === true) {
+                            modelData.value = false
+                        }
+                    }
+                }
             }
         }
     }
 
     SettingsGroupLayout {
         heading: qsTr("NMEA GPS")
-        visible: QGroundControl.settingsManager.autoConnectSettings.autoConnectNmeaPort.visible && QGroundControl.settingsManager.autoConnectSettings.autoConnectNmeaBaud.visible
+        visible: false
 
         LabelledComboBox {
             id: nmeaPortCombo
@@ -109,7 +125,7 @@ SettingsPage {
             fact: QGroundControl.settingsManager.autoConnectSettings.nmeaUdpPort
         }
     }
-
+    
     SettingsGroupLayout {
         heading: qsTr("Links")
 

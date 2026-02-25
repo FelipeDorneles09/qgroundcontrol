@@ -25,13 +25,34 @@ Rectangle{
     height:                         parent.height 
     color:                          "transparent"
     z:                              5
-    MouseArea{
+    
+    MouseArea {
+        anchors.fill:               parent
         onClicked: {
-            settingsView.visible = false;
-            supportView.visible = false;
-            logView.visible = false;
-            tuningView.visible = false;
-            linkView.visible = false;
+            // Verifica se o drawer está visível (x == 0)
+            if (drawer.x === 0) {
+                // Se o clique foi fora da área do drawer
+                if (mouse.x > drawer.width) {
+                    // Esconde todas as subviews
+                    settingsView.visible = false;
+                    supportView.visible = false;
+                    logView.visible = false;
+                    tuningView.visible = false;
+                    linkView.visible = false;
+                    // Fecha o DrawerMenu inteiro (parent)
+                    root.visible = false;
+                    mouse.accepted = true;
+                }
+                // Se o clique foi dentro do drawer, não faz nada (permite interação com os botões)
+            } else {
+                // Se o drawer não está visível, qualquer clique deve esconder as subviews
+                settingsView.visible = false;
+                supportView.visible = false;
+                logView.visible = false;
+                tuningView.visible = false;
+                linkView.visible = false;
+                mouse.accepted = true;
+            }
         }
     }
 
@@ -168,6 +189,18 @@ Rectangle{
                     tuningView.visible = false;
                     linkView.visible = false;
                 }          
+            }
+            ButtonIcon{
+                setWidth:           Math.min(ScreenTools.defaultFontPixelWidth * 7, 140)
+                setHeight:          setWidth
+                setImage:           "/skyclean/Ntrip"
+                onClicked:{
+                    mainWindow.showSettingsTool(qsTr("NTRIP/RTK"));
+                    tuningView.visible = false;
+                    settingsView.visible = false;
+                    supportView.visible = false;
+                    logView.visible = false;
+                }
             }
         }
     }  

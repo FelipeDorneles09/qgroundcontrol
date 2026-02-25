@@ -83,7 +83,7 @@ Item {
         radius:                         ScreenTools.defaultFontPixelWidth * 2
         anchors{
             bottom:                     parent.bottom 
-            bottomMargin:               5
+            bottomMargin:               ScreenTools.defaultFontPixelWidth * 0.65
         }
 
        GridLayout {
@@ -99,7 +99,7 @@ Item {
             anchors.bottomMargin:   ScreenTools.defaultFontPixelHeight * 0.65
 
             Row {
-                spacing: ScreenTools.defaultFontPixelWidth * 2.5
+                spacing: ScreenTools.defaultFontPixelWidth * 2
 
                 //Altitude
                 Row {
@@ -117,10 +117,10 @@ Item {
                         }
                     }
                     Text{
-                        text:               _altitude + " | "
+                        text:               _altitude
                         color:              qgcPal.iconColor 
                         font.bold:          true 
-                        font.pointSize:     16
+                        font.pointSize:     14
                         Layout.fillWidth:   true
                         Layout.minimumWidth: indicatorValueWidth
                         horizontalAlignment: firstLabel.horizontalAlignment
@@ -147,7 +147,7 @@ Item {
                         text: flightTimeFact ? secondsToHHMMSS(flightTimeFact.rawValue) : "00:00  | "
                         color:              qgcPal.iconColor 
                         font.bold:          true 
-                        font.pointSize:     16
+                        font.pointSize:     14
                         Layout.fillWidth:   true
                         Layout.minimumWidth: indicatorValueWidth
                         horizontalAlignment: firstLabel.horizontalAlignment
@@ -174,7 +174,7 @@ Item {
                        text:                _activeVehicle ? _activeVehicle.groundSpeed.rawValue.toFixed(1) + ' ' + _activeVehicle.groundSpeed.units : "0.0"  + " | "                           
                         color:              qgcPal.iconColor 
                         font.bold:          true 
-                        font.pointSize:     16
+                        font.pointSize:     14
                         Layout.fillWidth:   true
                         Layout.minimumWidth: indicatorValueWidth
                         horizontalAlignment: firstLabel.horizontalAlignment
@@ -201,7 +201,7 @@ Item {
                        text:                _activeVehicle ? _activeVehicle.climbRate.rawValue.toFixed(1) + ' ' + _activeVehicle.climbRate.units : "0.0"  + " | " //getVerticalSpeed()  + " | "                      
                         color:              qgcPal.iconColor 
                         font.bold:          true 
-                        font.pointSize:     16
+                        font.pointSize:     14
                         Layout.fillWidth:   true
                         Layout.minimumWidth: indicatorValueWidth
                         horizontalAlignment: firstLabel.horizontalAlignment
@@ -228,7 +228,7 @@ Item {
                         text:               _activeVehicle ? ('00000' + _activeVehicle.distanceToHome.rawValue.toFixed(0)).slice(-5) + ' ' + _activeVehicle.distanceToHome.units : "00000" + " | "
                         color:              qgcPal.iconColor 
                         font.bold:          true 
-                        font.pointSize:     16
+                        font.pointSize:     14
                         Layout.fillWidth:   true
                         Layout.minimumWidth: indicatorValueWidth
                         horizontalAlignment: firstLabel.horizontalAlignment

@@ -26,7 +26,7 @@ QGCComboBox{
     
     background: Rectangle{
         border.color:               qgcPal.cleanColor
-        border.width:               4
+        border.width:               2
         radius:                     10
         color:                      qgcPal.iconColor
     }

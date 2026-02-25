@@ -105,6 +105,7 @@ ToolIndicatorPage {
                         text:               autoConnectRepeater.names[index]
                         fact:               modelData
                         visible:            modelData.visible
+                        enabled:            false
                     }
                 }
             }

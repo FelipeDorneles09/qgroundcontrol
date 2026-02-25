@@ -40,7 +40,7 @@ jobs:
                 shell: bash
 
         env:
-            PACKAGE: QGroundControl
+            PACKAGE: SkyClean
             QT_VERSION: ${{ matrix.qt_version }}
             QT_ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/deploy/android/android_release.keystore
             QT_ANDROID_KEYSTORE_ALIAS: qgcandroidkeystore

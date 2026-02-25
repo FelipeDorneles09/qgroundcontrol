@@ -84,7 +84,7 @@ Item{
             }   
             /* E-mail */
                 Column{
-                    spacing:        ScreenTools.defaultFontPixelHeight * 1.456
+                    spacing:        ScreenTools.defaultFontPixelHeight
                     /* E-mail */
                     Row {
                         spacing:        ScreenTools.defaultFontPixelWidth * 0.35
@@ -98,7 +98,9 @@ Item{
                             }
                         }
                         Column {
-                            spacing:    ScreenTools.defaultFontPixelHeight * 0.0581
+                            spacing:    ScreenTools.defaultFontPixelHeight * 0.035
+                            anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 0.3
+                            
                             Text {
                                 text:   qsTr("E-mail")
                                 color:  qgcPal.textColor
@@ -123,7 +125,8 @@ Item{
                             }
                         }
                         Column {
-                            spacing:    ScreenTools.defaultFontPixelHeight * 0.0581
+                            spacing:    ScreenTools.defaultFontPixelHeight * 0.035
+                            anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 0.3
                             Text {
                                 text:           qsTr("Site")
                                 color:          qgcPal.textColor
@@ -146,6 +149,7 @@ Item{
                     /* Telefone */
                     Row {
                         spacing:        ScreenTools.defaultFontPixelWidth * 0.35
+                        anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 0.3
                         Image {
                             source:     "/InstrumentValueIcons/phone.svg"
                             layer.enabled: true
@@ -156,7 +160,7 @@ Item{
                             }
                         }
                         Column {
-                            spacing:    ScreenTools.defaultFontPixelHeight * 0.0581
+                            spacing:    ScreenTools.defaultFontPixelHeight * 0.035
                             Text {
                                 text:   qsTr("Telefone")
                                 color:  qgcPal.textColor
@@ -171,6 +175,7 @@ Item{
                     /* Versão do App */
                     Row {
                         spacing:        ScreenTools.defaultFontPixelWidth * 0.35
+                        anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 0.3
                         Image {
                             source:     "/InstrumentValueIcons/tablet.svg"
                             layer.enabled: true
@@ -181,7 +186,7 @@ Item{
                             }
                         }
                         Column {
-                            spacing:    ScreenTools.defaultFontPixelHeight * 0.0581
+                            spacing:    ScreenTools.defaultFontPixelHeight * 0.035
                             Text {
                                 text:   qsTr("Versão do Aplicativo")
                                 color:  qgcPal.textColor

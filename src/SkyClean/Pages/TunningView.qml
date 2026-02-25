@@ -83,7 +83,7 @@ Rectangle{
                     }                    
                     DropView{
                         setWidth:                   ScreenTools.defaultFontPixelWidth * 40.6
-                        setHeight:                  ScreenTools.defaultFontPixelHeight * 2.191
+                        setHeight:                  ScreenTools.defaultFontPixelHeight * 3
                         fact:                       QGroundControl.settingsManager.unitsSettings.horizontalDistanceUnits
                     }
 
@@ -102,7 +102,7 @@ Rectangle{
                     }                    
                     DropView{
                         setWidth:                   ScreenTools.defaultFontPixelWidth * 40.6
-                        setHeight:                  ScreenTools.defaultFontPixelHeight * 2.191
+                        setHeight:                  ScreenTools.defaultFontPixelHeight * 3
                         fact:                       QGroundControl.settingsManager.unitsSettings.verticalDistanceUnits
                     }   
 
@@ -120,7 +120,7 @@ Rectangle{
                     }                    
                     DropView{
                         setWidth:                   ScreenTools.defaultFontPixelWidth * 40.6
-                        setHeight:                  ScreenTools.defaultFontPixelHeight * 2.191
+                        setHeight:                  ScreenTools.defaultFontPixelHeight * 3
                         fact:                       QGroundControl.settingsManager.unitsSettings.areaUnits
                     }
 
@@ -138,7 +138,7 @@ Rectangle{
                     }                    
                     DropView{
                         setWidth:                   ScreenTools.defaultFontPixelWidth * 40.6
-                        setHeight:                  ScreenTools.defaultFontPixelHeight * 2.191
+                        setHeight:                  ScreenTools.defaultFontPixelHeight * 3
                         fact:                       QGroundControl.settingsManager.unitsSettings.speedUnits
                     }
 
@@ -156,7 +156,7 @@ Rectangle{
                     }                    
                     DropView{
                         setWidth:                   ScreenTools.defaultFontPixelWidth * 40.6
-                        setHeight:                  ScreenTools.defaultFontPixelHeight * 2.191
+                        setHeight:                  ScreenTools.defaultFontPixelHeight * 3
                         fact:                       QGroundControl.settingsManager.unitsSettings.temperatureUnits
                     }   
 

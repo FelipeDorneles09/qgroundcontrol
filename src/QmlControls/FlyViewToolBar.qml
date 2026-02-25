@@ -70,7 +70,6 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.left:   parent.left
         width:          mainStatusLayout.width
-        opacity:        qgcPal.windowTransparent.a
 
         gradient: Gradient {
             orientation: Gradient.Horizontal
@@ -108,6 +107,7 @@ Rectangle {
                 id:                 mainStatusLayout
                 Layout.fillHeight:  true
                 spacing:            0
+                Layout.fillWidth: true
 
                 QGCToolBarButton {
                     id:                 qgcButton
@@ -120,7 +120,6 @@ Rectangle {
                 MainStatusIndicator {
                     id:                 mainStatusIndicator
                     Layout.preferredHeight: viewButtonRow.height
-                    Layout.fillWidth: true
                 }
             }
 

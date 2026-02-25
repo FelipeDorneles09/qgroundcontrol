@@ -193,7 +193,8 @@ Rectangle{
                     }
                 }
                 Row{
-                    spacing:                            ScreenTools.defaultFontPixelHeight * 0.581
+                    spacing:                            ScreenTools.defaultFontPixelHeight
+                    anchors.bottomMargin:               ScreenTools.defaultFontPixelHeight * 2
                     ButtonAction{                        
                         setWidth:                       ScreenTools.defaultFontPixelWidth * 26.6
                         setHeight:                      ScreenTools.defaultFontPixelHeight * 2.191

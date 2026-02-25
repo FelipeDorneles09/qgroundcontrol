@@ -82,6 +82,7 @@ qt_add_qml_module(SkyCleanModule
         Images/StartFly.svg
         Images/SunMode.svg
         Images/Support.svg
+        Images/Ntrip.svg
         Images/TakeOff.svg
         Images/Time.svg
         Images/Tuning.svg
