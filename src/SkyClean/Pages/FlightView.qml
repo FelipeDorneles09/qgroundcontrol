@@ -77,7 +77,7 @@ Item {
 
     Rectangle{
         width:                          parent.width 
-        height:                         ScreenTools.defaultFontPixelWidth * 7
+        height:                         ScreenTools.defaultFontPixelWidth * 6
         color:                          "#6acce0"
         opacity:                        60
         radius:                         ScreenTools.defaultFontPixelWidth * 2
@@ -106,8 +106,8 @@ Item {
                     
                     Image{
                         source:             "/skyclean/Altitude"
-                        width:              ScreenTools.defaultFontPixelWidth * 3.5
-                        height:             ScreenTools.defaultFontPixelWidth * 3.5
+                        width:              ScreenTools.defaultFontPixelWidth * 3
+                        height:             ScreenTools.defaultFontPixelWidth * 3
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -119,7 +119,7 @@ Item {
                         text:               _altitude
                         color:              qgcPal.iconColor 
                         font.bold:          true 
-                        font.pointSize:     13
+                        font.pointSize:     12
                         Layout.fillWidth:   true
                         Layout.minimumWidth: indicatorValueWidth
                         horizontalAlignment: firstLabel.horizontalAlignment
@@ -133,8 +133,8 @@ Item {
                     
                     Image{
                         source:             "/skyclean/Time"
-                        width:              ScreenTools.defaultFontPixelWidth * 3.5
-                        height:             ScreenTools.defaultFontPixelWidth * 3.5
+                        width:              ScreenTools.defaultFontPixelWidth * 3
+                        height:             ScreenTools.defaultFontPixelWidth * 3
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -146,7 +146,7 @@ Item {
                         text: flightTimeFact ? secondsToHHMMSS(flightTimeFact.rawValue) : "00:00  | "
                         color:              qgcPal.iconColor 
                         font.bold:          true 
-                        font.pointSize:     13
+                        font.pointSize:     12
                         Layout.fillWidth:   true
                         Layout.minimumWidth: indicatorValueWidth
                         horizontalAlignment: firstLabel.horizontalAlignment
@@ -160,8 +160,8 @@ Item {
                     
                     Image{
                         source:             "/skyclean/HorizontalSpeed"
-                        width:              ScreenTools.defaultFontPixelWidth * 3.5
-                        height:             ScreenTools.defaultFontPixelWidth * 3.5
+                        width:              ScreenTools.defaultFontPixelWidth * 3
+                        height:             ScreenTools.defaultFontPixelWidth * 3
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -173,7 +173,7 @@ Item {
                        text:                _activeVehicle ? _activeVehicle.groundSpeed.rawValue.toFixed(1) + ' ' + _activeVehicle.groundSpeed.units : "0.0"  + " | "                           
                         color:              qgcPal.iconColor 
                         font.bold:          true 
-                        font.pointSize:     13
+                        font.pointSize:     12
                         Layout.fillWidth:   true
                         Layout.minimumWidth: indicatorValueWidth
                         horizontalAlignment: firstLabel.horizontalAlignment
@@ -187,8 +187,8 @@ Item {
                     
                     Image{
                         source:             "/skyclean/VerticalSpeed"
-                        width:              ScreenTools.defaultFontPixelWidth * 3.5
-                        height:             ScreenTools.defaultFontPixelWidth * 3.5
+                        width:              ScreenTools.defaultFontPixelWidth * 3
+                        height:             ScreenTools.defaultFontPixelWidth * 3
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -200,7 +200,7 @@ Item {
                        text:                _activeVehicle ? _activeVehicle.climbRate.rawValue.toFixed(1) + ' ' + _activeVehicle.climbRate.units : "0.0"  + " | " //getVerticalSpeed()  + " | "                      
                         color:              qgcPal.iconColor 
                         font.bold:          true 
-                        font.pointSize:     13
+                        font.pointSize:     12
                         Layout.fillWidth:   true
                         Layout.minimumWidth: indicatorValueWidth
                         horizontalAlignment: firstLabel.horizontalAlignment
@@ -214,8 +214,8 @@ Item {
                     
                     Image{
                         source:             "/skyclean/Distance"
-                        width:              ScreenTools.defaultFontPixelWidth * 3.5
-                        height:             ScreenTools.defaultFontPixelWidth * 3.5
+                        width:              ScreenTools.defaultFontPixelWidth * 3
+                        height:             ScreenTools.defaultFontPixelWidth * 3
                         //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
@@ -227,7 +227,7 @@ Item {
                         text:               _activeVehicle ? ('00000' + _activeVehicle.distanceToHome.rawValue.toFixed(0)).slice(-5) + ' ' + _activeVehicle.distanceToHome.units : "00000" + " | "
                         color:              qgcPal.iconColor 
                         font.bold:          true 
-                        font.pointSize:     13
+                        font.pointSize:     12
                         Layout.fillWidth:   true
                         Layout.minimumWidth: indicatorValueWidth
                         horizontalAlignment: firstLabel.horizontalAlignment
@@ -241,8 +241,8 @@ Item {
                     Image{
                         source: "/skyclean/Radar"
                         anchors.verticalCenter: parent.verticalCenter 
-                        width:              ScreenTools.defaultFontPixelWidth * 3.5
-                        height:             ScreenTools.defaultFontPixelWidth * 3.5
+                        width:              ScreenTools.defaultFontPixelWidth * 3
+                        height:             ScreenTools.defaultFontPixelWidth * 3
                         layer.enabled: true 
                         layer.effect: ColorOverlay {
                             opacity: 0.7
