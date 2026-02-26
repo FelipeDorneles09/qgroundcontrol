@@ -109,6 +109,7 @@ Item{
                             Text {
                                 text:   "suporte@skydrones.com.br"
                                 color: qgcPal.textColor
+                                font.pointSize: 12
                             }
                         }
                     }
@@ -135,7 +136,7 @@ Item{
                             Text {
                                 text:           "www.skydrones.com.br"
                                 color:          qgcPal.textColor
-                                //font.underline: true
+                                font.pointSize: 12
                                 MouseArea {
                                     anchors.fill:   parent
                                     cursorShape:    Qt.PointingHandCursor
@@ -169,6 +170,7 @@ Item{
                             Text {
                                 text:   "+55 51 3328.6091 | +55 51 995-950-550 |"
                                 color: qgcPal.textColor
+                                font.pointSize: 12
                             }
                         }
                     }
@@ -196,6 +198,7 @@ Item{
                                 id:     appVersionText
                                 text:   "1.1." + year + day + month + "-test"
                                 color: qgcPal.textColor
+                                font.pointSize: 12
                             }
                         }
                     }

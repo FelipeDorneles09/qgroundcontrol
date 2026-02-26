@@ -209,7 +209,7 @@ SettingsPage {
             buttonText: qsTr("Add")
 
             onClicked: {
-                var editingConfig = _linkManager.createConfiguration(ScreenTools.isSerialAvailable ? LinkConfiguration.TypeSerial : LinkConfiguration.TypeUdp, "")
+                    var editingConfig = _linkManager.createConfiguration(LinkConfiguration.TypeUdp, "")
                 linkDialogComponent.createObject(mainWindow, { editingConfig: editingConfig, originalConfig: null }).open()
             }
         }

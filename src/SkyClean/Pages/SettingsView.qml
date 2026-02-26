@@ -763,17 +763,23 @@ Rectangle{
                         color:                      qgcPal.textColor                       
                     }                    
                     SwitchAction{
-                        property bool backend:      QGroundControl.settingsManager.appSettings.qLocaleLanguage.rawValue === 66
+                        id:                         languageSwitch
                         setWidth:                   ScreenTools.defaultFontPixelWidth * 40.6
                         setHeight:                  ScreenTools.defaultFontPixelHeight * 2.919
                         falseImg:                   "/skyclean/BrazilIcon"
                         trueImg:                    "/skyclean/EUAIcon"
                         falseTxt:                   qsTr("Português")
                         trueTxt:                    qsTr("English")
-                        isChecked:                  backend
-                        onClicked: {
-                            backend = isChecked
-                            QGroundControl.settingsManager.appSettings.qLocaleLanguage.rawValue = backend ? 66 : 0
+                        isChecked:                  QGroundControl.settingsManager.appSettings.qLocaleLanguage.rawValue === 29
+                        
+                        onClicked: (checked) => {
+                            // 29 = QLocale::English, 74 = QLocale::Portuguese
+                            QGroundControl.settingsManager.appSettings.qLocaleLanguage.rawValue = checked ? 29 : 74
+                        }
+                        
+                        Connections {
+                            target: QGroundControl.settingsManager.appSettings.qLocaleLanguage
+                            onRawValueChanged: languageSwitch.isChecked = (QGroundControl.settingsManager.appSettings.qLocaleLanguage.rawValue === 29)
                         }
                     }   
                     FactComboBox {

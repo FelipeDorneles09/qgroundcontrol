@@ -39,7 +39,7 @@ Rectangle{
 
     Rectangle{
         id:                                     settings 
-        width:                                  ScreenTools.defaultFontPixelWidth * 56
+        width:                                  (ScreenTools.defaultFontPixelWidth * 56) + 10
         height:                                 parent.height 
         color:                                  qgcPal.iconColor
         x:                                      visible ? Math.min(ScreenTools.defaultFontPixelWidth * 9.8, 180) : -width 
@@ -65,6 +65,7 @@ Rectangle{
                     leftMargin:                 10
                     top:                        parent.top
                     topMargin:                  10
+                    bottomMargin:               ScreenTools.defaultFontPixelHeight * 2.191
                 }
                 
                 Text{
@@ -193,8 +194,7 @@ Rectangle{
                     }
                 }
                 Row{
-                    spacing:                            ScreenTools.defaultFontPixelHeight
-                    anchors.bottomMargin:               ScreenTools.defaultFontPixelHeight * 2
+                    spacing:                            ScreenTools.defaultFontPixelWidth
                     ButtonAction{                        
                         setWidth:                       ScreenTools.defaultFontPixelWidth * 26.6
                         setHeight:                      ScreenTools.defaultFontPixelHeight * 2.191

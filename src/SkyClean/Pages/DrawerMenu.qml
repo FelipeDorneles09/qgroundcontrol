@@ -28,7 +28,7 @@ Rectangle{
     
     MouseArea {
         anchors.fill:               parent
-        onClicked: {
+        onClicked: function(mouse) {
             // Verifica se o drawer está visível (x == 0)
             if (drawer.x === 0) {
                 // Se o clique foi fora da área do drawer
