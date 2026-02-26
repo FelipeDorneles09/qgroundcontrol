@@ -161,7 +161,21 @@ void QGCApplication::setLanguage() {
                                << (QLocale::system().uiLanguages().length() > 0 ? QLocale::system().uiLanguages()[0]
                                                                                 : "None");
 
-    QLocale::Language possibleLocale = AppSettings::_qLocaleLanguageEarlyAccess();
+    // Prefer the in-memory AppSettings fact value when available. During
+    // runtime changing the fact updates the in-memory value immediately but
+    // QSettings may not yet have been persisted when this is called from the
+    // rawValueChanged signal. Reading the fact avoids a race where setLanguage
+    // would otherwise read the old value from QSettings via _qLocaleLanguageEarlyAccess.
+    QLocale::Language possibleLocale = QLocale::AnyLanguage;
+    if (SettingsManager::instance() && SettingsManager::instance()->appSettings()) {
+        Fact* localeFact = SettingsManager::instance()->appSettings()->qLocaleLanguage();
+        if (localeFact) {
+            possibleLocale = static_cast<QLocale::Language>(localeFact->rawValue().toInt());
+        }
+    } else {
+        possibleLocale = AppSettings::_qLocaleLanguageEarlyAccess();
+    }
+
     if (possibleLocale != QLocale::AnyLanguage) {
         _locale = QLocale(possibleLocale);
     }

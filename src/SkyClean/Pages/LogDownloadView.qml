@@ -65,7 +65,6 @@ Rectangle{
                     leftMargin:                 10
                     top:                        parent.top
                     topMargin:                  10
-                    bottomMargin:               ScreenTools.defaultFontPixelHeight * 2.191
                 }
                 
                 Text{
@@ -259,6 +258,10 @@ Rectangle{
                             }
                         }
                     }
+                }
+                Item {
+                    width: parent.width
+                    height: ScreenTools.defaultFontPixelHeight * 4  // Ajuste o valor conforme necessário
                 }
             }
             QGCFileDialog {

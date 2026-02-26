@@ -83,7 +83,6 @@ Item {
         radius:                         ScreenTools.defaultFontPixelWidth * 2
         anchors{
             bottom:                     parent.bottom 
-            bottomMargin:               ScreenTools.defaultFontPixelWidth * 0.65
         }
 
        GridLayout {

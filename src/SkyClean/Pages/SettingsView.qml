@@ -772,9 +772,17 @@ Rectangle{
                         trueTxt:                    qsTr("English")
                         isChecked:                  QGroundControl.settingsManager.appSettings.qLocaleLanguage.rawValue === 29
                         
+                        Component.onCompleted: {
+                            // Ensure UI reflects current saved locale on creation
+                            languageSwitch.isChecked = QGroundControl.settingsManager.appSettings.isLocaleEnglish()
+                        }
+
                         onClicked: (checked) => {
-                            // 29 = QLocale::English, 74 = QLocale::Portuguese
-                            QGroundControl.settingsManager.appSettings.qLocaleLanguage.rawValue = checked ? 29 : 74
+                            if (checked) {
+                                QGroundControl.settingsManager.appSettings.setLocaleEnglish()
+                            } else {
+                                QGroundControl.settingsManager.appSettings.setLocalePortuguese()
+                            }
                         }
                         
                         Connections {

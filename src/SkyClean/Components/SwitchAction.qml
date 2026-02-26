@@ -43,7 +43,7 @@ Rectangle{
     //private
     property int setWidth:                      0
     property int setHeight:                     0
-    property bool isChecked:                    switchSettings.savedState
+    property bool isChecked:                    false
     property url falseImg:                      ""
     property url trueImg:                       ""
     property string falseTxt:                   ""
@@ -131,8 +131,8 @@ Rectangle{
     
     Connections {
         target: root
-        onClicked: {
-            isChecked = !isChecked
+        onClicked: function(checked) {
+            root.isChecked = checked
         }
     }
 }
