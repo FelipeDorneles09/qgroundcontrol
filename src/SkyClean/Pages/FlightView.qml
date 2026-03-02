@@ -39,7 +39,7 @@ Item {
     property string _messageText:           ""
     property var    battery:                _activeVehicle ? (isNaN(_activeVehicle.battery.voltage.rawValue)) : 0
     property Fact flightTimeFact: _activeVehicle ? _activeVehicle.getFact("FlightTime") : null
-    property real   _fixedTextWidth:        ScreenTools.defaultFontPixelWidth * 10
+    property real   _fixedTextWidth:        ScreenTools.defaultFontPixelWidth * 6
 
     //import
     QGCPalette { id: qgcPal }
