@@ -28,10 +28,10 @@ Item {
 
 
     // Only visible when NTRIP reports connected (user requested)
-    visible: true
+    visible: isConnected
 
     property url ntripIcon: "/skyclean/Ntrip"
-    property color iconColor: qgcPal.cleanColor
+    property color iconColor: qgcPal.colorGreen
 
     Rectangle {
         width: ScreenTools.defaultFontPixelWidth * 4.9
