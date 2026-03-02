@@ -29,7 +29,7 @@ Item{
 
     //private list 
     property int efkParam:                          controllerLoader.item.getParameterFact(-1, "EK3_SRC1_POSZ").value
-    property var    _activeVehicle:                 QGroundControl.multiVehicleManager.activeVehicle
+    property var  _activeVehicle:                 QGroundControl.multiVehicleManager.activeVehicle
     property bool _initialDownloadComplete:         _activeVehicle ? _activeVehicle.initialConnectComplete : true
     property url baro:                              "/skyclean/BaroIcon"
     property url gps:                               "/qmlimages/Gps.svg"

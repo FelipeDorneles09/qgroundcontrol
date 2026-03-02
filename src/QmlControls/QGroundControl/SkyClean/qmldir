@@ -32,6 +32,7 @@ Laser                           1.0 LaserSafety.qml
 LaserAjusted                    1.0 LaserAjusted.qml
 BoxAlert                        1.0 BoxWindowAlert.qml
 StatusLaser                     1.0 StatusLaser.qml
+StatusNTRIP                     1.0 StatusNTRIP.qml
 AltIndicator                    1.0 AltIndicator.qml
 FailGps                         1.0 FailGPS.qml
 MaxLoad                         1.0 MaxLoad.qml

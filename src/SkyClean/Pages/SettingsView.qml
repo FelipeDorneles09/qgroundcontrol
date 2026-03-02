@@ -695,7 +695,7 @@ Rectangle{
                             width:                  ScreenTools.defaultFontPixelWidth * 41.3
                             fact:                   _videoSettings.rtspUrl
                             visible:                rtspUrlLabel.visible
-                            text:                   "rtsp://192.168.144.25:8554/main.264"
+                            text:                   "rtsp://192.168.144.25:8554/main.254"
                             onTextChanged: SiYi.camera.analyzeIp(text)
                         }
                         ButtonAction{

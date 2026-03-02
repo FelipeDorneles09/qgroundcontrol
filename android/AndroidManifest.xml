@@ -19,7 +19,7 @@
     <application android:name="org.qtproject.qt.android.bindings.QtApplication" android:hardwareAccelerated="true" android:label="SkyClean" android:requestLegacyExternalStorage="true" android:allowBackup="true" android:fullBackupOnly="false" android:icon="-- %%INSERT_APP_ICON%% --" android:usesCleartextTraffic="true" android:networkSecurityConfig="@xml/network_security_config">
         <!-- android:theme="@style/AppTheme" -->
 
-        <activity android:name="org.mavlink.qgroundcontrol.QGCActivity" android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density" android:label="SkyClean" android:launchMode="singleTop" android:screenOrientation="sensorLandscape" android:exported="true" android:fitsSystemWindows="false">
+        <activity android:name="org.mavlink.qgroundcontrol.QGCActivity" android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density" android:label="SkyClean" android:launchMode="singleTop" android:screenOrientation="sensorLandscape" android:exported="true" android:fitsSystemWindows="false" android:theme="@style/AppTheme">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,7 +37,7 @@
 
             <meta-data android:name="android.app.lib_name" android:value="-- %%INSERT_APP_LIB_NAME%% --" />
             <meta-data android:name="android.app.arguments" android:value="-- %%INSERT_APP_ARGUMENTS%% --" />
-            <meta-data android:name="android.app.extract_android_style" android:value="minimal" />
+            <meta-data android:name="android.app.extract_android_style" android:value="none" />
             <meta-data android:name="android.app.splash_screen_drawable_portrait" android:resource="@drawable/screen" />
             <meta-data android:name="android.app.splash_screen_drawable_landscape" android:resource="@drawable/screen" />
             <meta-data android:name="android.app.splash_screen_drawable" android:resource="@drawable/screen"/>

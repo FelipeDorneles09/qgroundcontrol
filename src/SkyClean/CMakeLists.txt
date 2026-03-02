@@ -43,6 +43,7 @@ qt_add_qml_module(SkyCleanModule
         Pages/Notification/LaserSafety.qml
         Pages/Notification/MaxLoad.qml
         Pages/Notification/ObstacleAlert.qml
+        Pages/Notification/StatusNTRIP.qml
         Pages/Notification/StatusLaser.qml
         Pages/Notification/WindowTakeOff.qml
         Pages/Notification/WrongParameters.qml

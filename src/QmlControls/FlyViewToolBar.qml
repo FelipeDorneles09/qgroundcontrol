@@ -137,6 +137,16 @@ Rectangle {
             
         }
 
+        FlightModeMenu {
+            id:                     flightModeMenu
+            Layout.preferredHeight: control.height
+            verticalAlignment:      Text.AlignVCenter
+            font.pointSize:         _vehicleInAir ?  ScreenTools.largeFontPointSize : ScreenTools.defaultFontPointSize
+            mouseAreaLeftMargin:    -(flightModeMenu.x - flightModeIcon.x)
+            anchors.centerIn:       parent
+            visible:                _activeVehicle && !_communicationLost
+        }
+
         QGCFlickable {
             id:                     indicatorsFlickable
             Layout.alignment:       Qt.AlignRight

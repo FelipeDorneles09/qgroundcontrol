@@ -10,6 +10,7 @@
 #include "QGCApplication.h"
 
 #include <QtCore/private/qthread_p.h>
+#include <QtCore/qnativeinterface.h>
 
 #include <QtCore/QEvent>
 #include <QtCore/QFile>
@@ -325,6 +326,9 @@ void QGCApplication::_initForNormalAppBoot() {
 #endif
 
     // Now that main window is up check for lost log files
+#ifdef Q_OS_ANDROID
+    QNativeInterface::QAndroidApplication::hideSplashScreen(0);
+#endif
     MAVLinkProtocol::instance()->checkForLostLogFiles();
 
     // Load known link configurations

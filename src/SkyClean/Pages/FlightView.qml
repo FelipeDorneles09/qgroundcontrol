@@ -39,6 +39,7 @@ Item {
     property string _messageText:           ""
     property var    battery:                _activeVehicle ? (isNaN(_activeVehicle.battery.voltage.rawValue)) : 0
     property Fact flightTimeFact: _activeVehicle ? _activeVehicle.getFact("FlightTime") : null
+    property real   _fixedTextWidth:        ScreenTools.defaultFontPixelWidth * 10
 
     //import
     QGCPalette { id: qgcPal }
@@ -100,7 +101,7 @@ Item {
             Row {
                 spacing: ScreenTools.defaultFontPixelWidth * 2
 
-                //Altitude
+                // Altitude
                 Row {
                     spacing:    ScreenTools.defaultFontPixelWidth
                     
@@ -108,7 +109,6 @@ Item {
                         source:             "/skyclean/Altitude"
                         width:              ScreenTools.defaultFontPixelWidth * 3
                         height:             ScreenTools.defaultFontPixelWidth * 3
-                        //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
                             opacity:            0.7
@@ -120,9 +120,8 @@ Item {
                         color:              qgcPal.iconColor 
                         font.bold:          true 
                         font.pointSize:     12
-                        Layout.fillWidth:   true
-                        Layout.minimumWidth: indicatorValueWidth
-                        horizontalAlignment: firstLabel.horizontalAlignment
+                        width:              _fixedTextWidth // <-- LARGURA FIXA AQUI
+                        horizontalAlignment: Text.AlignLeft
                         anchors.bottom:     parent.bottom
                     }
                 }
@@ -135,7 +134,6 @@ Item {
                         source:             "/skyclean/Time"
                         width:              ScreenTools.defaultFontPixelWidth * 3
                         height:             ScreenTools.defaultFontPixelWidth * 3
-                        //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
                             opacity:            0.7
@@ -147,9 +145,8 @@ Item {
                         color:              qgcPal.iconColor 
                         font.bold:          true 
                         font.pointSize:     12
-                        Layout.fillWidth:   true
-                        Layout.minimumWidth: indicatorValueWidth
-                        horizontalAlignment: firstLabel.horizontalAlignment
+                        width:              _fixedTextWidth // <-- LARGURA FIXA AQUI
+                        horizontalAlignment: Text.AlignLeft
                         anchors.bottom:     parent.bottom
                     }
                 }                                
@@ -162,7 +159,6 @@ Item {
                         source:             "/skyclean/HorizontalSpeed"
                         width:              ScreenTools.defaultFontPixelWidth * 3
                         height:             ScreenTools.defaultFontPixelWidth * 3
-                        //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
                             opacity:            0.7
@@ -170,13 +166,12 @@ Item {
                         }
                     }
                     Text{
-                       text:                _activeVehicle ? _activeVehicle.groundSpeed.rawValue.toFixed(1) + ' ' + _activeVehicle.groundSpeed.units : "0.0"  + " | "                           
+                       text:                _activeVehicle ? _activeVehicle.groundSpeed.rawValue.toFixed(1) + ' ' + _activeVehicle.groundSpeed.units : "0.0"  + " | "                            
                         color:              qgcPal.iconColor 
                         font.bold:          true 
                         font.pointSize:     12
-                        Layout.fillWidth:   true
-                        Layout.minimumWidth: indicatorValueWidth
-                        horizontalAlignment: firstLabel.horizontalAlignment
+                        width:              _fixedTextWidth // <-- LARGURA FIXA AQUI
+                        horizontalAlignment: Text.AlignLeft
                         anchors.bottom:     parent.bottom
                     }
                 }
@@ -189,7 +184,6 @@ Item {
                         source:             "/skyclean/VerticalSpeed"
                         width:              ScreenTools.defaultFontPixelWidth * 3
                         height:             ScreenTools.defaultFontPixelWidth * 3
-                        //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
                             opacity:            0.7
@@ -197,18 +191,17 @@ Item {
                         }
                     }
                     Text{
-                       text:                _activeVehicle ? _activeVehicle.climbRate.rawValue.toFixed(1) + ' ' + _activeVehicle.climbRate.units : "0.0"  + " | " //getVerticalSpeed()  + " | "                      
+                       text:                _activeVehicle ? _activeVehicle.climbRate.rawValue.toFixed(1) + ' ' + _activeVehicle.climbRate.units : "0.0"  + " | " 
                         color:              qgcPal.iconColor 
                         font.bold:          true 
                         font.pointSize:     12
-                        Layout.fillWidth:   true
-                        Layout.minimumWidth: indicatorValueWidth
-                        horizontalAlignment: firstLabel.horizontalAlignment
+                        width:              _fixedTextWidth // <-- LARGURA FIXA AQUI
+                        horizontalAlignment: Text.AlignLeft
                         anchors.bottom:     parent.bottom
                     }
                 }
 
-                //Distance
+                // Distance
                 Row {
                     spacing:    ScreenTools.defaultFontPixelWidth
                     
@@ -216,7 +209,6 @@ Item {
                         source:             "/skyclean/Distance"
                         width:              ScreenTools.defaultFontPixelWidth * 3
                         height:             ScreenTools.defaultFontPixelWidth * 3
-                        //anchors.bottom:     parent.bottom
                         layer.enabled:          true 
                         layer.effect: ColorOverlay {
                             opacity:            0.7
@@ -228,14 +220,13 @@ Item {
                         color:              qgcPal.iconColor 
                         font.bold:          true 
                         font.pointSize:     12
-                        Layout.fillWidth:   true
-                        Layout.minimumWidth: indicatorValueWidth
-                        horizontalAlignment: firstLabel.horizontalAlignment
+                        width:              _fixedTextWidth // <-- LARGURA FIXA AQUI
+                        horizontalAlignment: Text.AlignLeft
                         anchors.bottom:     parent.bottom
                     }
                 }
 
-                //Laser Image 
+                // Laser Image 
                 Row{
                     spacing:        10
                     Image{

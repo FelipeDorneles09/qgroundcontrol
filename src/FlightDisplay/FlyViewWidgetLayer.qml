@@ -272,6 +272,8 @@ Item {
     //ChangeMap{}           // Alterar modelo de mapa
 
     StatusLaser{}           // Status do laser Lig/Des
+    
+    StatusNTRIP{}           // Status do NTRIP conectado
 
     AltIndicator{}          // Indicador de altura primaria 
 
