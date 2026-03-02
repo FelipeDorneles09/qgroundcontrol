@@ -66,12 +66,6 @@ void VideoSettings::_setDefaults() {
     } else {
         _nameToMetaDataMap[videoSourceName]->setRawDefaultValue(videoDisabled);
     }
-
-#ifdef QGC_GST_STREAMING
-    // Default to software decoder to avoid hardware decoder issues on some devices
-    _nameToMetaDataMap[forceVideoDecoderName]->setRawDefaultValue(
-        static_cast<int>(GStreamer::ForceVideoDecoderSoftware));
-#endif
 }
 
 DECLARE_SETTINGSFACT(VideoSettings, aspectRatio)
