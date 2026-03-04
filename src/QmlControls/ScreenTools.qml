@@ -33,8 +33,8 @@ Item {
     property real platformFontPointSize:    10
 
     readonly property real smallFontPointRatio:      0.75
-    readonly property real mediumFontPointRatio:     1.25
-    readonly property real largeFontPointRatio:      1.5
+    readonly property real mediumFontPointRatio:     1.15
+    readonly property real largeFontPointRatio:      1.35
 
     /// You can use these properties to position ui elements in a screen resolution independent manner. Using fixed positioning values should not
     /// be done. All positioning should be done using anchors or a ratio of the defaultFontPixelHeight and defaultFontPixelWidth values. This way

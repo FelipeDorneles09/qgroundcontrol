@@ -99,7 +99,7 @@ Item {
 
         Image {
             anchors.centerIn: parent
-            source: "/qmlimages/wall.png"
+            source: "/res/wall.png"
             fillMode: Image.PreserveAspectFit
             width: parent.width * 0.8
             height: parent.height

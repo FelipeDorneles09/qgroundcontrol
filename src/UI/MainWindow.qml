@@ -40,11 +40,6 @@ ApplicationWindow {
     Component.onCompleted: {
         // Start the sequence of first run prompt(s)
         firstRunPromptManager.nextPrompt()
-        Qt.inputMethod.visibleChanged.connect(function() {
-            if (Qt.inputMethod.visible) {
-                Qt.inputMethod.show()
-            }
-        })
     }
 
     /// Saves main window position and size and re-opens it in the same position and size next time
