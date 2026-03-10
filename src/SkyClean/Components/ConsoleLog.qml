@@ -27,6 +27,8 @@ Rectangle{
 
     //private
 
+    property bool                   hasUnreadErrorMessages: false
+
     QGCPalette{ id:qgcPal }
 
     Rectangle{
@@ -50,12 +52,24 @@ Rectangle{
             layer.enabled:          true 
             anchors.centerIn:       parent
             layer.effect: ColorOverlay{
-                color:              qgcPal.cleanColor
+                color:              hasUnreadErrorMessages ? qgcPal.warningText : qgcPal.cleanColor
             }
         }
         MouseArea {
             anchors.fill:   parent
-            onClicked:      mainWindow.showIndicatorPopup(_root, vehicleMessagesPopup)
+            onClicked: {
+                hasUnreadErrorMessages = false
+                mainWindow.showIndicatorPopup(_root, vehicleMessagesPopup)
+            }
+        }
+
+        Connections {
+            target:                 _activeVehicle
+            onNewFormattedMessage: {
+                if (formattedMessage.indexOf("<#E>") !== -1 || formattedMessage.indexOf("<#I>") !== -1) {
+                    hasUnreadErrorMessages = true
+                }
+            }
         }
 
         Component {

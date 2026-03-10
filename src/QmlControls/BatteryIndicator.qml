@@ -21,11 +21,19 @@ Item {
     id:             _root
     anchors.top:    parent.top
     anchors.bottom: parent.bottom
-    width:          batteryIndicatorRow.width
+    width:          batteryIndicatorRow.width + skyDronesImage.width + ScreenTools.defaultFontPixelWidth
 
     property bool showIndicator: true
 
     property var _activeVehicle: QGroundControl.multiVehicleManager.activeVehicle
+
+    function colorThemaSky() {
+        if (qgcPal.globalTheme === QGCPalette.Light) {
+            return "/skyclean/SkyDrones";
+        } else if (qgcPal.globalTheme === QGCPalette.Dark) {
+            return "/skyclean/SkyDronesWhite";
+        }
+    }
 
     Row {
         id:             batteryIndicatorRow
@@ -42,6 +50,19 @@ Item {
                 property var battery: object
             }
         }
+    }
+
+    Image {
+        id:                 skyDronesImage
+        anchors {
+            left:           batteryIndicatorRow.right
+            top:            parent.top
+            bottom:         parent.bottom
+            bottomMargin:   ScreenTools.defaultFontPixelHeight * 0.25
+            leftMargin:     ScreenTools.defaultFontPixelWidth * 2
+        }
+        source:             colorThemaSky()
+        fillMode:           Image.PreserveAspectFit
     }
     MouseArea {
         anchors.fill:   parent
@@ -171,21 +192,12 @@ Item {
 
             QGCLabel {
                 text:                   getBatteryVoltageText() //getBatteryPercentageText() system to voltage
-                font.pointSize:         ScreenTools.mediumFontPointSize * 1.2
+                font.pointSize:         ScreenTools.mediumFontPointSize * 0.9
                 font.bold:              true 
                 //color:                  getBatteryColor()
                 anchors.verticalCenter: parent.verticalCenter
             }
 
-            /* QGCColoredImage {
-                anchors.top:        parent.top
-                anchors.bottom:     parent.bottom
-                width:              height * 1.5
-                sourceSize.width:   width * 1.5
-                source:             "/skyclean/SkyDrones"//getBatteryBatteryImage() system to voltage
-                fillMode:           Image.PreserveAspectFit
-                color:              qgcPal.buttonText
-            } */
         }
     }
 

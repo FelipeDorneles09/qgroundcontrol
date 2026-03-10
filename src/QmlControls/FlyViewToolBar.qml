@@ -142,8 +142,7 @@ Rectangle {
             Layout.preferredHeight: control.height
             verticalAlignment:      Text.AlignVCenter
             font.pointSize:         _vehicleInAir ?  ScreenTools.largeFontPointSize : ScreenTools.defaultFontPointSize
-            mouseAreaLeftMargin:    -(flightModeMenu.x - (flightModeIcon.x * 1.5))
-            anchors.centerIn:       parent
+            mouseAreaLeftMargin:    -(flightModeMenu.x - (flightModeIcon.x * 0.5))
             visible:                _activeVehicle && !_communicationLost
         }
 

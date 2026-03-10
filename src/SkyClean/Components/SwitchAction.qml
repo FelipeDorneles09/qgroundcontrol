@@ -85,7 +85,7 @@ Rectangle{
     Rectangle{
         id:                                     pill 
         width:                                  height
-    height:                                 ScreenTools.defaultFontPixelHeight * 2.919
+        height:                                 ScreenTools.defaultFontPixelHeight * 2.919
         color:                                  qgcPal.cleanColor
         radius:                                 height
         x:                                      isChecked ? root.width - pill.width : 0

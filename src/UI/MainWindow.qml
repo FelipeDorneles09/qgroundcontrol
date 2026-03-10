@@ -33,7 +33,7 @@ ApplicationWindow {
     
     
     // No Qt 6, isso ajuda a ignorar as margens do sistema
-    flags:          Qt.Window | Qt.MaximizeUsingFullscreenGeometryHint
+    flags:      Qt.Window | (ScreenTools.isAndroid ? Qt.ExpandedClientAreaHint | Qt.NoTitleBarBackgroundHint : 0)
     property SiYiCamera siYiCamera: SiYi.camera
     property bool   _utmspSendActTrigger
 

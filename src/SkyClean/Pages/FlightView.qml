@@ -103,7 +103,7 @@ Item {
 
                 // Altitude
                 Row {
-                    spacing:    ScreenTools.defaultFontPixelWidth
+                    spacing:    ScreenTools.defaultFontPixelWidth / 2
                     
                     Image{
                         source:             "/skyclean/Altitude"
@@ -120,7 +120,7 @@ Item {
                         color:              qgcPal.iconColor 
                         font.bold:          true 
                         font.pointSize:     11
-                        width:              _fixedTextWidth // <-- LARGURA FIXA AQUI
+                        width:              _fixedTextWidth * 0.8 // <-- LARGURA FIXA AQUI
                         horizontalAlignment: Text.AlignLeft
                         anchors.bottom:     parent.bottom
                     }
@@ -128,7 +128,7 @@ Item {
 
                 // Flight Time
                 Row {
-                    spacing:    ScreenTools.defaultFontPixelWidth
+                    spacing:    ScreenTools.defaultFontPixelWidth / 2
                     
                     Image{
                         source:             "/skyclean/Time"
@@ -145,7 +145,7 @@ Item {
                         color:              qgcPal.iconColor 
                         font.bold:          true 
                         font.pointSize:     11
-                        width:              _fixedTextWidth // <-- LARGURA FIXA AQUI
+                        width:              _fixedTextWidth * 0.8 // <-- LARGURA FIXA AQUI
                         horizontalAlignment: Text.AlignLeft
                         anchors.bottom:     parent.bottom
                     }
@@ -153,7 +153,7 @@ Item {
                 
                 // HorizontalSpeed
                 Row {
-                    spacing:    ScreenTools.defaultFontPixelWidth
+                    spacing:    ScreenTools.defaultFontPixelWidth / 2
                     
                     Image{
                         source:             "/skyclean/HorizontalSpeed"
@@ -178,7 +178,7 @@ Item {
 
                 // VerticalSpeed
                 Row {
-                    spacing:    ScreenTools.defaultFontPixelWidth
+                    spacing:    ScreenTools.defaultFontPixelWidth / 2
                     
                     Image{
                         source:             "/skyclean/VerticalSpeed"
@@ -203,7 +203,7 @@ Item {
 
                 // Distance
                 Row {
-                    spacing:    ScreenTools.defaultFontPixelWidth
+                    spacing:    ScreenTools.defaultFontPixelWidth / 2
                     
                     Image{
                         source:             "/skyclean/Distance"

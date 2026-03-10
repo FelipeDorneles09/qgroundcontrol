@@ -55,8 +55,8 @@ Rectangle{
 
     Rectangle{
         id:                                     pill 
-        width:                                  100
-        height:                                 100
+        width:                                  root.setWidth / 5
+        height:                                 root.setHeight
         color:                                  qgcPal.cleanColor
         radius:                                 10
         x:                                      isChecked ? root.width - pill.width : 0

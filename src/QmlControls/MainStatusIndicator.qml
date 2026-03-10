@@ -30,7 +30,7 @@ RowLayout {
         id:             mainStatusLabel
         text:           mainStatusText()
         font.bold:      true
-        font.pointSize: ScreenTools.largeFontPointSize   
+        font.pointSize: ScreenTools.mediumFontPointSize   
         Layout.fillWidth: true
         elide: Text.ElideRight
         maximumLineCount: 1

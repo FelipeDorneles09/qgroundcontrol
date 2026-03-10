@@ -45,7 +45,7 @@ Item {
                   proximityValues.rotationNoneValueString[0] : "N/A"
             color: qgcPal.iconColor
             font.bold: true 
-            font.pointSize: 16
+            font.pointSize: 11
             visible: !isNaN(proximityValues.rotationNoneValue)
             anchors {
                 left: parent.left 

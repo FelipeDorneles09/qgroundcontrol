@@ -70,7 +70,7 @@ Item {
             }
         }
     }
-
+    /*
     Image {
         id:                 roiIcon
         anchors {
@@ -82,6 +82,7 @@ Item {
         source:             colorThemaSky() //"/qmlimages/roi.svg"
         fillMode:           Image.PreserveAspectFit
     }
+    */
 
     /* MouseArea {
         anchors.fill:   parent
