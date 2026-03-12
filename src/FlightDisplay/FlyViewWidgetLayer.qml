@@ -256,12 +256,14 @@ Item {
     }
 
     Item{
-        width:              Screen.width 
-        height:             Screen.height 
+        anchors.fill:       parent
+        z:                  -1
         Image{
+            anchors.fill:   parent
             source:         "/skyclean/LinesPage"
             visible:        true
             opacity:        0.5
+            fillMode:       Image.Stretch
         }
     }
 
