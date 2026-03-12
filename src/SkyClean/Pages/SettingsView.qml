@@ -305,7 +305,7 @@ Rectangle{
                                 width: ScreenTools.defaultFontPixelWidth * 25.2
                                 height: ScreenTools.defaultFontPixelHeight * 2
 
-                                TextField{ 
+                                QGCTextField{ 
                                     id:                                         valueTxt         
                                     anchors.fill:                               parent
                                     rightPadding:                                ScreenTools.defaultFontPixelWidth * 5
@@ -428,7 +428,7 @@ Rectangle{
                                     width: ScreenTools.defaultFontPixelWidth * 25.2
                                     height: ScreenTools.defaultFontPixelHeight * 2
 
-                                    TextField{ 
+                                    QGCTextField{ 
                                         id:                                         valueTxtBatt         
                                         anchors.fill:                               parent
                                         rightPadding:                                ScreenTools.defaultFontPixelWidth * 5
@@ -566,7 +566,7 @@ Rectangle{
                                     width: ScreenTools.defaultFontPixelWidth * 25.2
                                     height: ScreenTools.defaultFontPixelHeight * 2
 
-                                    TextField{ 
+                                    QGCTextField{ 
                                         id:                                         valueBatt        
                                         anchors.fill:                               parent
                                         rightPadding:                                ScreenTools.defaultFontPixelWidth * 5

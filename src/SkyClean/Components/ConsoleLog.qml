@@ -36,7 +36,7 @@ Rectangle{
         height:                     width
         radius:                     width
         color:                      qgcPal.iconColor
-        border.color:               qgcPal.cleanColor
+        border.color:              hasUnreadErrorMessages ? qgcPal.warningText : qgcPal.cleanColor
         border.width:               2
         anchors{
             left:                   parent.left 
@@ -75,14 +75,25 @@ Rectangle{
         Component {
             id: vehicleMessagesPopup
 
-            Rectangle {
-                width:          mainWindow.width  * 0.666
-                height:         mainWindow.height * 0.666
-                radius:         ScreenTools.defaultFontPixelHeight / 2
-                color:          qgcPal.window
-                border.color:   qgcPal.cleanColor
-                x:              (mainWindow.width - width) * 1.5
-                y:              (mainWindow.height - height) / 2
+            Item {
+                width:  mainWindow.width
+                height: mainWindow.height
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: mainWindow.hideIndicatorPopup()
+                    z: 0
+                }
+
+                Rectangle {
+                    width:          mainWindow.width  * 0.7
+                    height:         mainWindow.height * 0.7
+                    radius:         ScreenTools.defaultFontPixelHeight / 2
+                    color:          qgcPal.window
+                    border.color:   qgcPal.cleanColor
+                    x:              (mainWindow.width - width) * 2.1
+                    y:              (mainWindow.height - height) / 2
+                    z:              1
 
                 function formatMessage(message) {
                     message = message.replace(new RegExp("<#E>", "g"), "color: " + qgcPal.warningText + "; font: " + (ScreenTools.defaultFontPointSize.toFixed(0) - 1) + "pt monospace;");
@@ -91,8 +102,28 @@ Rectangle{
                     return message;
                 }
 
+                function _reorderMessagesOldestFirst(html) {
+                    if (!html) return "";
+                    var parts = html.split("</font><br/>");
+                    var filtered = [];
+                    for (var i = 0; i < parts.length; i++) {
+                        var p = parts[i].trim();
+                        if (p.length > 0) {
+                            filtered.push(p + "</font><br/>");
+                        }
+                    }
+                    filtered.reverse();
+                    return filtered.join("");
+                }
+
+                // unified HTML buffer so we always set the TextEdit's text
+                property string messageHtml: ""
+
                 Component.onCompleted: {
-                    messageText.text = formatMessage(_activeVehicle.formattedMessages)
+                    var raw = _activeVehicle.formattedMessages
+                    var ordered = _reorderMessagesOldestFirst(raw)
+                    messageHtml = ordered
+                    messageText.text = formatMessage(messageHtml)
                     //-- Hack to scroll to last message
                     for (var i = 0; i < _activeVehicle.messageCount; i++)
                         messageFlick.flick(0,-5000)
@@ -102,7 +133,9 @@ Rectangle{
                 Connections {
                     target: _activeVehicle
                     onNewFormattedMessage :{
-                        messageText.append(formatMessage(formattedMessage))
+                        // append to our unified HTML buffer and re-render the full HTML
+                        messageHtml += formattedMessage
+                        messageText.text = formatMessage(messageHtml)
                         //-- Hack to scroll down
                         messageFlick.flick(0,-500)
                     }
@@ -122,7 +155,7 @@ Rectangle{
                     height:             ScreenTools.isMobile ? ScreenTools.defaultFontPixelHeight * 1.5 : ScreenTools.defaultFontPixelHeight
                     width:              height
                     sourceSize.height:   height
-                    source:             "/res/TrashDelete.svg"
+                    source:             "/InstrumentValueIcons/trash.svg"
                     fillMode:           Image.PreserveAspectFit
                     mipmap:             true
                     smooth:             true
@@ -153,6 +186,7 @@ Rectangle{
                         textFormat:     TextEdit.RichText
                         color:          qgcPal.text
                     }
+                }
                 }
             }
         }

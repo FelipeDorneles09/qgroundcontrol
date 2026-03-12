@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Layouts
 
 import QGroundControl
 import QGroundControl.Controls
@@ -15,22 +14,20 @@ TextField {
     antialiasing:       true
     font.pointSize:     ScreenTools.defaultFontPointSize
     font.family:        ScreenTools.normalFontFamily
-    inputMethodHints: {
-    if (numericValuesOnly && !ScreenTools.isiOS) {
-        return Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
-    }
-    return Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
-}          
+    inputMethodHints:   numericValuesOnly && !ScreenTools.isiOS ?
+                            Qt.ImhFormattedNumbersOnly :
+                            Qt.ImhNone
     leftPadding:        _marginPadding
     rightPadding:       _marginPadding + unitsHelpLayout.width
     topPadding:         _marginPadding
     bottomPadding:      _marginPadding
+    EnterKey.type:      Qt.EnterKeyDone
 
     property bool   showUnits:          false
     property bool   showHelp:           false
     property string unitsLabel:         ""
     property string extraUnitsLabel:    ""
-    property bool   numericValuesOnly:  false   // true: Used as hint for mobile devices to show numeric only keyboard
+    property bool   numericValuesOnly:  false
     property alias  textColor:          control.color
     property bool   validationError:    false
 
@@ -40,13 +37,34 @@ TextField {
     signal helpClicked
 
     Component.onCompleted: checkActiveFocus()
-    onActiveFocusChanged: checkActiveFocus()
+
+    onActiveFocusChanged: {
+        checkActiveFocus()
+        if (ScreenTools.isMobile) {
+            if (activeFocus) {
+                // Pequeno delay para garantir que o campo já está pronto
+                showOverlayTimer.start()
+            }
+        }
+    }
+
+    Timer {
+        id:         showOverlayTimer
+        interval:   50
+        repeat:     false
+        onTriggered: {
+            if (control.activeFocus) {
+                if (typeof mainWindow !== "undefined" && mainWindow && typeof mainWindow.showKeyboardOverlay === "function") {
+                    mainWindow.showKeyboardOverlay(control)
+                }
+            }
+        }
+    }
 
     QGCPalette { id: qgcPal; colorGroupEnabled: enabled }
 
     onEditingFinished: {
         if (ScreenTools.isMobile) {
-            // Toss focus on mobile after Done on virtual keyboard. Prevent strange interactions.
             focus = false
         }
     }
@@ -105,7 +123,6 @@ TextField {
             Component.onCompleted:  control._helpLayoutWidth = unitsHelpLayout.width
             onWidthChanged:         control._helpLayoutWidth = unitsHelpLayout.width
 
-            // Help button
             Rectangle {
                 id:                     helpButton
                 Layout.margins:         2
@@ -123,10 +140,8 @@ TextField {
                     color:              qgcPal.textField
                     text:               qsTr("?")
                 }
-
             }
 
-            // Extra units
             Text {
                 Layout.alignment:   Qt.AlignVCenter
                 text:               control.extraUnitsLabel
@@ -137,7 +152,6 @@ TextField {
                 visible:            control.showUnits && text !== ""
             }
 
-            // Units
             Text {
                 Layout.alignment:   Qt.AlignVCenter
                 text:               control.unitsLabel

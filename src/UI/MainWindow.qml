@@ -204,6 +204,17 @@ ApplicationWindow {
     }
 
     //-------------------------------------------------------------------------
+    //-- Keyboard Input Overlay (mobile: exibido sobre toda a UI ao editar QGCTextField)
+
+    function showKeyboardOverlay(sourceTextField) {
+        keyboardInputOverlay.showFor(sourceTextField)
+    }
+
+    function hideKeyboardOverlay() {
+        keyboardInputOverlay.hide()
+    }
+
+    //-------------------------------------------------------------------------
     //-- Global simple message dialog
 
     function showMessageDialog(dialogTitle, dialogText, buttons = Dialog.Ok, acceptFunction = null, closeFunction = null) {
@@ -398,6 +409,129 @@ ApplicationWindow {
         id:             logView
         anchors.fill:   parent 
         visible:        false
+    }
+
+    //-------------------------------------------------------------------------
+    //-- Keyboard Input Overlay Popup
+
+    Popup {
+        id:             keyboardInputOverlay
+        x:              0
+        y:              (mainWindow.height - _overlayHeight) / 2.2
+        width:          mainWindow.width
+        height:         _overlayHeight
+        padding:        0
+        modal:          true
+        focus:          true
+        closePolicy:    Popup.CloseOnEscape | Popup.CloseOnPressOutside
+
+        property var    sourceField:        null
+        property real   _overlayHeight:     ScreenTools.toolbarHeight * 1.5
+        property real   _margins:           ScreenTools.defaultFontPixelWidth
+        property bool   _syncing:           false
+
+        function showFor(field) {
+            if (!field) return
+            sourceField     = field
+            sourceField.focus = false
+            _syncing        = true
+            overlayTextField.text = field.text
+            _syncing        = false
+            open()
+            overlayTextField.forceActiveFocus()
+            overlayTextField.cursorPosition = overlayTextField.length
+        }
+
+        function hide() {
+            close()
+            if (sourceField) {
+                sourceField.focus = false
+            }
+            sourceField = null
+        }
+
+        onClosed: {
+            if (sourceField) {
+                sourceField.focus = false
+            }
+            sourceField = null
+        }
+
+        background: Rectangle {
+            color: "transparent"
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked:    keyboardInputOverlay.hide()
+            }
+        }
+
+        contentItem: Rectangle {
+            id:             overlayBar
+            width:          keyboardInputOverlay.width
+            height:         keyboardInputOverlay._overlayHeight
+            color:          qgcPal.window
+
+            RowLayout {
+                anchors.fill:           parent
+                anchors.leftMargin:     keyboardInputOverlay._margins
+                anchors.rightMargin:    keyboardInputOverlay._margins
+                anchors.topMargin:      keyboardInputOverlay._margins * 0.5
+                anchors.bottomMargin:   keyboardInputOverlay._margins * 0.5
+                spacing:                keyboardInputOverlay._margins
+
+                // Campo de texto espelhado
+                Rectangle {
+                    Layout.fillWidth:   true
+                    Layout.fillHeight:  true
+                    color:              qgcPal.textField
+                    radius:             ScreenTools.buttonBorderRadius
+
+                    TextInput {
+                        id:                     overlayTextField
+                        anchors.fill:           parent
+                        anchors.leftMargin:     ScreenTools.defaultFontPixelWidth
+                        anchors.rightMargin:    ScreenTools.defaultFontPixelWidth
+                        anchors.topMargin:      ScreenTools.defaultFontPixelHeight * 0.3
+                        anchors.bottomMargin:   ScreenTools.defaultFontPixelHeight * 0.3
+                        color:                  qgcPal.textFieldText
+                        selectionColor:         qgcPal.iconColor
+                        selectedTextColor:      qgcPal.textField
+                        font.pointSize:         ScreenTools.defaultFontPointSize
+                        font.family:            ScreenTools.normalFontFamily
+                        verticalAlignment:      TextInput.AlignVCenter
+                        clip:                   true
+
+                        inputMethodHints: {
+                            if (keyboardInputOverlay.sourceField) {
+                                return keyboardInputOverlay.sourceField.inputMethodHints
+                            }
+                            return Qt.ImhNone
+                        }
+
+                        Keys.onReturnPressed: keyboardInputOverlay.hide()
+                        Keys.onEscapePressed: keyboardInputOverlay.hide()
+
+                        onTextChanged: {
+                            if (!keyboardInputOverlay._syncing && keyboardInputOverlay.sourceField) {
+                                keyboardInputOverlay._syncing = true
+                                keyboardInputOverlay.sourceField.text = text
+                                keyboardInputOverlay._syncing = false
+                            }
+                        }
+                    }
+                }
+
+                // Botão Confirmar / fechar overlay
+                ButtonAction {
+                    Layout.preferredWidth:  ScreenTools.defaultFontPixelWidth * 8
+                    Layout.fillHeight:      true
+                    text:                   qsTr("OK")
+                    font.bold:              true
+                    onClicked:              keyboardInputOverlay.hide()
+                }
+            }
+        }
     }
 
     footer: LogReplayStatusBar {

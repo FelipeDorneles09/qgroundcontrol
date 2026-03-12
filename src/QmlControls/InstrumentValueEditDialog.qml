@@ -310,7 +310,7 @@ QGCPopupDialog {
                                 height:     width
                                 fillMode:   Image.PreserveAspectFit
                                 color:      QGroundControl.globalPalette.text
-                                source:     "/res/TrashDelete.svg"
+                                source:     "/InstrumentValueIcons/trash.svg"
 
                                 QGCMouseArea {
                                     fillItem:   parent
@@ -423,7 +423,7 @@ QGCPopupDialog {
                                 height:     width
                                 fillMode:   Image.PreserveAspectFit
                                 color:      QGroundControl.globalPalette.text
-                                source:     "/res/TrashDelete.svg"
+                                source:     "/InstrumentValueIcons/trash.svg"
 
                                 QGCMouseArea {
                                     fillItem:   parent
@@ -528,7 +528,7 @@ QGCPopupDialog {
                                 height:     width
                                 fillMode:   Image.PreserveAspectFit
                                 color:      QGroundControl.globalPalette.text
-                                source:     "/res/TrashDelete.svg"
+                                source:     "/InstrumentValueIcons/trash.svg"
 
                                 QGCMouseArea {
                                     fillItem:   parent

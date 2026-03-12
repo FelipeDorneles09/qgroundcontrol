@@ -173,7 +173,7 @@ SettingsPage {
                     mipmap:                 true
                     smooth:                 true
                     color:                  qgcPalDelete.text
-                    source:                 "/res/TrashDelete.svg"
+                    source:                 "/InstrumentValueIcons/trash.svg"
 
                     QGCPalette {
                         id: qgcPalDelete

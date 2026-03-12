@@ -116,7 +116,7 @@ Rectangle {
             smooth:                 true
             color:                  qgcPal.text
             visible:                _currentItem && missionItem.sequenceNumber !== 0
-            source:                 "/res/TrashDelete.svg"
+            source:                 "/InstrumentValueIcons/trash.svg"
 
             QGCMouseArea {
                 fillItem:   parent
