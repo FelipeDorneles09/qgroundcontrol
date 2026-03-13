@@ -216,6 +216,7 @@ Rectangle {
                 checked:            true
                 text:               qsTr("Summary")
                 Layout.fillWidth:   true
+                visible:            false
 
                 onClicked: showSummaryPanel()
             }
@@ -259,9 +260,7 @@ Rectangle {
 
             ConfigButton {
                 id:                 parametersButton
-                visible:            QGroundControl.multiVehicleManager.parameterReadyVehicleAvailable &&
-                                    !QGroundControl.multiVehicleManager.activeVehicle.usingHighLatencyLink &&
-                                    _corePlugin.showAdvancedUI
+                visible:            false
                 text:               qsTr("Parameters")
                 Layout.fillWidth:   true
                 icon.source:        "/qmlimages/subMenuButtonImage.png"

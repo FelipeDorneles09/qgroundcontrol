@@ -70,7 +70,7 @@ SetupPage {
             readonly property int _calTypeCompass:  1   ///< Calibrate compass
             readonly property int _calTypeAccel:    2   ///< Calibrate accel
             readonly property int _calTypeSet:      3   ///< Set orientations only
-            readonly property int _buttonWidth:     ScreenTools.defaultFontPixelWidth * 15
+            readonly property int _buttonWidth:     ScreenTools.defaultFontPixelWidth * 18
 
             property bool   _orientationsDialogShowCompass: true
             property string _orientationDialogHelp:         orientationHelpSet
@@ -691,6 +691,7 @@ SetupPage {
                     QGCButton {
                         width:  _buttonWidth
                         text:   _levelHorizonText
+                        visible: false
 
                         readonly property string _levelHorizonText: qsTr("Level Horizon")
 
@@ -709,7 +710,7 @@ SetupPage {
                     QGCButton {
                         width:      _buttonWidth
                         text:       qsTr("Gyro")
-                        visible:    globals.activeVehicle && (globals.activeVehicle.multiRotor | globals.activeVehicle.rover | globals.activeVehicle.sub)
+                        visible:    false
                         onClicked:  mainWindow.showMessageDialog(qsTr("Calibrate Gyro"),
                                                                  qsTr("For Gyroscope calibration you will need to place your vehicle on a surface and leave it still.\n\nClick Ok to start calibration."),
                                                                  Dialog.Cancel | Dialog.Ok,
@@ -719,6 +720,7 @@ SetupPage {
                     QGCButton {
                         width:      _buttonWidth
                         text:       _calibratePressureText
+                        visible:    false
                         onClicked:  mainWindow.showMessageDialog(_calibratePressureText,
                                                                  qsTr("Pressure calibration will set the %1 to zero at the current pressure reading. %2").arg(_altText).arg(_helpTextFW),
                                                                  Dialog.Cancel | Dialog.Ok,
@@ -732,13 +734,14 @@ SetupPage {
                     QGCButton {
                         width:      _buttonWidth
                         text:       qsTr("CompassMot")
-                        visible:    globals.activeVehicle ? globals.activeVehicle.supportsMotorInterference : false
+                        visible:    false
                         onClicked:  compassMotDialogComponent.createObject(mainWindow).open()
                     }
 
                     QGCButton {
                         width:      _buttonWidth
                         text:       qsTr("Sensor Settings")
+                        visible:    false
                         onClicked:  showOrientationsDialog(_calTypeSet)
                     }
                 } // Column - Cal Buttons
@@ -749,6 +752,7 @@ SetupPage {
                     anchors.top:        buttonColumn.bottom
                     anchors.left:       buttonColumn.left
                     spacing:            buttonColumn.spacing
+                    visible:            false
 
                     QGCButton {
                         id:         nextButton
