@@ -914,7 +914,7 @@ Rectangle{
                             visible:                                _activeVehicle ? _activeVehicle.initialConnectComplete : false  
                             setWidth:                               ScreenTools.defaultFontPixelWidth * 41.3
                             height:                                 ScreenTools.defaultFontPixelHeight * 2.919
-                            setText:                                qsTr("Configurar Laser")
+                            setText:                                qsTr("Configurações Adicionais")
                             onClicked:{
                                 /*  if(_activeVehicle ? _activeVehicle.loadProgress){
                                     showLaserSafety()

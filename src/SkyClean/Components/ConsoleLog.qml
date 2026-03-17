@@ -119,14 +119,32 @@ Rectangle{
                 // unified HTML buffer so we always set the TextEdit's text
                 property string messageHtml: ""
 
+                //-- Auto-close the popup after 5 seconds
+                Timer {
+                    id:             autoCloseTimer
+                    interval:       5000
+                    repeat:         false
+                    running:        true
+                    onTriggered:    mainWindow.hideIndicatorPopup()
+                }
+
+                //-- Timer para scroll automático ao final
+                Timer {
+                    id:             scrollToBottomTimer
+                    interval:       100
+                    repeat:         false
+                    onTriggered: {
+                        messageFlick.contentY = Math.max(0, messageFlick.contentHeight - messageFlick.height)
+                    }
+                }
+
                 Component.onCompleted: {
                     var raw = _activeVehicle.formattedMessages
                     var ordered = _reorderMessagesOldestFirst(raw)
                     messageHtml = ordered
                     messageText.text = formatMessage(messageHtml)
-                    //-- Hack to scroll to last message
-                    for (var i = 0; i < _activeVehicle.messageCount; i++)
-                        messageFlick.flick(0,-5000)
+                    //-- Scroll para a última mensagem
+                    scrollToBottomTimer.start()
                     _activeVehicle.resetMessages()
                 }
 
@@ -136,8 +154,8 @@ Rectangle{
                         // append to our unified HTML buffer and re-render the full HTML
                         messageHtml += formattedMessage
                         messageText.text = formatMessage(messageHtml)
-                        //-- Hack to scroll down
-                        messageFlick.flick(0,-500)
+                        //-- Scroll para a última mensagem
+                        scrollToBottomTimer.restart()
                     }
                 }
 

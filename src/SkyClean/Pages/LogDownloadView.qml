@@ -81,7 +81,9 @@ Rectangle{
                     wrapMode: Text.WordWrap
                     color: qgcPal.textColor
                     // link color set to palette cleanColor and link text bold
-                    text: "Aqui você pode conferir o histórico de voos realizados com o SkyClean. Para fazer o download dos logs de voos, você deve conectar seu drone ao computador e acessá-lo através do software SkyDrones, conforme o tutorial neste link " +"<a href=\"https://docs.skydrones.com.br/manutencao-basica/skydrones-desktop\" style=\"color: " + qgcPal.cleanColor + "; font-weight: bold; text-decoration: underline;\">tutorial SkyDrones Desktop</a>."
+                    text: qsTr("Aqui você pode conferir o histórico de voos realizados com o SkyClean. Para fazer o download dos logs de voos, você deve conectar seu drone ao computador e acessá-lo através do software SkyDrones, conforme o tutorial neste link %1.").arg(
+                        "<a href=\"https://docs.skydrones.com.br/manutencao-basica/skydrones-desktop\" style=\"color: " + qgcPal.cleanColor + "; font-weight: bold; text-decoration: underline;\">" + qsTr("tutorial SkyDrones Desktop") + "</a>"
+                    )
                     onLinkActivated: function(link) { Qt.openUrlExternally(link) }
                 }
                 

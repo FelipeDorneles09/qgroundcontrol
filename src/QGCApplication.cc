@@ -194,23 +194,29 @@ void QGCApplication::setLanguage() {
     removeTranslator(JsonHelper::translator());
     removeTranslator(&_qgcTranslatorSourceCode);
     removeTranslator(&_qgcTranslatorQtLibs);
-    if (_locale.name() != "en_US") {
-        QLocale::setDefault(_locale);
-        if (_qgcTranslatorQtLibs.load("qt_" + _locale.name(), QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
-            installTranslator(&_qgcTranslatorQtLibs);
-        } else {
-            qCWarning(QGCApplicationLog) << "Qt lib localization for" << _locale.name() << "is not present";
-        }
-        if (_qgcTranslatorSourceCode.load(_locale, QLatin1String("qgc_source_"), "", ":/i18n")) {
-            installTranslator(&_qgcTranslatorSourceCode);
-        } else {
-            qCWarning(QGCApplicationLog) << "Error loading source localization for" << _locale.name();
-        }
-        if (JsonHelper::translator()->load(_locale, QLatin1String("qgc_json_"), "", ":/i18n")) {
-            installTranslator(JsonHelper::translator());
-        } else {
-            qCWarning(QGCApplicationLog) << "Error loading json localization for" << _locale.name();
-        }
+
+    // Always set the default locale and attempt to load source and json translators.
+    // Some parts of this fork use non-English source strings (e.g. Portuguese in SkyClean QML)
+    // so loading the `qgc_source_`/`qgc_json_` translators for the selected locale (including
+    // en_US) is necessary to get correct translations when switching languages at runtime.
+    QLocale::setDefault(_locale);
+
+    if (_qgcTranslatorQtLibs.load("qt_" + _locale.name(), QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+        installTranslator(&_qgcTranslatorQtLibs);
+    } else {
+        qCWarning(QGCApplicationLog) << "Qt lib localization for" << _locale.name() << "is not present";
+    }
+
+    if (_qgcTranslatorSourceCode.load(_locale, QLatin1String("qgc_source_"), "", ":/i18n")) {
+        installTranslator(&_qgcTranslatorSourceCode);
+    } else {
+        qCWarning(QGCApplicationLog) << "Error loading source localization for" << _locale.name();
+    }
+
+    if (JsonHelper::translator()->load(_locale, QLatin1String("qgc_json_"), "", ":/i18n")) {
+        installTranslator(JsonHelper::translator());
+    } else {
+        qCWarning(QGCApplicationLog) << "Error loading json localization for" << _locale.name();
     }
 
     if (_qmlAppEngine) {

@@ -63,7 +63,7 @@ Item{
                     height: 300
 
                     Text{
-                            text:           qsTr("Acessar ajustes do Laser")
+                            text:           qsTr("Acessar ajustes adicionais")
                             color:          "white"
                             font.bold:      true 
                             font.pointSize:  16
