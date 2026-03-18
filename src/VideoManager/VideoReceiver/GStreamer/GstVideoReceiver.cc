@@ -640,9 +640,7 @@ GstElement* GstVideoReceiver::_makeSource(const QString& input) {
                 break;
             }
 
-            g_object_set(source, "location", input.toUtf8().constData(), "latency", 17, "udp-reconnect", 1, "timeout",
-                         5000000, nullptr);
-            g_object_set(static_cast<gpointer>(source), "protocols", 0x00000004, NULL);
+            g_object_set(source, "location", input.toUtf8().constData(), "latency", 25, nullptr);
         } else if (isTcpMPEGTS) {
             source = gst_element_factory_make("tcpclientsrc", "source");
             if (!source) {
@@ -1005,34 +1003,9 @@ bool GstVideoReceiver::_addVideoSink(GstPad* pad) {
     GstCaps* caps = gst_pad_query_caps(pad, nullptr);
 
     (void)gst_object_ref(_videoSink);  // gst_bin_add() will steal one reference
-
-    // Insert a colorspace converter between decoder and sink to avoid
-    // color/format mismatches (green frames) on some platforms/devices.
-    GstElement* convert = gst_element_factory_make("videoconvert", nullptr);
-    if (convert) {
-        (void)gst_bin_add(GST_BIN(_pipeline), convert);
-    }
-
     (void)gst_bin_add(GST_BIN(_pipeline), _videoSink);
 
-    bool linked = false;
-    if (convert) {
-        linked = gst_element_link_many(_decoder, convert, _videoSink);
-        if (!linked) {
-            qCWarning(GstVideoReceiverLog) << "Linking via videoconvert failed, trying direct link";
-            // try direct link as a fallback
-            linked = gst_element_link(_decoder, _videoSink);
-        }
-    } else {
-        linked = gst_element_link(_decoder, _videoSink);
-    }
-
-    if (!linked) {
-        // cleanup added elements
-        if (convert) {
-            (void)gst_bin_remove(GST_BIN(_pipeline), convert);
-            gst_clear_object(&convert);
-        }
+    if (!gst_element_link(_decoder, _videoSink)) {
         (void)gst_bin_remove(GST_BIN(_pipeline), _videoSink);
         qCCritical(GstVideoReceiverLog) << "Unable to link video sink";
         gst_clear_caps(&caps);

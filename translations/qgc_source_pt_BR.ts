@@ -10758,7 +10758,7 @@ VTOL</source>
     <message>
         <location filename="../src/UI/MainWindow.qml" line="771"/>
         <source>Exit</source>
-        <translation type="unfinished">Exit</translation>
+        <translation type="unfinished">Voltar</translation>
     </message>
 </context>
 <context>

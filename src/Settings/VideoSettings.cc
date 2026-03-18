@@ -66,17 +66,6 @@ void VideoSettings::_setDefaults() {
     } else {
         _nameToMetaDataMap[videoSourceName]->setRawDefaultValue(videoDisabled);
     }
-    // Default decoder selection:
-    // On Android devices such as SIYI radios prefer hardware decoding by default
-    // to avoid CPU overload and freezes. On other platforms default to software
-    // to preserve existing behavior.
-#if defined(Q_OS_ANDROID)
-    _nameToMetaDataMap[forceVideoDecoderName]->setRawDefaultValue(
-        static_cast<int>(GStreamer::ForceVideoDecoderHardware));
-#else
-    _nameToMetaDataMap[forceVideoDecoderName]->setRawDefaultValue(
-        static_cast<int>(GStreamer::ForceVideoDecoderSoftware));
-#endif
 }
 
 DECLARE_SETTINGSFACT(VideoSettings, aspectRatio)

@@ -768,7 +768,7 @@ ApplicationWindow {
 
                 QGCLabel {
                     id:             toolbarDrawerText
-                    text:           qsTr("Exit") + " " + toolDrawer.toolTitle
+                    text:           qsTr("Exit")
                     font.pointSize: ScreenTools.largeFontPointSize
                 }
             }
