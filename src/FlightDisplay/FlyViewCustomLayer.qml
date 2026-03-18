@@ -71,10 +71,12 @@ Item {
                 case "FLF:9":
                     _hasFLFMessage9 = true;
                     console.log("FLF:9 activated, showing overlay.");
+                    QGroundControl.mainWindow.showMessageDialog(qsTr("Modo Parede"), qsTr("Modo Parede ativado."));
                     break;
                 case "FLF:0":
                     _hasFLFMessage9 = false;
                     console.log("FLF:0 activated, hiding overlay.");
+                    QGroundControl.mainWindow.showMessageDialog(qsTr("Modo Parede"), qsTr("Modo Parede desativado."));
                     break;
                 default:
                     break;

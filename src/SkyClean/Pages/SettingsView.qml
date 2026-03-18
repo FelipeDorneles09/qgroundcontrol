@@ -80,9 +80,9 @@ Rectangle{
     BoxWindowAlert{ 
         id:                                         laserAlert
         visible:                                    false
-    // Converted from fixed pixels to ScreenTools-based sizing
-    setWidth:                                   ScreenTools.defaultFontPixelWidth * 84
-    setHeight:                                  ScreenTools.defaultFontPixelHeight * 8.68
+        // Converted from fixed pixels to ScreenTools-based sizing
+        setWidth:                                   ScreenTools.defaultFontPixelWidth * 84
+        setHeight:                                  ScreenTools.defaultFontPixelHeight * 8.68
         buttonVisible:                              true
         titleName:                                  qsTr("LOG")
         setDescri:                                  qsTr("O drone precisa ser reiniciado")

@@ -417,157 +417,127 @@
 <context>
     <name>APMCopterMode</name>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="85"/>
         <source>Stabilize</source>
-        <translation type="unfinished">Stabilize</translation>
+        <translation type="obsolete">Stabilize</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="86"/>
         <source>Acro</source>
-        <translation type="unfinished">Acro</translation>
+        <translation type="obsolete">Acro</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="87"/>
         <source>Altitude Hold</source>
-        <translation type="unfinished">Altitude Hold</translation>
+        <translation type="obsolete">Altitude Hold</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="88"/>
         <source>Auto</source>
-        <translation type="unfinished">Auto</translation>
+        <translation type="obsolete">Auto</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="89"/>
         <source>Guided</source>
-        <translation type="unfinished">Guided</translation>
+        <translation type="obsolete">Guided</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="90"/>
         <source>GPS</source>
-        <translation type="unfinished">GPS</translation>
+        <translation type="obsolete">GPS</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="91"/>
         <source>RTL</source>
-        <translation type="unfinished">RTL</translation>
+        <translation type="obsolete">RTL</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="92"/>
         <source>Circle</source>
-        <translation type="unfinished">Circle</translation>
+        <translation type="obsolete">Circle</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="93"/>
         <source>Land</source>
-        <translation type="unfinished">Land</translation>
+        <translation type="obsolete">Land</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="94"/>
         <source>Drift</source>
-        <translation type="unfinished">Drift</translation>
+        <translation type="obsolete">Drift</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="95"/>
         <source>Sport</source>
-        <translation type="unfinished">Sport</translation>
+        <translation type="obsolete">Sport</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="96"/>
         <source>Flip</source>
-        <translation type="unfinished">Flip</translation>
+        <translation type="obsolete">Flip</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="97"/>
         <source>Autotune</source>
-        <translation type="unfinished">Autotune</translation>
+        <translation type="obsolete">Autotune</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="98"/>
         <source>Position Hold</source>
-        <translation type="unfinished">Position Hold</translation>
+        <translation type="obsolete">Position Hold</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="99"/>
         <source>Brake</source>
-        <translation type="unfinished">Brake</translation>
+        <translation type="obsolete">Brake</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="100"/>
         <source>Throw</source>
-        <translation type="unfinished">Throw</translation>
+        <translation type="obsolete">Throw</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="101"/>
         <source>Avoid ADSB</source>
-        <translation type="unfinished">Avoid ADSB</translation>
+        <translation type="obsolete">Avoid ADSB</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="102"/>
         <source>Guided No GPS</source>
-        <translation type="unfinished">Guided No GPS</translation>
+        <translation type="obsolete">Guided No GPS</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="103"/>
         <source>Smart RTL</source>
-        <translation type="unfinished">Smart RTL</translation>
+        <translation type="obsolete">Smart RTL</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="104"/>
         <source>Flow Hold</source>
-        <translation type="unfinished">Flow Hold</translation>
+        <translation type="obsolete">Flow Hold</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="105"/>
         <source>Follow</source>
-        <translation type="unfinished">Follow</translation>
+        <translation type="obsolete">Follow</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="106"/>
         <source>ZigZag</source>
-        <translation type="unfinished">ZigZag</translation>
+        <translation type="obsolete">ZigZag</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="107"/>
         <source>SystemID</source>
-        <translation type="unfinished">SystemID</translation>
+        <translation type="obsolete">SystemID</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="108"/>
         <source>AutoRotate</source>
-        <translation type="unfinished">AutoRotate</translation>
+        <translation type="obsolete">AutoRotate</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="109"/>
         <source>AutoRTL</source>
-        <translation type="unfinished">AutoRTL</translation>
+        <translation type="obsolete">AutoRTL</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="110"/>
         <source>Turtle</source>
-        <translation type="unfinished">Turtle</translation>
+        <translation type="obsolete">Turtle</translation>
     </message>
 </context>
 <context>
     <name>APMCustomMode</name>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.h" line="102"/>
         <source>Guided</source>
-        <translation type="unfinished">Guided</translation>
+        <translation type="obsolete">Guided</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.h" line="103"/>
         <source>RTL</source>
-        <translation type="unfinished">RTL</translation>
+        <translation type="obsolete">RTL</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.h" line="104"/>
         <source>Smart RTL</source>
-        <translation type="unfinished">Smart RTL</translation>
+        <translation type="obsolete">Smart RTL</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.h" line="105"/>
         <source>Auto</source>
-        <translation type="unfinished">Auto</translation>
+        <translation type="obsolete">Auto</translation>
     </message>
 </context>
 <context>
@@ -642,6 +612,26 @@
         <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.cc" line="1094"/>
         <source>Unable to start mission: Vehicle failed to arm.</source>
         <translation>Não foi possível iniciar a missão: Veículo falhou em armar.</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.h" line="102"/>
+        <source>Guided</source>
+        <translation type="unfinished">Guided</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.h" line="103"/>
+        <source>RTL</source>
+        <translation type="unfinished">RTL</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.h" line="104"/>
+        <source>Smart RTL</source>
+        <translation type="unfinished">Smart RTL</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/APMFirmwarePlugin.h" line="105"/>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1070,7 +1060,8 @@
         <translation type="unfinished">* Stabilize Collective Curve *</translation>
     </message>
     <message>
-        <location filename="../src/AutoPilotPlugins/APM/APMHeliComponent.qml" line="401"/>
+        <location filename="../src/AutoPilotPlugins/APM/APMHeliComponent.qml" line="421"/>
+        <location filename="../src/AutoPilotPlugins/APM/APMHeliComponent.qml" line="436"/>
         <source></source>
         <translation></translation>
     </message>
@@ -1243,134 +1234,108 @@
 <context>
     <name>APMPlaneMode</name>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="67"/>
         <source>Manual</source>
-        <translation type="unfinished">Manual</translation>
+        <translation type="obsolete">Manual</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="68"/>
         <source>Circle</source>
-        <translation type="unfinished">Circle</translation>
+        <translation type="obsolete">Circle</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="69"/>
         <source>Stabilize</source>
-        <translation type="unfinished">Stabilize</translation>
+        <translation type="obsolete">Stabilize</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="70"/>
         <source>Training</source>
-        <translation type="unfinished">Training</translation>
+        <translation type="obsolete">Training</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="71"/>
         <source>Acro</source>
-        <translation type="unfinished">Acro</translation>
+        <translation type="obsolete">Acro</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="72"/>
         <source>FBW A</source>
-        <translation type="unfinished">FBW A</translation>
+        <translation type="obsolete">FBW A</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="73"/>
         <source>FBW B</source>
-        <translation type="unfinished">FBW B</translation>
+        <translation type="obsolete">FBW B</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="74"/>
         <source>Cruise</source>
-        <translation type="unfinished">Cruise</translation>
+        <translation type="obsolete">Cruise</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="75"/>
         <source>Autotune</source>
-        <translation type="unfinished">Autotune</translation>
+        <translation type="obsolete">Autotune</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="76"/>
         <source>Auto</source>
-        <translation type="unfinished">Auto</translation>
+        <translation type="obsolete">Auto</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="77"/>
         <source>RTL</source>
-        <translation type="unfinished">RTL</translation>
+        <translation type="obsolete">RTL</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="78"/>
         <source>Loiter</source>
-        <translation type="unfinished">Loiter</translation>
+        <translation type="obsolete">Loiter</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="79"/>
         <source>Takeoff</source>
-        <translation type="unfinished">Takeoff</translation>
+        <translation type="obsolete">Takeoff</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="80"/>
         <source>Avoid ADSB</source>
-        <translation type="unfinished">Avoid ADSB</translation>
+        <translation type="obsolete">Avoid ADSB</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="81"/>
         <source>Guided</source>
-        <translation type="unfinished">Guided</translation>
+        <translation type="obsolete">Guided</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="82"/>
         <source>Initializing</source>
-        <translation type="unfinished">Initializing</translation>
+        <translation type="obsolete">Initializing</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="83"/>
         <source>QuadPlane Stabilize</source>
-        <translation type="unfinished">QuadPlane Stabilize</translation>
+        <translation type="obsolete">QuadPlane Stabilize</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="84"/>
         <source>QuadPlane Hover</source>
-        <translation type="unfinished">QuadPlane Hover</translation>
+        <translation type="obsolete">QuadPlane Hover</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="85"/>
         <source>QuadPlane Loiter</source>
-        <translation type="unfinished">QuadPlane Loiter</translation>
+        <translation type="obsolete">QuadPlane Loiter</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="86"/>
         <source>QuadPlane Land</source>
-        <translation type="unfinished">QuadPlane Land</translation>
+        <translation type="obsolete">QuadPlane Land</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="87"/>
         <source>QuadPlane RTL</source>
-        <translation type="unfinished">QuadPlane RTL</translation>
+        <translation type="obsolete">QuadPlane RTL</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="88"/>
         <source>QuadPlane AutoTune</source>
-        <translation type="unfinished">QuadPlane AutoTune</translation>
+        <translation type="obsolete">QuadPlane AutoTune</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="89"/>
         <source>QuadPlane Acro</source>
-        <translation type="unfinished">QuadPlane Acro</translation>
+        <translation type="obsolete">QuadPlane Acro</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="90"/>
         <source>Thermal</source>
-        <translation type="unfinished">Thermal</translation>
+        <translation type="obsolete">Thermal</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="91"/>
         <source>Loiter to QLand</source>
-        <translation type="unfinished">Loiter to QLand</translation>
+        <translation type="obsolete">Loiter to QLand</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="92"/>
         <source>Autoland</source>
-        <translation type="unfinished">Autoland</translation>
+        <translation type="obsolete">Autoland</translation>
     </message>
 </context>
 <context>
@@ -1734,79 +1699,64 @@
 <context>
     <name>APMRoverMode</name>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="58"/>
         <source>Manual</source>
-        <translation type="unfinished">Manual</translation>
+        <translation type="obsolete">Manual</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="59"/>
         <source>Acro</source>
-        <translation type="unfinished">Acro</translation>
+        <translation type="obsolete">Acro</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="60"/>
         <source>Learning</source>
-        <translation type="unfinished">Learning</translation>
+        <translation type="obsolete">Learning</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="61"/>
         <source>Steering</source>
-        <translation type="unfinished">Steering</translation>
+        <translation type="obsolete">Steering</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="62"/>
         <source>Hold</source>
-        <translation type="unfinished">Hold</translation>
+        <translation type="obsolete">Hold</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="63"/>
         <source>Loiter</source>
-        <translation type="unfinished">Loiter</translation>
+        <translation type="obsolete">Loiter</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="64"/>
         <source>Follow</source>
-        <translation type="unfinished">Follow</translation>
+        <translation type="obsolete">Follow</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="65"/>
         <source>Simple</source>
-        <translation type="unfinished">Simple</translation>
+        <translation type="obsolete">Simple</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="66"/>
         <source>Dock</source>
-        <translation type="unfinished">Dock</translation>
+        <translation type="obsolete">Dock</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="67"/>
         <source>Circle</source>
-        <translation type="unfinished">Circle</translation>
+        <translation type="obsolete">Circle</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="68"/>
         <source>Auto</source>
-        <translation type="unfinished">Auto</translation>
+        <translation type="obsolete">Auto</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="69"/>
         <source>RTL</source>
-        <translation type="unfinished">RTL</translation>
+        <translation type="obsolete">RTL</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="70"/>
         <source>Smart RTL</source>
-        <translation type="unfinished">Smart RTL</translation>
+        <translation type="obsolete">Smart RTL</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="71"/>
         <source>Guided</source>
-        <translation type="unfinished">Guided</translation>
+        <translation type="obsolete">Guided</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="72"/>
         <source>Initializing</source>
-        <translation type="unfinished">Initializing</translation>
+        <translation type="obsolete">Initializing</translation>
     </message>
 </context>
 <context>
@@ -3344,59 +3294,48 @@ Clique em Ok para iniciar a calibração.</translation>
 <context>
     <name>APMSubMode</name>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="125"/>
         <source>Manual</source>
-        <translation type="unfinished">Manual</translation>
+        <translation type="obsolete">Manual</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="126"/>
         <source>Stabilize</source>
-        <translation type="unfinished">Stabilize</translation>
+        <translation type="obsolete">Stabilize</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="127"/>
         <source>Acro</source>
-        <translation type="unfinished">Acro</translation>
+        <translation type="obsolete">Acro</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="128"/>
         <source>Depth Hold</source>
-        <translation type="unfinished">Depth Hold</translation>
+        <translation type="obsolete">Depth Hold</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="129"/>
         <source>Auto</source>
-        <translation type="unfinished">Auto</translation>
+        <translation type="obsolete">Auto</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="130"/>
         <source>Guided</source>
-        <translation type="unfinished">Guided</translation>
+        <translation type="obsolete">Guided</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="131"/>
         <source>Circle</source>
-        <translation type="unfinished">Circle</translation>
+        <translation type="obsolete">Circle</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="132"/>
         <source>Surface</source>
-        <translation type="unfinished">Surface</translation>
+        <translation type="obsolete">Surface</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="133"/>
         <source>Position Hold</source>
-        <translation type="unfinished">Position Hold</translation>
+        <translation type="obsolete">Position Hold</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="134"/>
         <source>Motor Detection</source>
-        <translation type="unfinished">Motor Detection</translation>
+        <translation type="obsolete">Motor Detection</translation>
     </message>
     <message>
-        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="135"/>
         <source>Surftrak</source>
-        <translation type="unfinished">Surftrak</translation>
+        <translation type="obsolete">Surftrak</translation>
     </message>
 </context>
 <context>
@@ -3970,14 +3909,6 @@ Por favor coloque seu veículo na água, clique no botão, e espere. Note que os
     </message>
 </context>
 <context>
-    <name>AirmapSettings</name>
-    <message>
-        <location filename="../src/Airmap/AirmapSettings.qml" line="208"/>
-        <source></source>
-        <translation></translation>
-    </message>
-</context>
-<context>
     <name>AlertFailSafe</name>
     <message>
         <location filename="../src/SkyClean/Pages/Notification/AlertFailSafe.qml" line="145"/>
@@ -4183,6 +4114,408 @@ Por favor coloque seu veículo na água, clique no botão, e espere. Note que os
         <location filename="../src/Settings/AppSettings.cc" line="186"/>
         <source> (Test Only)</source>
         <translation type="unfinished"> (Test Only)</translation>
+    </message>
+</context>
+<context>
+    <name>ArduCopterFirmwarePlugin</name>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="85"/>
+        <source>Stabilize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="86"/>
+        <source>Acro</source>
+        <translation type="unfinished">Acro</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="87"/>
+        <source>Altitude Hold</source>
+        <translation type="unfinished">Altitude Hold</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="88"/>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="89"/>
+        <source>Guided</source>
+        <translation type="unfinished">Guided</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="90"/>
+        <source>GPS</source>
+        <translation type="unfinished">GPS</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="91"/>
+        <source>RTL</source>
+        <translation type="unfinished">RTL</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="92"/>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="93"/>
+        <source>Land</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="94"/>
+        <source>Drift</source>
+        <translation type="unfinished">Drift</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="95"/>
+        <source>Sport</source>
+        <translation type="unfinished">Sport</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="96"/>
+        <source>Flip</source>
+        <translation type="unfinished">Flip</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="97"/>
+        <source>Autotune</source>
+        <translation type="unfinished">Autotune</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="98"/>
+        <source>Position Hold</source>
+        <translation type="unfinished">Position Hold</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="99"/>
+        <source>Brake</source>
+        <translation type="unfinished">Brake</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="100"/>
+        <source>Throw</source>
+        <translation type="unfinished">Throw</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="101"/>
+        <source>Avoid ADSB</source>
+        <translation type="unfinished">Avoid ADSB</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="102"/>
+        <source>Guided No GPS</source>
+        <translation type="unfinished">Guided No GPS</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="103"/>
+        <source>Smart RTL</source>
+        <translation type="unfinished">Smart RTL</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="104"/>
+        <source>Flow Hold</source>
+        <translation type="unfinished">Flow Hold</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="105"/>
+        <source>Follow</source>
+        <translation type="unfinished">Follow</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="106"/>
+        <source>ZigZag</source>
+        <translation type="unfinished">ZigZag</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="107"/>
+        <source>SystemID</source>
+        <translation type="unfinished">SystemID</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="108"/>
+        <source>AutoRotate</source>
+        <translation type="unfinished">AutoRotate</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="109"/>
+        <source>AutoRTL</source>
+        <translation type="unfinished">AutoRTL</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduCopterFirmwarePlugin.h" line="110"/>
+        <source>Turtle</source>
+        <translation type="unfinished">Turtle</translation>
+    </message>
+</context>
+<context>
+    <name>ArduPlaneFirmwarePlugin</name>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="67"/>
+        <source>Manual</source>
+        <translation type="unfinished">Manual</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="68"/>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="69"/>
+        <source>Stabilize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="70"/>
+        <source>Training</source>
+        <translation type="unfinished">Training</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="71"/>
+        <source>Acro</source>
+        <translation type="unfinished">Acro</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="72"/>
+        <source>FBW A</source>
+        <translation type="unfinished">FBW A</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="73"/>
+        <source>FBW B</source>
+        <translation type="unfinished">FBW B</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="74"/>
+        <source>Cruise</source>
+        <translation type="unfinished">Cruise</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="75"/>
+        <source>Autotune</source>
+        <translation type="unfinished">Autotune</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="76"/>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="77"/>
+        <source>RTL</source>
+        <translation type="unfinished">RTL</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="78"/>
+        <source>Loiter</source>
+        <translation type="unfinished">Loiter</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="79"/>
+        <source>Takeoff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="80"/>
+        <source>Avoid ADSB</source>
+        <translation type="unfinished">Avoid ADSB</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="81"/>
+        <source>Guided</source>
+        <translation type="unfinished">Guided</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="82"/>
+        <source>Initializing</source>
+        <translation type="unfinished">Initializing</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="83"/>
+        <source>QuadPlane Stabilize</source>
+        <translation type="unfinished">QuadPlane Stabilize</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="84"/>
+        <source>QuadPlane Hover</source>
+        <translation type="unfinished">QuadPlane Hover</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="85"/>
+        <source>QuadPlane Loiter</source>
+        <translation type="unfinished">QuadPlane Loiter</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="86"/>
+        <source>QuadPlane Land</source>
+        <translation type="unfinished">QuadPlane Land</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="87"/>
+        <source>QuadPlane RTL</source>
+        <translation type="unfinished">QuadPlane RTL</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="88"/>
+        <source>QuadPlane AutoTune</source>
+        <translation type="unfinished">QuadPlane AutoTune</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="89"/>
+        <source>QuadPlane Acro</source>
+        <translation type="unfinished">QuadPlane Acro</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="90"/>
+        <source>Thermal</source>
+        <translation type="unfinished">Thermal</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="91"/>
+        <source>Loiter to QLand</source>
+        <translation type="unfinished">Loiter to QLand</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduPlaneFirmwarePlugin.h" line="92"/>
+        <source>Autoland</source>
+        <translation type="unfinished">Autoland</translation>
+    </message>
+</context>
+<context>
+    <name>ArduRoverFirmwarePlugin</name>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="58"/>
+        <source>Manual</source>
+        <translation type="unfinished">Manual</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="59"/>
+        <source>Acro</source>
+        <translation type="unfinished">Acro</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="60"/>
+        <source>Learning</source>
+        <translation type="unfinished">Learning</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="61"/>
+        <source>Steering</source>
+        <translation type="unfinished">Steering</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="62"/>
+        <source>Hold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="63"/>
+        <source>Loiter</source>
+        <translation type="unfinished">Loiter</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="64"/>
+        <source>Follow</source>
+        <translation type="unfinished">Follow</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="65"/>
+        <source>Simple</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="66"/>
+        <source>Dock</source>
+        <translation type="unfinished">Dock</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="67"/>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="68"/>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="69"/>
+        <source>RTL</source>
+        <translation type="unfinished">RTL</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="70"/>
+        <source>Smart RTL</source>
+        <translation type="unfinished">Smart RTL</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="71"/>
+        <source>Guided</source>
+        <translation type="unfinished">Guided</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduRoverFirmwarePlugin.h" line="72"/>
+        <source>Initializing</source>
+        <translation type="unfinished">Initializing</translation>
+    </message>
+</context>
+<context>
+    <name>ArduSubFirmwarePlugin</name>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="125"/>
+        <source>Manual</source>
+        <translation type="unfinished">Manual</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="126"/>
+        <source>Stabilize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="127"/>
+        <source>Acro</source>
+        <translation type="unfinished">Acro</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="128"/>
+        <source>Depth Hold</source>
+        <translation type="unfinished">Depth Hold</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="129"/>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="130"/>
+        <source>Guided</source>
+        <translation type="unfinished">Guided</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="131"/>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="132"/>
+        <source>Surface</source>
+        <translation type="unfinished">Surface</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="133"/>
+        <source>Position Hold</source>
+        <translation type="unfinished">Position Hold</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="134"/>
+        <source>Motor Detection</source>
+        <translation type="unfinished">Motor Detection</translation>
+    </message>
+    <message>
+        <location filename="../src/FirmwarePlugin/APM/ArduSubFirmwarePlugin.h" line="135"/>
+        <source>Surftrak</source>
+        <translation type="unfinished">Surftrak</translation>
     </message>
 </context>
 <context>
@@ -4963,7 +5296,7 @@ Click Ok to start the auto-tuning process.
 <context>
     <name>ConsoleLog</name>
     <message>
-        <location filename="../src/SkyClean/Components/ConsoleLog.qml" line="146"/>
+        <location filename="../src/SkyClean/Components/ConsoleLog.qml" line="164"/>
         <source>No Messages</source>
         <translation type="unfinished">No Messages</translation>
     </message>
@@ -6706,6 +7039,25 @@ VTOL</source>
         <location filename="../src/FlightDisplay/FlyViewAdditionalActionsButton.qml" line="21"/>
         <source>Actions</source>
         <translation type="unfinished">Actions</translation>
+    </message>
+</context>
+<context>
+    <name>FlyViewCustomLayer</name>
+    <message>
+        <location filename="../src/FlightDisplay/FlyViewCustomLayer.qml" line="74"/>
+        <location filename="../src/FlightDisplay/FlyViewCustomLayer.qml" line="79"/>
+        <source>Modo Parede</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FlightDisplay/FlyViewCustomLayer.qml" line="74"/>
+        <source>Modo Parede ativado.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/FlightDisplay/FlyViewCustomLayer.qml" line="79"/>
+        <source>Modo Parede desativado.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9060,55 +9412,102 @@ VTOL</source>
 <context>
     <name>LaserAjusted</name>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="106"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="179"/>
         <source>CONFIGURAÇÕES ADICIONAIS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="211"/>
-        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="311"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="284"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="386"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="399"/>
         <source>LASER</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="218"/>
-        <source>Sensor de proximidade</source>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="77"/>
+        <source>Confirmação</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="246"/>
-        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="405"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="86"/>
+        <source>Você está iniciando o drone com o sistema de radares frontais desligado, correndo o risco de impacto frontal. Você entende e assume esse risco?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="95"/>
+        <source>Sim</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="114"/>
+        <source>Não</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="294"/>
+        <source>Desabilite o RADAR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="323"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="499"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="658"/>
         <source>LIGADO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="246"/>
-        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="405"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="323"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="499"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="658"/>
         <source>DESLIGADO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="312"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="387"/>
+        <source>Desabilite o RADAR primeiro para ativar o LASER</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="400"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="738"/>
         <source>É preciso reiniciar o drone para a aplicação funcionar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="370"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="468"/>
         <source>FLOW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="377"/>
-        <source>Sensor de fluxo óptico</source>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="619"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="723"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="737"/>
+        <source>RADAR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="462"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="629"/>
+        <source>Desabilite o LASER</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="719"/>
+        <source>Definir Radar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="724"/>
+        <source>Desabilite o LASER primeiro para ativar o RADAR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="556"/>
         <source>Definir Laser</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="463"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="557"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserAjusted.qml" line="720"/>
         <source>Você precisa estar conectado ao drone.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9116,27 +9515,32 @@ VTOL</source>
 <context>
     <name>LaserSafety</name>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserSafety.qml" line="66"/>
-        <source>Acessar ajustes adicionais</source>
+        <location filename="../src/SkyClean/Pages/Notification/LaserSafety.qml" line="97"/>
+        <source>ACESSO RESTRITO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserSafety.qml" line="74"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserSafety.qml" line="161"/>
+        <source>Insira a senha para acessar ajustes adicionais</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SkyClean/Pages/Notification/LaserSafety.qml" line="185"/>
         <source>Insira a senha</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserSafety.qml" line="101"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserSafety.qml" line="262"/>
         <source>Entrar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserSafety.qml" line="107"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserSafety.qml" line="298"/>
         <source>Senha inválida</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/Notification/LaserSafety.qml" line="117"/>
+        <location filename="../src/SkyClean/Pages/Notification/LaserSafety.qml" line="234"/>
         <source>Cancelar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9484,47 +9888,57 @@ VTOL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="153"/>
+        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="84"/>
+        <source>Aqui você pode conferir o histórico de voos realizados com o SkyClean. Para fazer o download dos logs de voos, você deve conectar seu drone ao computador e acessá-lo através do software SkyDrones, conforme o tutorial neste link %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="85"/>
+        <source>tutorial SkyDrones Desktop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="155"/>
         <source>Date Unknown</source>
         <translation type="unfinished">Data desconhecida</translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="200"/>
+        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="202"/>
         <source>Atualizar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="214"/>
+        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="216"/>
         <source>Baixar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="225"/>
+        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="227"/>
         <source>Baixar Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="225"/>
+        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="227"/>
         <source>Você precisa selecionar qual arquivo deseja baixar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="232"/>
+        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="234"/>
         <source>Selecione diretório</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="245"/>
+        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="247"/>
         <source>Deletar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="248"/>
+        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="250"/>
         <source>Apagar Todos Os Arquivos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="254"/>
+        <location filename="../src/SkyClean/Pages/LogDownloadView.qml" line="256"/>
         <source>Ao selecionar &apos;Apagar Todos&apos; os arquivos serão deletados permanentimente. Deseja Continuar ?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14543,27 +14957,27 @@ Click &apos;Ok&apos; to upload the Plan anyway.</source>
 <context>
     <name>QGCApplication</name>
     <message>
-        <location filename="../src/QGCApplication.cc" line="313"/>
+        <location filename="../src/QGCApplication.cc" line="319"/>
         <source>The current user does not have the correct permissions to access serial devices. You should also remove modemmanager since it also interferes.&lt;br/&gt;&lt;br/&gt;If you are using Ubuntu, execute the following commands to fix these issues:&lt;br/&gt;&lt;pre&gt;sudo usermod -a -G dialout $USER&lt;br/&gt;sudo apt-get remove modemmanager&lt;/pre&gt;</source>
         <translation>O usuário atual não tem as permissões corretas para acessar dispositivos seriais. Você deve remover modemmanager porque também interfere.&lt;br/&gt;&lt;br/&gt;Se você está usando Ubuntu, execute os seguintes comandos para consertar esses problemas:&lt;br/&gt;&lt;pre&gt;sudo usermod -a -G dialout $USER&lt;br/&gt;sudo apt-get remove modemmanager&lt;/pre&gt;</translation>
     </message>
     <message>
-        <location filename="../src/QGCApplication.cc" line="341"/>
+        <location filename="../src/QGCApplication.cc" line="347"/>
         <source>The format for %1 saved settings has been modified. Your saved settings have been reset to defaults.</source>
         <translation>O formato para as configurações salvas %1 foi modificado. Suas configurações foram redefinidas para as padrões.</translation>
     </message>
     <message>
-        <location filename="../src/QGCApplication.cc" line="385"/>
+        <location filename="../src/QGCApplication.cc" line="391"/>
         <source>Parameters are missing from firmware. You may be running a version of firmware which is not fully supported or your firmware has a bug in it. Missing params: %1</source>
         <translation>Os parâmetros estão faltando no firmware. Você pode estar rodando uma versão de firmware que não é completamente suportada ou seu firmware tem um bug. Parâmetros faltando: %1</translation>
     </message>
     <message>
-        <location filename="../src/QGCApplication.cc" line="521"/>
+        <location filename="../src/QGCApplication.cc" line="527"/>
         <source>There is a newer version of %1 available. You can download it from %2.</source>
         <translation>Existe uma nova versão de %1 disponível. Você pode baixar de %2.</translation>
     </message>
     <message>
-        <location filename="../src/QGCApplication.cc" line="524"/>
+        <location filename="../src/QGCApplication.cc" line="530"/>
         <source>New Version Available</source>
         <translation>Nova versão disponível</translation>
     </message>
@@ -17971,28 +18385,33 @@ ROTATION_NONE indica que o componente aponta na direção do voo.</translation>
 <context>
     <name>SupportView</name>
     <message>
-        <location filename="../src/SkyClean/Pages/SupportView.qml" line="53"/>
-        <source>Suporte</source>
+        <location filename="../src/SkyClean/Pages/SupportView.qml" line="102"/>
+        <source>Suporte SkyDrones</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/SupportView.qml" line="105"/>
+        <location filename="../src/SkyClean/Pages/SupportView.qml" line="161"/>
         <source>E-mail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/SupportView.qml" line="132"/>
+        <location filename="../src/SkyClean/Pages/SupportView.qml" line="180"/>
         <source>Site</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/SupportView.qml" line="166"/>
+        <location filename="../src/SkyClean/Pages/SupportView.qml" line="201"/>
         <source>Telefone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SkyClean/Pages/SupportView.qml" line="193"/>
+        <location filename="../src/SkyClean/Pages/SupportView.qml" line="220"/>
         <source>Versão do Aplicativo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SkyClean/Pages/SupportView.qml" line="251"/>
+        <source>© %1 SkyDrones Tecnologia Aviônica</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -18189,14 +18608,6 @@ Pairar e capturar imagem</translation>
         <location filename="../src/Comms/TCPLink.cc" line="209"/>
         <source>Could Not Send Data - Write Returned 0 Bytes</source>
         <translation type="unfinished">Could Not Send Data - Write Returned 0 Bytes</translation>
-    </message>
-</context>
-<context>
-    <name>TaisyncSettings</name>
-    <message>
-        <location filename="../src/Taisync/TaisyncSettings.qml" line="200"/>
-        <source></source>
-        <translation></translation>
     </message>
 </context>
 <context>

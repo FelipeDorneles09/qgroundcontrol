@@ -24,6 +24,7 @@ Item {
     width:  parent.width
     height: parent.height
     z:      30
+    focus:  true
 
     // ── private ───────────────────────────────────────────────────────────────
     property var  _activeVehicle:           QGroundControl.multiVehicleManager.activeVehicle
@@ -37,6 +38,7 @@ Item {
     property bool laserEnabled:             !radarType
     property bool radarEnabled:             !pxrType
     property bool bothEnabled:              pxrType && radarType // Detecta se ambos estão ligados
+    property bool _disablingRadar:          false
 
     // ── design tokens ─────────────────────────────────────────────────────────
     readonly property color _surface:       "#111827"
@@ -59,6 +61,70 @@ Item {
     }
 
     QGCPalette { id: qgcPal }
+
+    // ── Funcção para ocultar teclado ──────────────────────────────────────────
+    function hideKeyboard() {
+        Qt.inputMethod.hide()
+        root.focus = true
+    }
+
+    // ── Componente de confirmação para desligamento do radar ──────────────────────
+    Component {
+        id: radarDisableConfirmDialogComponent
+
+        QGCPopupDialog {
+            id: radarDisableConfirmDialog
+            title: qsTr("Confirmação")
+            buttons: Dialog.None
+
+            ColumnLayout {
+                anchors.margins: ScreenTools.defaultFontPixelWidth
+                spacing: ScreenTools.defaultFontPixelHeight * 0.5
+
+                QGCLabel {
+                    wrapMode: Text.WordWrap
+                    text: qsTr("Você está iniciando o drone com o sistema de radares frontais desligado, correndo o risco de impacto frontal. Você entende e assume esse risco?")
+                    Layout.maximumWidth: ScreenTools.defaultFontPixelWidth * 60
+                }
+
+                RowLayout {
+                    spacing: ScreenTools.defaultFontPixelWidth * 0.5
+                    Layout.alignment: Qt.AlignRight
+
+                    QGCButton {
+                        text: qsTr("Sim")
+                        backgroundColor: qgcPal.colorGreen
+                        
+                        onClicked: {
+                            // Desligando radar - se laser está ligado, manter RNGFND1_TYPE em 8
+                            var rngVal = pxrType ? 8 : 0
+                            controllerLoader.item.getParameterFact(-1, "RNGFND1_TYPE").value = rngVal
+                            console.log("Valor a ser enviado para RNGFND1_TYPE: ", rngVal)
+                            controllerLoader.item.getParameterFact(-1, "RNGFND2_TYPE").value = rngVal
+                            console.log("Valor a ser enviado para RNGFND2_TYPE: ", rngVal)
+                            controllerLoader.item.getParameterFact(-1, "RNGFND3_TYPE").value = rngVal
+                            console.log("Valor a ser enviado para RNGFND3_TYPE: ", rngVal)
+                            _disablingRadar = false
+                            radarDisableConfirmDialog.close()
+                            hideKeyboard()
+                        }
+                    }
+
+                    QGCButton {
+                        text: qsTr("Não")
+                        backgroundColor: qgcPal.colorRed
+                        onClicked: {
+                            // Manter radar ligado - não fazer nada
+                            radarType = true  // Restaurar estado do radar
+                            _disablingRadar = false
+                            radarDisableConfirmDialog.close()
+                            hideKeyboard()
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     // ── dimmed backdrop ───────────────────────────────────────────────────────
     Rectangle {
@@ -221,11 +287,7 @@ Item {
                         font.pixelSize:     ScreenTools.defaultFontPixelHeight * 0.88
                         font.letterSpacing: 1.0
                     }
-                    Text {
-                        text:           qsTr("subtitle")
-                        color:          _textSecondary
-                        font.pixelSize: ScreenTools.defaultFontPixelHeight * 0.65
-                    }
+                    
                     
                     Text {
                         visible:        !laserEnabled && !bothEnabled
@@ -409,11 +471,7 @@ Item {
                         font.pixelSize:     ScreenTools.defaultFontPixelHeight * 0.88
                         font.letterSpacing: 1.0
                     }
-                    Text {
-                        text:           qsTr("subtitle")
-                        color:          _textSecondary
-                        font.pixelSize: ScreenTools.defaultFontPixelHeight * 0.65
-                    }
+                    
 
                     Rectangle {
                         width:        flr.implicitWidth + ScreenTools.defaultFontPixelWidth * 1.2
@@ -564,11 +622,7 @@ Item {
                         font.pixelSize:     ScreenTools.defaultFontPixelHeight * 0.88
                         font.letterSpacing: 1.0
                     }
-                    Text {
-                        text:           qsTr("subtitle")
-                        color:          _textSecondary
-                        font.pixelSize: ScreenTools.defaultFontPixelHeight * 0.65
-                    }
+                    
                     
                     Text {
                         visible:        !radarEnabled && !bothEnabled
@@ -683,14 +737,9 @@ Item {
                                 mainWindow.showMessageDialog(qsTr("RADAR"),
                                                              qsTr("É preciso reiniciar o drone para a aplicação funcionar"))
                             } else {
-                                // Desligando radar - se laser está ligado, manter RNGFND1_TYPE em 8
-                                var rngVal = pxrType ? 8 : 0
-                                controllerLoader.item.getParameterFact(-1, "RNGFND1_TYPE").value = rngVal
-                                console.log("Valor a ser enviado para RNGFND1_TYPE: ", rngVal)
-                                controllerLoader.item.getParameterFact(-1, "RNGFND2_TYPE").value = rngVal
-                                console.log("Valor a ser enviado para RNGFND2_TYPE: ", rngVal)
-                                controllerLoader.item.getParameterFact(-1, "RNGFND3_TYPE").value = rngVal
-                                console.log("Valor a ser enviado para RNGFND3_TYPE: ", rngVal)
+                                // Desligando radar - mostrar confirmação
+                                _disablingRadar = true
+                                mainWindow.showPopupDialogFromComponent(radarDisableConfirmDialogComponent)
                             }
                         }
                     }
